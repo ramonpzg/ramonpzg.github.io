@@ -44,7 +44,7 @@ paginate_path: /page:num/
 timezone: "Australia/NSW"
 locale: "en-US"
 
-# logo: "/assets/images/88x88.png"
+logo: "/assets/images/bio-photo.png"
 
 include:
   - _pages
