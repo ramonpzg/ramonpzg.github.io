@@ -41,7 +41,7 @@ minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "default", "dirt", "n
 permalink: /:categories/:title/
 paginate: 5 # amount of posts to show
 paginate_path: /page:num/
-timezone: "Australia/NSW"
+timezone: Australia/NSW
 locale: "en-US"
 
 logo: "/assets/images/bio-photo.png"
@@ -82,33 +82,24 @@ plugins:
 
 author:
   name   : "Ramon Perez"
-  # avatar : "/assets/images/bio-photo.png"
+  avatar : "/assets/images/bio-photo.png"
   bio    : "My awesome biography constrained to a sentence or two goes here."
   links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/ramonpzg"
     - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/ramonprz"
 
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/ramonpzg"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/ramonprz"
 
 defaults:
   # _posts
