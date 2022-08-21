@@ -106,6 +106,14 @@ footer:
       url: "https://linkedin.com/ramonprz"
 
 defaults:
+  # _portfolio
+  - scope:
+      path: ""
+      type: portfolio
+    values:
+      layout: single
+      author_profile: false
+      share: true
   # _posts
   - scope:
       path: ""
@@ -126,6 +134,7 @@ defaults:
       layout: single
       author_profile: true
 
+
 category_archive:
   type: liquid
   path: /categories/
@@ -137,5 +146,11 @@ tag_archive:
 
 # Other Collections
 collections:
-  tutorials:
+  # tutorials:
+  #   output: true
+  portfolio:
     output: true
+    permalink: /:collection/:path/
+  teaching:
+    output: true
+    permalink: /:collection/:path/

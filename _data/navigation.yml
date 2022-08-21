@@ -1,15 +1,19 @@
 main:
   - title: "Home"
-    url: /home/
+    url: /
   - title: "Blog"
     url: /posts/
-  - title: "Projects"
-    url: /projects/
+  - title: "Portfolio"
+    url: /portfolio/
   - title: "Talks"
     url: /talks/
-  - title: "Teaching"
+  - title: "Tutorials"
     url: /tutorials/
+  - title: "Teaching"
+    url: /teaching/
   - title: "Resume"
     url: /resume/
   - title: "Bio"
     url: /bio/
+  - title: "Contact"
+    url: /contact/
