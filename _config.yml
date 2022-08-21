@@ -46,8 +46,7 @@ locale: "en-US"
 
 logo: "/assets/images/bio-photo.png"
 
-include:
-  - ["_pages"]
+include: ["_pages"]
 
 
 # theme: minimal-mistakes-jekyll
