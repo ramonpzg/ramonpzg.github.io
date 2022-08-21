@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: "Something Analytical"
+title: "Ramon's Webstite"
 # subtitle: "Version 2.0"
 name: "Ramon Perez"
 
@@ -45,6 +45,7 @@ timezone: Australia/NSW
 locale: "en-US"
 
 logo: "/assets/images/bio-photo.png"
+# teaser: "/assets/images/bio-photo.png"
 
 include: ["_pages"]
 
@@ -83,16 +84,17 @@ author:
   name   : "Ramon Perez"
   avatar : "/assets/images/ramon_headshot.png"
   bio    : "Senior Product Developer @ [Decoded](decoded.com)"
+  location: "Kuala Lumpur, Malaysia"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/ramonpzg"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://linkedin.com/ramonprz"
-    - label: "Email"
-      icon: "fab fa-fw fa-email"
-      url: "ramonpzg@proton.me"
+      url: "https://linkedin.com/in/ramonprz"
+    # - label: "Email"
+    #   icon: "far fa-paper-plane"
+    #   url: "ramonpzg@proton.me"
 
 footer:
   links:
@@ -130,3 +132,10 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
+
+
+
+# Other Collections
+collections:
+  tutorials:
+    output: true
