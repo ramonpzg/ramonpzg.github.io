@@ -1,13 +1,11 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
-layout: home-tutorials
-title: "Tutorials"
-category: Tutorials
-author_profile: true
+title: Tutorials
+layout: collection
+permalink: /tutorials/
+collection: tutorials
+# entries_layout: posts
+classes: wide
 ---
-
 
 You'll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
