@@ -157,3 +157,9 @@ collections:
   tutorials:
     output: true
     permalink: /:collection/:path/
+
+
+# gems: [jekyll-mermaid]
+
+# mermaid:
+#   src: '/assets/js/mermaid.js'

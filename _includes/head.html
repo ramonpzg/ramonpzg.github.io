@@ -37,3 +37,8 @@
     <script src="{{ script | relative_url }}"></script>
   {% endfor %}
 {% endif %}
+
+
+{% if page.mermaid %}
+  {% include mermaid.html %}
+{% endif %}
