@@ -4,4 +4,14 @@
 
 layout: home
 author_profile: true
+mermaid: true
 ---
+
+<div class="mermaid">
+%%{init: {'theme':'dark'}}%%
+graph TD; 
+    A-->B; 
+    A-->C; 
+    B-->D; 
+    C-->D; 
+</div>
