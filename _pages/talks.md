@@ -1,6 +1,10 @@
 ---
 permalink: /talks/
+layout: collection
 title: "Talks"
+collection: talks
+entries_layout: posts
+classes: wide
 author_profile: true
 ---
 

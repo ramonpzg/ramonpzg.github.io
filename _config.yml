@@ -157,7 +157,9 @@ collections:
   tutorials:
     output: true
     permalink: /:collection/:path/
-
+  talks:
+    output: true
+    permalink: /:collection/:path/
 
 # gems: [jekyll-mermaid]
 
