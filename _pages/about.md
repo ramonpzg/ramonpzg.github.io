@@ -1,6 +1,5 @@
 ---
-permalink: /bio/
-title: "Bio"
+permalink: /about/
 ---
 
 Hello! I'm Ramon, a data scientist, researcher and educator traveling and working remotely. I currently work as a Senior Product Developer at Decoded, where I create custom data science tools, workshops, and training programs for clients in industries ranging from retail to finance. My previous roles have been at the intersection of education, data science, and research in the areas of entrepreneurship and strategy, alongside a few research ventures in consumer behaviour and development economics in industry and academia, respectively.

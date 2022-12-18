@@ -1,8 +1,8 @@
 ---
-title: Tutorials
+title: Workshops
 layout: collection
-permalink: /tutorials/
-collection: tutorials
+permalink: /workshops/
+collection: workshops
 entries_layout: grid
 classes: wide
 ---

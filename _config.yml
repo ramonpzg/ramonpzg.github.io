@@ -18,9 +18,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: "Ramon's Webstite"
-# subtitle: "Version 2.0"
+title: "Ramon Perez"
+subtitle: "Personal Website"
+title_separator: "|"
 name: "Ramon Perez"
+masthead_title: "My Custom Title"
 
 
 email: ramonpzg@proton.me
@@ -34,7 +36,6 @@ repository: "ramonpzg/ramonpzg.github.io"
 # Build settings
 markdown: kramdown
 remote_theme: "mmistakes/minimal-mistakes@4.23.0"
-
 minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "default", "dirt", "neon", "mint", "plum" "sunrise"
 
 # Outputting
@@ -45,10 +46,11 @@ timezone: Australia/NSW
 locale: "en-US"
 
 logo: "/assets/images/bio-photo.png"
-# teaser: "/assets/images/bio-photo.png"
+teaser: "/assets/images/husky_coffee.png"
 
 include: ["_pages"]
 
+search: true
 
 # theme: minimal-mistakes-jekyll
 plugins:
@@ -83,8 +85,8 @@ plugins:
 author:
   name   : "Ramon Perez"
   avatar : "/assets/images/ramon_headshot.png"
-  bio    : "Senior Product Developer @ [Decoded](decoded.com)"
-  location: "Kuala Lumpur, Malaysia"
+  bio    : "Freelance Data Professional"
+  location: "Sydney, NSW, Australia"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
@@ -92,9 +94,15 @@ author:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/ramonprz"
-    # - label: "Email"
-    #   icon: "far fa-paper-plane"
-    #   url: "ramonpzg@proton.me"
+    - label: "Kaggle"
+      icon: "fab fa-fw fa-kaggle"
+      url: "https://linkedin.com/in/ramonprz"
+    - label: "HuggingFace"
+      icon: "fab fa-fw fa-face-smiling-hands"
+      url: "https://linkedin.com/in/ramonprz"
+    - label: "Streamlit"
+      icon: "fab fa-fw fa-face-smiling-hands"
+      url: "https://linkedin.com/in/ramonprz"
 
 footer:
   links:
@@ -104,6 +112,12 @@ footer:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/ramonprz"
+    - label: "Kaggle"
+      icon: "fa-brands fa-kaggle"
+      url: "https://linkedin.com/in/ramonprz"
+    - label: "HuggingFace"
+      icon: "fa-thin fa-face-smiling-hands"
+      url: "https://linkedin.com/in/ramonprz"
 
 defaults:
   # _portfolio
@@ -122,7 +136,12 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: true
+      comments:
+        provider: "utterances"
+        utterances:
+          theme: "github-dark"
+          issue_term: "pathname"
+          label: "comment"
       share: true
       related: true
       show_date: true
@@ -133,7 +152,6 @@ defaults:
     values:
       layout: single
       author_profile: true
-
 
 category_archive:
   type: liquid
@@ -148,19 +166,18 @@ tag_archive:
 collections:
   # tutorials:
   #   output: true
-  portfolio:
+  projects:
     output: true
     permalink: /:collection/:path/
   teaching:
     output: true
     permalink: /:collection/:path/
-  tutorials:
+  workshops:
     output: true
     permalink: /:collection/:path/
   talks:
     output: true
     permalink: /:collection/:path/
-
 # gems: [jekyll-mermaid]
 
 # mermaid:
