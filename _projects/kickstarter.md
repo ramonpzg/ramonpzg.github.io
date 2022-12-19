@@ -8,7 +8,7 @@ header:
 
 sidebar:
   - title: "Role"
-    image: http://placehold.it/350x250
+    image: "assets/images/cyberpunk_husky.png"
     image_alt: "logo"
     text: "Designer, Front-End Developer"
   - title: "Responsibilities"

@@ -1,19 +1,19 @@
 main:
-  - title: "Home"
+  - title: "🏠 Home"
     url: /
-  - title: "Writing"
+  - title: "🖎 Writing"
     url: /posts/
-  - title: "Projects"
+  - title: "🗂️ Projects"
     url: /projects/
-  - title: "Talks"
+  - title: "💭 Talks"
     url: /talks/
-  - title: "Workshops"
+  - title: "👨🏻‍💻 Workshops"
     url: /workshops/
-  - title: "Learn"
+  - title: "🕮 Learn"
     url: /rpg_content
-  - title: "Resume"
+  - title: "📜 Resume"
     url: /resume/
-  - title: "About"
+  - title: "🙋🏻 About"
     url: /about/
   # - title: "Contact"
   #   url: /contact/

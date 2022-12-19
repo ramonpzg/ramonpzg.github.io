@@ -22,7 +22,7 @@ title: "Ramon Perez"
 subtitle: "Personal Website"
 title_separator: "|"
 name: "Ramon Perez"
-masthead_title: "My Website"
+masthead_title: "Ramon Perez"
 
 
 email: ramonpzg@proton.me
@@ -44,7 +44,7 @@ paginate: 5 # amount of posts to show
 paginate_path: /page:num/
 timezone: Australia/NSW
 locale: "en-US"
-
+breadcrumbs: true
 logo: "/assets/images/bio-photo.png"
 teaser: "/assets/images/husky_coffee.png"
 
@@ -103,6 +103,13 @@ author:
     - label: "Streamlit"
       icon: "fab fa-fw fa-face-smiling-hands"
       url: "https://linkedin.com/in/ramonprz"
+    - label: "Observable"
+      icon: "fab fa-fw fa-face-smiling-hands"
+      url: "https://linkedin.com/in/ramonprz"
+    # - label: [Hire Me!](#link){: .btn .btn--success}
+    #   icon: "fab fa-fw fa-kaggle"
+    #   url: "https://linkedin.com/in/ramonprz"
+
 
 footer:
   links:
@@ -122,15 +129,15 @@ footer:
 defaults:
   # _portfolio
   - scope:
-      path: ""
-      type: portfolio
+      path: "_projects"
+      type: projects
     values:
       layout: single
       author_profile: false
       share: true
   # _posts
   - scope:
-      path: ""
+      path: "_posts"
       type: posts
     values:
       layout: single
@@ -152,6 +159,31 @@ defaults:
     values:
       layout: single
       author_profile: true
+  # _talks
+  - scope:
+      path: "_talks"
+      type: talks
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      show_date: true
+  # _workshops
+  - scope:
+      path: "_workshops"
+      type: workshops
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      show_date: true
+
 
 category_archive:
   type: liquid

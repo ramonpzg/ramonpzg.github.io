@@ -1,9 +1,9 @@
 ---
-title: "Ginger Gulp Identity"
-excerpt: "Ginger Gulp design system including logo mark, website design, and branding applications."
+title: "PyData Global 2022"
+excerpt: "Foo Bar design system including logo mark, website design, and branding applications."
 header:
-  image: /assets/images/unsplash-gallery-image-3.jpg
-  teaser: assets/images/unsplash-gallery-image-3-th.jpg
+  image: /assets/images/foo-bar-identity.jpg
+  teaser: /assets/images/foo-bar-identity-th.jpg
 sidebar:
   - title: "Role"
     image: http://placehold.it/350x250
