@@ -2,6 +2,10 @@
 title: "Transitioning into a Career in Data Analytics"
 excerpt: "Panel discussion with industry leaders in data analytics and data science."
 date: 2021-04-12
+
+header:
+  # image: /assets/images/bikes.jpg
+  teaser: assets/images/coderacademy.jpeg
 ---
 
 {% include video id="cPdSHBzeTck" provider="youtube" %}
