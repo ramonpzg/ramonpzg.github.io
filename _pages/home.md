@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Home"
+title: "Test"
 author_profile: true
 ---
 

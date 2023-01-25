@@ -1,6 +1,6 @@
 main:
-  - title: "🏠 Home"
-    url: /
+  # - title: "🏠 Home"
+  #   url: /home/
   - title: "🖎 Writing"
     url: /posts/
   - title: "🗂️ Projects"

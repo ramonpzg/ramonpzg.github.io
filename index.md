@@ -7,6 +7,8 @@ author_profile: true
 mermaid: true
 ---
 
+Hi there! 👋 I'm Ramon, a 
+
 <div class="mermaid">
 %%{init: {'theme':'dark'}}%%
 graph TD; 
