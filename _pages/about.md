@@ -8,4 +8,6 @@ My latest contract was teaching a data science course from October 2022 to Janua
 
 My previous roles have been at the intersection of education, data science, and research in the areas of entrepreneurship and strategy, alongside a few research ventures in consumer behaviour and development economics in industry and academia, respectively.
 
-During my professional career, I've had the fortune of working with research teams dedicated to helping multinational companies understand their customers better via data-driven approaches ranging from A/B testing to machine learning. I also enjoy giving workshops and have had the honour of participating in PyCon (US, APAC, and Chile), SciPy (US and Japan), and countless Meetup events. In my spare time, I enjoy cycling, playing baseball, and exploring many of the outdoor wonders Australia has to offer.
+During my professional career, I've had the fortune of working with research teams dedicated to helping multinational companies understand their customers better via data-driven approaches ranging from A/B testing to machine learning.
+
+On the personal side, I enjoy giving technical workshops and have had the honour of participating in PyCon (US, APAC, Ireland and Chile), SciPy (US and Japan), PyData Global, and countless Meetup events. In my spare time, I enjoy mountain biking, playing baseball, and exploring many of the outdoor wonders Australia has to offer.

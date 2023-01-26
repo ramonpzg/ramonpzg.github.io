@@ -3,16 +3,16 @@ main:
   #   url: /home/
   - title: "🖎 Writing"
     url: /posts/
-  - title: "🗂️ Projects"
-    url: /projects/
+  # - title: "🗂️ Projects"
+  #   url: /projects/
   - title: "💭 Talks"
     url: /talks/
   - title: "👨🏻‍💻 Workshops"
     url: /workshops/
-  - title: "🕮 Learn"
-    url: /rpg_content
-  - title: "📜 Resume"
-    url: /resume/
+  # - title: "🕮 Learn"
+  #   url: /rpg_content
+  # - title: "📜 Resume"
+  #   url: /resume/
   - title: "🙋🏻 About"
     url: /about/
   # - title: "Contact"
