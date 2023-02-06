@@ -11,8 +11,8 @@ main:
     url: /workshops/
   # - title: "🕮 Learn"
   #   url: /rpg_content
-  # - title: "📜 Resume"
-  #   url: /resume/
+  - title: "📜 Resume"
+    url: https://www.canva.com/design/DAFZxjm92AQ/QCL_ZBSi4W5DBPVvUb7KFA/view?website#4
   - title: "🙋🏻 About"
     url: /about/
   # - title: "Contact"
