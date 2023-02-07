@@ -4,7 +4,7 @@ permalink: /about/
 
 Hi there! I'm Ramon, a freelance data data professional, researcher and educator traveling and working remotely since late 2021. 
 
-My latest contract was teaching a data science course from October 2022 to January 2023 for IBM and SkillUp Online. My last full-time gig was as a Senior Product Developer for [Decoded](decoded.com), where I created custom data science tools, workshops, and training programs for clients in industries ranging from retail to finance. I still teach workshops for Decoded although in a more ad-hoc way (between 5-10 per month). 
+My latest contract was teaching a data science course from October 2022 to January 2023 for IBM and SkillUp Online. My last full-time gig was as a Senior Product Developer for [Decoded](decoded.com), where I created custom data science tools, workshops, and training programs for clients in industries ranging from retail to finance. I still teach workshops for Decoded although in a more ad-hoc way. 
 
 My previous roles have been at the intersection of education, data science, and research in the areas of entrepreneurship and strategy, alongside a few research ventures in consumer behaviour and development economics in industry and academia, respectively.
 
