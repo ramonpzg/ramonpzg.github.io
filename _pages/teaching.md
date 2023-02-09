@@ -9,4 +9,5 @@ header:
   image: ../assets/images/hand_drawn_husky.png
 ---
 
-# Coming Soon (☞ ͡° ͜ʖ ͡°)☞
+
+## Coming Soon! (☞ ͡° ͜ʖ ͡°)☞
