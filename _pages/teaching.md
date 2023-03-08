@@ -6,7 +6,7 @@ collection: teaching
 entries_layout: grid
 classes: wide
 header:
-  image: ../assets/images/hand_drawn_husky.png
+  image: ../assets/images/husky_teaching.png
 ---
 
 
