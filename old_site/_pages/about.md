@@ -1,0 +1,27 @@
+---
+permalink: /about/
+---
+
+
+
+Hi there! I'm Ramon, a freelance data data professional, researcher and educator traveling and working remotely since late 2021. 
+
+My latest gig was teaching a data science course from October 2022 to January 2023 for IBM and 
+SkillUp Online. My last full-time gig was as a Senior Product Developer for [Decoded](decoded.com), 
+where I created custom data science tools, workshops, and training programs for clients in industries 
+ranging from retail to finance. I still teach workshops for Decoded although in a more ad-hoc way. I 
+also initiated the development of Decoded's data platform, a cloud-native solution in AWS that addresses 
+the data needs of the company and allows data consumers to access clean data to their hearts content.
+
+My previous roles before Decoded have all been at the intersection of education, data science, and 
+research in the areas of entrepreneurship and strategy, alongside a few research ventures in consumer 
+behaviour and development economics in industry and academia, respectively.
+
+During my professional career, I've had the fortune of working with research teams dedicated to helping 
+multinational companies understand their customers better via data-driven approaches ranging from A/B 
+testing to machine learning.
+
+On the personal side, I enjoy giving technical workshops and have had the honour of participating in 
+PyCon (US, APAC, Ireland and Chile), SciPy (US and Japan), PyData Global, and countless Meetup events. 
+In my spare time, I enjoy mountain biking, playing baseball, and exploring many of the outdoor wonders 
+Australia has to offer.
