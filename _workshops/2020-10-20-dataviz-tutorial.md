@@ -4,7 +4,7 @@ excerpt: Workshop on how to create beautiful visualizations with your workout da
 date: 2020-10-20
 header:
   image: https://miro.medium.com/max/953/1*rstwYdItC4WNPg7WhHhpag.png
-  teaser: https://www.coderacademy.edu.au/hubfs/Coder_Academy_July2021/images/ikmxytzh7zqlqjj9csvj.jpg
+  teaser: assets/images/sdxl_dataviz.png
 ---
 
 Here is the recording of the workshop.

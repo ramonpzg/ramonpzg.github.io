@@ -4,7 +4,7 @@ excerpt: "ETL Pipelines 4 Data Professionals"
 date: 2021-11-05
 header:
   image: https://pycon.cl/2021/images/pycon_chile_white.png
-  teaser: https://www.pycon.cl/assets/images/photos/photos-1.jpg
+  teaser: https://pycon.cl/images/lapycon2021.png
 tags:
   - workshop
   - pycon

@@ -1,6 +1,6 @@
 ---
 title: "PyCon Global 2023"
-date: 2023-02-06
+date: 2023-12-06
 excerpt: "Architecting Data Tools"
 header:
   image: https://images.production.bytewax.io/pydata_global_2023_519c788d2c.png
