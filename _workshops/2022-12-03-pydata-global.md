@@ -4,7 +4,7 @@ date: 2022-12-03
 excerpt: "Workflows Deep Dive: From Data Engineering to Machine Learning"
 header:
   image: https://pydata.org/global2022/wp-content/uploads/2022/11/PyDataGlobal-OpenGraph.png
-  teaser: https://ponder.io/wp-content/uploads/2022/11/pydata_global_2022.png
+  teaser: https://images.production.bytewax.io/pydata_global_2023_519c788d2c.png
 ---
 
 Here is the recording of the workshop.
