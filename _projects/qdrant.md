@@ -3,7 +3,6 @@ title: "Qdrant"
 excerpt: "Short-term contract to for content creation about LLMs and Vector Databases"
 
 header:
-  image: https://qdrant.tech/images/logo_with_text.png
   teaser: /assets/images/qdrant-and-audio-data-outro.gif
 
 sidebar:
