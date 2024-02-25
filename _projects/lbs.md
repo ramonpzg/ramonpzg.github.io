@@ -11,17 +11,17 @@ sidebar:
     text: "Teach statistics, machine learning, and programming to MBA students"
 ---
 
-Between January and March 2021, I got to co-teach the MBA course, People Analytics, at London 
+Between January and March 2021, I got to co-teach the MBA course, People Analytics, at London
 Business School alongside the director of the School, Dr. Isabel Fernandez-Mateo.
+
+## [Link to the Course](https://ramonpzg.github.io/people-analytics/)
 
 Here is an overview of the topics I taught in all 6 sessions,
 
 0. Intro to Python
 1. Regression Pt 1
-2. Regression Pt 2 
+2. Regression Pt 2
 3. Panel Regression and Fixed Effects
-4. Regularization 
+4. Regularization
 5. Intro to NLP and Topic Modeling
 6. Network Analysis
-
-## [Link to Lessons](https://ramonpzg.github.io/people-analytics/)

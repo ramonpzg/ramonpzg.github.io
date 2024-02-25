@@ -9,10 +9,10 @@ main:
     url: /talks/
   - title: "👨🏻‍💻 Workshops"
     url: /workshops/
-  - title: "📚 Learn"
-    url: /rpg_content
-  - title: "📜 Resume"
-    url: https://www.canva.com/design/DAFZ3VUaEvc/fMtPTh-4VkANglkFXAv3fw/view?website#2
+  # - title: "📚 Learn"
+  #   url: /rpg_content
+  # - title: "📜 Resume"
+  #   url: https://www.canva.com/design/DAFZ3VUaEvc/fMtPTh-4VkANglkFXAv3fw/view?website#2
   - title: "🙋🏻 About"
     url: /about/
   # - title: "Contact"
