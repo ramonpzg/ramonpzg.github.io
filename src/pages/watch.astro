@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import MenuBar from '../components/MenuBar.astro';
+
+const allVideos = await getCollection('videos');
+allVideos.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Watch | My Video Collection">
+  <MenuBar />
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">Watch Our Latest Videos</h1>
+    <div class="space-y-8">
+      {allVideos.map((video) => (
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <a href={`/videos/${video.slug}`} class="block">
+            <img 
+              src={video.data.thumbnailUrl} 
+              alt={video.data.title} 
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-6">
+              <h2 class="text-xl font-semibold mb-2">{video.data.title}</h2>
+              <p class="text-gray-600 mb-4">{video.data.description}</p>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-sm text-gray-500">{video.data.duration}</span>
+                <span class="text-sm text-gray-500">{video.data.pubDate.toLocaleDateString()}</span>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                {video.data.tags.map((tag) => (
+                  <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>

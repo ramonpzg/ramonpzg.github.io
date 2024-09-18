@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import MenuBar from '../../components/MenuBar.astro';
+
+export async function getStaticPaths() {
+  const videos = await getCollection('videos');
+  return videos.map(video => ({
+    params: { slug: video.slug },
+    props: { video },
+  }));
+}
+
+const { video } = Astro.props;
+const { Content } = await video.render();
+---
+
+<MenuBar />
+<Layout title={video.data.title}>
+  <main class="container mx-auto px-4 py-8">
+    <nav class="text-sm breadcrumbs mb-6">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/watch">Watch</a></li>
+        <li>{video.data.title}</li>
+      </ul>
+    </nav>
+    <article class="prose lg:prose-xl mx-auto">
+      <h1>{video.data.title}</h1>
+      <div class="aspect-w-16 aspect-h-9 mb-6">
+        <iframe src={video.data.videoUrl} frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="flex items-center justify-between mb-6">
+        <span class="text-sm text-gray-500">{video.data.duration}</span>
+        <span class="text-sm text-gray-500">{video.data.pubDate.toLocaleDateString()}</span>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-6">
+        {video.data.tags.map((tag) => (
+          <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <Content />
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .breadcrumbs ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+  .breadcrumbs li:not(:last-child)::after {
+    content: ">";
+    margin: 0 0.5rem;
+  }
+  .breadcrumbs a {
+    color: #3182ce;
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+</style>
