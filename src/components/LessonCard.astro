@@ -1,0 +1,205 @@
+---
+interface Props {
+  lesson: {
+    slug: string;
+    data: {
+      title: string;
+      description: string;
+      duration: string;
+      difficulty: string;
+      topics: string[];
+      author: string;
+      section: string;
+      subsection: string;
+      isOverview?: boolean;
+    };
+  };
+}
+
+const { lesson } = Astro.props;
+const { 
+  title, 
+  description, 
+  duration, 
+  difficulty, 
+  topics, 
+  author,
+  isOverview 
+} = lesson.data;
+---
+
+<div 
+  class:list={[
+    'lesson-card group',
+    { 'overview-card': isOverview }
+  ]}
+  data-tags={topics.join(',')}
+>
+  <svg width="0" height="0" class="hidden">
+    <defs>
+      <filter id="rounded-border">
+        <!-- Noise texture for organic feel -->
+        <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="1" />
+        <feDisplacementMap in="SourceGraphic" scale="2" />
+        <!-- Smoothing -->
+        <feGaussianBlur stdDeviation="0.5" />
+      </filter>
+    </defs>
+  </svg>
+
+  <a href={`/learn/${lesson.slug}`} class="card-content">
+    <!-- Left: Title and Description -->
+    <div class="flex-grow min-w-0">
+      <h3 class="title">
+        {isOverview && <span class="overview-badge">Overview</span>}
+        {title}
+      </h3>
+      <p class="description">{description}</p>
+    </div>
+
+    <!-- Right: Meta Information -->
+    <div class="meta">
+      <div class="tags">
+        {topics.slice(0, 2).map(topic => (
+          <span class="tag">{topic}</span>
+        ))}
+        {topics.length > 2 && <span class="tag">+{topics.length - 2}</span>}
+      </div>
+      <div class="details">
+        <span class="duration">{duration}</span>
+        <span class="difficulty" data-difficulty={difficulty}>{difficulty}</span>
+      </div>
+    </div>
+  </a>
+</div>
+
+<style>
+  .lesson-card {
+    position: relative;
+    background: rgba(var(--background-800), 0.5);
+    border-radius: 16px;
+    margin: 0.5rem 0;
+  }
+
+  .lesson-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 18px;
+    padding: 2px;
+    background: var(--primary-400);
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    filter: url(#rounded-border);
+    opacity: 0.15;
+    transition: opacity 0.2s ease;
+  }
+
+  .lesson-card:hover::before {
+    opacity: 0.3;
+  }
+
+  .overview-card::before {
+    background: linear-gradient(
+      45deg,
+      var(--primary-400),
+      var(--accent-400)
+    );
+    opacity: 0.2;
+  }
+
+  .overview-card:hover::before {
+    opacity: 0.4;
+  }
+
+  .card-content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-50);
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .overview-badge {
+    font-size: 0.75rem;
+    padding: 0.125rem 0.375rem;
+    background: rgba(var(--primary-400), 0.2);
+    color: var(--primary-400);
+    border-radius: 4px;
+  }
+
+  .description {
+    font-size: 0.875rem;
+    color: var(--text-300);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.125rem 0.375rem;
+    background: rgba(var(--text-400), 0.1);
+    border-radius: 4px;
+    color: var(--text-300);
+  }
+
+  .details {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .duration {
+    color: var(--text-400);
+  }
+
+  .difficulty {
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+  }
+
+  .difficulty[data-difficulty="beginner"] {
+    background: rgba(var(--primary-400), 0.1);
+    color: var(--primary-400);
+  }
+
+  .difficulty[data-difficulty="intermediate"] {
+    background: rgba(var(--accent-400), 0.1);
+    color: var(--accent-400);
+  }
+
+  .difficulty[data-difficulty="advanced"] {
+    background: rgba(var(--secondary-400), 0.1);
+    color: var(--secondary-400);
+  }
+</style>

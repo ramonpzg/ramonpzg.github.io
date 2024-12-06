@@ -1,0 +1,264 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const dockItems = [
+  { name: 'Home', icon: 'ri:home-line', href: '/' },
+  { name: 'Projects', icon: 'ri:archive-line', href: '/projects' },
+  { name: 'Learn', icon: 'ri:search-line', href: '/learn' },
+  { name: 'Read', icon: 'ri:book-read-line', href: '/read' },
+  { name: 'Watch', icon: 'ri:movie-line', href: '/watch' },
+  { name: 'About', icon: 'ri:user-line', href: '/about' },
+  { name: 'Lists', icon: 'ri:list-check', href: '/lists' },
+];
+---
+
+<div class="dock-container fixed bottom-4 right-4 md:relative md:bottom-auto md:right-auto" x-data="{ isOpen: false }">
+  <button 
+    @click="isOpen = !isOpen"
+    class="md:hidden dock-hamburger"
+    aria-label="Toggle menu"
+  >
+    <Icon name="ri:menu-line" class="icon" />
+  </button>
+
+  <div 
+    class="dock" 
+    :class="{ 'dock-mobile': !isOpen }"
+  >
+    {
+      dockItems.map((item) => (
+        <a href={item.href} class="dock-item">
+          <div class="icon-wrapper">
+            <Icon name={item.icon} class="icon" />
+          </div>
+          <span class="dock-tooltip">{item.name}</span>
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .dock-container {
+    position: relative;
+    width: fit-content;
+    z-index: 50;
+  }
+
+  .doodle-border {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    z-index: -1;
+  }
+
+  .doodle-path {
+    fill: none;
+    stroke: var(--primary-400);
+    stroke-width: 2;
+    stroke-dasharray: 8;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 4px var(--primary-500));
+    animation: draw 1s ease-out forwards, wobble 3s ease-in-out infinite;
+  }
+
+  .dock {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(var(--background-900), 0.85);
+    border: 1px solid var(--primary-400);
+    border-radius: 1rem;
+    position: relative;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .dock-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+  }
+
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    background: rgba(var(--background-800), 0.5);
+  }
+
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke-width: 1.5;
+    color: var(--text-300);
+    transition: all 0.3s ease;
+  }
+
+  .dock-item:hover .icon-wrapper {
+    transform: scale(1.15);
+    background: var(--primary-500);
+  }
+
+  .dock-item:hover .icon {
+    color: var(--text-50);
+    filter: drop-shadow(0 0 4px var(--primary-400));
+  }
+
+  .dock-tooltip {
+    position: absolute;
+    top: -2.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--background-800);
+    color: var(--text-50);
+    border: 1px solid var(--primary-400);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.2s;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .dock-item:hover .dock-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1000;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes wobble {
+    0%, 100% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    33% {
+      transform: translate(-50%, -50%) rotate(0.5deg);
+    }
+    66% {
+      transform: translate(-50%, -50%) rotate(-0.5deg);
+    }
+  }
+
+  /* Icon drawing animation */
+  .icon path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: drawIcon 1s ease forwards;
+  }
+
+  @keyframes drawIcon {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .dock-item {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+
+    .icon {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+  }
+
+  .dock-tooltip {
+    @media (max-width: 767px) {
+      top: -2rem;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  .dock-hamburger {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.5rem;
+    background: rgba(var(--background-900), 0.85);
+    border: 1px solid var(--primary-400);
+    border-radius: 1rem;
+    color: var(--text-300);
+    transition: all 0.3s ease;
+  }
+
+  .dock-hamburger:hover {
+    background: var(--primary-500);
+    color: var(--text-50);
+  }
+
+  @media (max-width: 767px) {
+    .dock-hamburger {
+      display: block;
+    }
+
+    .dock {
+      position: absolute;
+      bottom: calc(100% + 0.5rem);
+      right: 0;
+      flex-direction: column-reverse;
+      gap: 0.5rem;
+      min-width: 200px;
+      transform-origin: bottom right;
+      transition: all 0.3s ease;
+    }
+
+    .dock-mobile {
+      opacity: 0;
+      transform: scale(0.95) translateY(-10px);
+      pointer-events: none;
+    }
+
+    .dock-item {
+      width: 100%;
+      height: 2.5rem;
+      justify-content: flex-start;
+      gap: 0.75rem;
+      padding: 0 0.75rem;
+    }
+
+    .icon-wrapper {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .dock-tooltip {
+      position: static;
+      opacity: 1;
+      transform: none;
+      background: none;
+      border: none;
+      padding: 0;
+      pointer-events: auto;
+      color: var(--text-300);
+    }
+
+    .dock-item:hover .dock-tooltip {
+      color: var(--text-50);
+    }
+  }
+</style>

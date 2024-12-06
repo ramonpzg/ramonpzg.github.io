@@ -1,15 +1,123 @@
 ---
-import MenuBar from '../components/MenuBar.astro';
+import Layout from '../layouts/Layout.astro';
+import Dock from '../components/Dock.astro';
 ---
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
-</head>
-<body>
-    <MenuBar />
-    <!-- Rest of your page content -->
-</body>
-</html>
+<Layout title="About | Ramon Perez">
+  <main class="relative min-h-screen bg-background-950 text-text-50 pb-24">
+    <!-- Header Section -->
+    <div class="max-w-4xl mx-auto px-4 pt-16">
+      <h1 class="text-4xl font-bold mb-4">Ramon Perez</h1>
+      <p class="text-xl text-text-300 mb-8">Data Scientist & Engineer</p>
+      
+      <!-- Contact Links -->
+      <div class="flex flex-wrap gap-4 mb-12 text-text-300">
+        <a href="mailto:ramonpzg@proton.me" class="hover:text-primary-400 flex items-center gap-2">
+          <span>📧</span> ramonpzg@proton.me
+        </a>
+        <a href="tel:+61-411-707-278" class="hover:text-primary-400 flex items-center gap-2">
+          <span>📱</span> +61-411-707-278
+        </a>
+        <a href="https://github.com/ramonpzg" class="hover:text-primary-400 flex items-center gap-2">
+          <span>🐙</span> ramonpzg
+        </a>
+        <span class="flex items-center gap-2">
+          <span>📍</span> Remote
+        </span>
+      </div>
+
+      <!-- Experience Sections -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 text-primary-400">Engineering Experience</h2>
+        
+        <!-- Seldon -->
+        <div class="mb-8">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h3 class="text-xl font-medium">DX Engineer at Seldon</h3>
+              <p class="text-text-300">London</p>
+            </div>
+            <span class="text-text-400">Jun-23 to Oct-24</span>
+          </div>
+          <p class="text-text-200 mb-4">
+            Actively contributed to Seldon's suite of dev tools with emphasis on the paid machine learning inference products, crafted educational content for the OSS tools, delivered talks at conferences on different ML topics, and engage with our developer community while coordinating the MLOps World Meetup group events, fostering stronger connections and support within our network.
+          </p>
+        </div>
+
+        <!-- Decoded -->
+        <div class="mb-8">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h3 class="text-xl font-medium">Sr. Product Developer | Instructor at Decoded</h3>
+              <p class="text-text-300">Remote</p>
+            </div>
+            <span class="text-text-400">Nov-21 to Present</span>
+          </div>
+          <p class="text-text-200">
+            Created Decoded's initial data engineering platform on AWS, and developed four machine learning (ML) applications for language translation, churn prediction, fraud detection, and content recommendation. I led the creation of our MLOps engineering program (<a href="#" class="text-primary-400 hover:underline">see it here</a>) and contributed to our React-based presentation tool. I still teach for Decoded's biggest clients.
+          </p>
+        </div>
+      </section>
+
+      <!-- Teaching Experience -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 text-secondary-400">Teaching Experience</h2>
+        
+        <div class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-background-900 p-4 rounded-lg">
+              <h3 class="font-medium mb-2">London Business School</h3>
+              <p class="text-text-300 text-sm">Programming Instructor</p>
+              <p class="text-text-400 text-sm">Remote | Jan to Mar-21</p>
+            </div>
+            
+            <div class="bg-background-900 p-4 rounded-lg">
+              <h3 class="font-medium mb-2">Coder Academy</h3>
+              <p class="text-text-300 text-sm">Data Scientist & Educator</p>
+              <p class="text-text-400 text-sm">Sydney, AU | Sep-19 to Aug-21</p>
+            </div>
+            
+            <div class="bg-background-900 p-4 rounded-lg">
+              <h3 class="font-medium mb-2">Johns Hopkins University</h3>
+              <p class="text-text-300 text-sm">Lead Quantitative Tutor</p>
+              <p class="text-text-400 text-sm">Remote | Jan to Aug-19</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 text-accent-400">Technical Skills</h2>
+        
+        <div class="space-y-4">
+          <div>
+            <h3 class="text-lg font-medium mb-2">Languages</h3>
+            <p class="text-text-300">Native: Python, English, Java/Type-Script and Spanish | Intermediate: French</p>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-medium mb-2">Technologies</h3>
+            <div class="flex flex-wrap gap-2">
+              {['PyTorch', 'Docker', 'FastAPI', 'React', 'NumPy', 'pandas', 'Astro', 'Git'].map(tech => (
+                <span class="px-3 py-1 bg-background-800 rounded-full text-sm text-text-300">{tech}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Dock Menu -->
+    <div class="fixed bottom-0 left-0 right-0 z-30 flex justify-center pb-4">
+      <Dock />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Add any custom styles here */
+  .bg-gradient-radial {
+    background: radial-gradient(circle at center, var(--primary-500/20), var(--background-950));
+  }
+</style>

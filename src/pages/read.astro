@@ -1,43 +1,120 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import MenuBar from '../components/MenuBar.astro';
+import BlogCard from '../components/BlogCard.astro';
+import TagFilter from '../components/TagFilter.astro';
+import Dock from '../components/Dock.astro';
 
-const allPosts = await getCollection('posts');
-allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+// Get all blog posts
+const posts = await getCollection('posts');
+
+// Extract unique tags from all posts
+const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))];
 ---
 
-<MenuBar />
-<Layout title="Read | My Blog">
-  <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-8">Read Our Latest Posts</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {allPosts.map((post) => (
-        <a href={`/posts/${post.slug}`} class="block">
-          <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
-            <img 
-              src={post.data.image.url} 
-              alt={post.data.image.alt} 
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <h2 class="text-xl font-semibold mb-2">{post.data.title}</h2>
-              <p class="text-gray-600 mb-4">{post.data.description}</p>
-              <div class="flex items-center justify-between mb-4">
-                <span class="text-sm text-gray-500">{post.data.readingTime} min read</span>
-                <span class="text-sm text-gray-500">{post.data.pubDate.toLocaleDateString()}</span>
-              </div>
-              <div class="flex flex-wrap gap-2">
-                {post.data.tags.map((tag) => (
-                  <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </a>
-      ))}
+<Layout title="Reading List | Ramon Perez">
+  <main class="relative min-h-screen overflow-hidden">
+    <div class="max-w-3xl mx-auto px-4 py-12">
+      <div class="space-y-8 mb-12">
+        <h1 class="text-4xl font-bold tracking-tight">
+          <span class="text-gradient">Reading List</span>
+        </h1>
+        <p class="text-lg text-text-300">
+          Thoughts, tutorials, and insights about technology, education, and development.
+        </p>
+      </div>
+
+      <!-- Tag Filter -->
+      <TagFilter tags={allTags} />
+
+      <!-- Blog Posts List -->
+      <div class="space-y-8 mt-12" id="posts-container">
+        {posts.map((post) => (
+          <BlogCard post={post} />
+        ))}
+      </div>
+
+      <!-- Empty State -->
+      <div 
+        id="empty-state" 
+        class="hidden text-center py-12 text-text-300"
+      >
+        <p class="text-lg">No posts found for the selected tag.</p>
+      </div>
+    </div>
+
+    <!-- Dock Menu -->
+    <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
+      <Dock />
     </div>
   </main>
 </Layout>
+
+<style>
+  .text-gradient {
+    background: linear-gradient(45deg, var(--primary-400), var(--accent-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Add some bottom padding to prevent content from being hidden behind the dock */
+  main {
+    padding-bottom: 120px;
+  }
+</style>
+
+<script>
+  // Filter posts based on selected tag
+  function initializeTagFilter() {
+    const tagButtons = document.querySelectorAll('[data-tag]');
+    const posts = document.querySelectorAll('[data-post]');
+    const emptyState = document.getElementById('empty-state');
+    let activeTag = 'all';
+
+    function updatePostsVisibility(tag: string) {
+      let visiblePosts = 0;
+
+      posts.forEach(post => {
+        const postTags = JSON.parse(post.getAttribute('data-tags') || '[]');
+        if (tag === 'all' || postTags.includes(tag)) {
+          post.style.display = 'block';
+          post.classList.add('fade-in');
+          visiblePosts++;
+        } else {
+          post.style.display = 'none';
+          post.classList.remove('fade-in');
+        }
+      });
+
+      // Show/hide empty state
+      if (emptyState) {
+        emptyState.style.display = visiblePosts === 0 ? 'block' : 'none';
+      }
+    }
+
+    tagButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tag = button.getAttribute('data-tag');
+        if (!tag) return;
+
+        // Update active tag
+        activeTag = tag;
+        
+        // Update active button state
+        tagButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        // Filter posts
+        updatePostsVisibility(tag);
+      });
+    });
+  }
+
+  // Initialize when the DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeTagFilter);
+  } else {
+    initializeTagFilter();
+  }
+</script>

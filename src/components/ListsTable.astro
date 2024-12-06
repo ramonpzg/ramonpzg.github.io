@@ -1,0 +1,201 @@
+---
+interface ListItem {
+  id: string;
+  data: {
+    title: string;
+    description: string;
+    tags: string[];
+    items: {
+      name: string;
+      description: string;
+      url: string;
+      category: string;
+    }[];
+  };
+}
+
+interface Props {
+  lists: ListItem[];
+}
+
+const { lists } = Astro.props;
+---
+
+<div class="space-y-4">
+  <!-- Search -->
+  <div class="mb-8">
+    <input 
+      type="text" 
+      id="table-search"
+      placeholder="Search lists..." 
+      class="w-full bg-background-800/50 border border-text-400/10 rounded-lg px-4 py-2 focus:outline-none focus:border-primary-400/50 text-text-300 placeholder-text-400/50"
+    />
+  </div>
+
+  <!-- Table -->
+  <div class="relative overflow-hidden rounded-xl border border-text-400/10 bg-background-800/50">
+    <table class="w-full" id="lists-table">
+      <thead>
+        <tr class="border-b border-text-400/10">
+          <th class="sortable px-6 py-4 text-left text-sm font-medium text-text-300" data-sort="title">
+            Title
+            <span class="sort-icon ml-1">↕</span>
+          </th>
+          <th class="px-6 py-4 text-left text-sm font-medium text-text-300">
+            Tags
+          </th>
+          <th class="sortable px-6 py-4 text-left text-sm font-medium text-text-300" data-sort="description">
+            Description
+            <span class="sort-icon ml-1">↕</span>
+          </th>
+          <th class="w-10 px-6 py-4"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {lists.map((list) => (
+          <tr class="group border-b border-text-400/5">
+            <td class="px-6 py-4">
+              <a 
+                href={`/lists/${list.id.replace('.yaml', '')}`} 
+                class="text-primary-400 hover:text-primary-300 font-medium"
+              >
+                {list.data.title}
+              </a>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex flex-wrap gap-2">
+                {list.data.tags.map(tag => {
+                  const tagColors = {
+                    python: 'bg-blue-400/10 text-blue-400',
+                    'data-science': 'bg-green-400/10 text-green-400',
+                    'machine-learning': 'bg-purple-400/10 text-purple-400',
+                    mlops: 'bg-orange-400/10 text-orange-400',
+                    devops: 'bg-red-400/10 text-red-400'
+                  };
+                  const colorClass = tagColors[tag] || 'bg-primary-400/10 text-primary-400';
+                  return (
+                    <span class={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${colorClass}`}>
+                      {tag}
+                    </span>
+                  );
+                })}
+              </div>
+            </td>
+            <td class="px-6 py-4 text-text-300">
+              {list.data.description}
+            </td>
+            <td class="px-6 py-4">
+              <button 
+                class="expand-button text-text-400 hover:text-primary-400 transition-colors"
+                aria-label="Expand details"
+              >
+                <svg 
+                  class="w-5 h-5 transform transition-transform duration-200" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+          <tr class="hidden details-row border-b border-text-400/5 bg-background-700/30">
+            <td colspan="4" class="px-6 py-4">
+              <div class="space-y-4">
+                <h3 class="font-medium text-text-200">Resources:</h3>
+                <div class="grid gap-2">
+                  {list.data.items.map(item => (
+                    <div class="flex items-start space-x-4">
+                      <div class="flex-1">
+                        <h4 class="text-primary-400">{item.name}</h4>
+                        <p class="text-sm text-text-300">{item.description}</p>
+                      </div>
+                      <a 
+                        href={item.url}
+                        class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-primary-400/10 text-primary-400 hover:bg-primary-400/20 transition-colors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Visit →
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  class TableManager {
+    constructor() {
+      this.table = document.getElementById('lists-table');
+      this.searchInput = document.getElementById('table-search');
+      this.sortColumns = document.querySelectorAll('.sortable');
+      this.expandButtons = document.querySelectorAll('.expand-button');
+      this.currentSort = { column: null, direction: 'asc' };
+      
+      this.initialize();
+    }
+
+    initialize() {
+      this.searchInput?.addEventListener('input', () => this.filterTable());
+      this.sortColumns.forEach(column => {
+        column.addEventListener('click', () => this.sortTable(column));
+      });
+      this.expandButtons.forEach(button => {
+        button.addEventListener('click', (e) => this.toggleDetails(e));
+      });
+    }
+
+    toggleDetails(e) {
+      const button = e.currentTarget;
+      const row = button.closest('tr');
+      const detailsRow = row.nextElementSibling;
+      const icon = button.querySelector('svg');
+
+      detailsRow.classList.toggle('hidden');
+      icon.style.transform = detailsRow.classList.contains('hidden') ? '' : 'rotate-180deg';
+    }
+
+    // ... rest of the TableManager methods (filterTable, sortTable) remain the same ...
+  }
+
+  // Initialize table manager when the page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    new TableManager();
+  });
+</script>
+
+<style>
+  .sortable {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .sortable:hover {
+    color: var(--primary-400);
+  }
+
+  .sort-icon {
+    opacity: 0.5;
+    font-size: 0.8em;
+  }
+
+  .sortable:hover .sort-icon {
+    opacity: 1;
+  }
+
+  .sort-asc .sort-icon::after {
+    content: "↑";
+  }
+
+  .sort-desc .sort-icon::after {
+    content: "↓";
+  }
+</style> 

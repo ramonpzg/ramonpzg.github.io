@@ -1,0 +1,161 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Dock from '../../components/Dock.astro';
+
+export async function getStaticPaths() {
+  const videos = await getCollection('videos');
+  return videos.map(video => ({
+    params: { slug: video.slug },
+    props: { video },
+  }));
+}
+
+const { video } = Astro.props;
+const { Content } = await video.render();
+
+// Format date
+const publishDate = new Date(video.data.pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<Layout title={video.data.title}>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center space-x-2 text-sm mb-8 text-text-300">
+      <a href="/" class="hover:text-primary-400">Home</a>
+      <span>/</span>
+      <a href="/watch" class="hover:text-primary-400">Watch</a>
+      <span>/</span>
+      <span class="text-text-50">{video.data.title}</span>
+    </nav>
+
+    <article class="space-y-8">
+      <!-- Video Title -->
+      <header class="space-y-4">
+        <h1 class="text-4xl font-bold text-text-50">{video.data.title}</h1>
+        <div class="flex items-center space-x-4 text-sm text-text-300">
+          <span>{publishDate}</span>
+          <span>•</span>
+          <span>{video.data.duration}</span>
+        </div>
+      </header>
+
+      <!-- Video/Image Section -->
+      <div class="relative bg-background-900 rounded-lg overflow-hidden">
+        <div class="aspect-w-16 aspect-h-9">
+          {video.data.videoUrl ? (
+            <iframe
+              src={video.data.videoUrl}
+              title={video.data.title}
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="absolute inset-0 w-full h-full"
+            ></iframe>
+          ) : (
+            <img
+              src={video.data.thumbnailUrl}
+              alt={video.data.title}
+              class="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2">
+        {video.data.tags.map((tag) => (
+          <span 
+            class="px-3 py-1 text-sm rounded-full bg-primary-400/10 text-primary-400"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <!-- Description -->
+      <div class="prose prose-invert prose-primary max-w-none">
+        <p class="text-lg text-text-300">{video.data.description}</p>
+        
+        <!-- Content from markdown -->
+        <div class="mt-8">
+          <Content />
+        </div>
+      </div>
+    </article>
+
+    <!-- Dock Menu -->
+    <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
+      <Dock />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Style markdown content */
+  :global(.prose h2) {
+    color: var(--text-50);
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  :global(.prose h3) {
+    color: var(--text-50);
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  :global(.prose p) {
+    color: var(--text-300);
+    margin-bottom: 1rem;
+  }
+
+  :global(.prose ul) {
+    color: var(--text-300);
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  :global(.prose li) {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Aspect ratio container for video */
+  .aspect-w-16 {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+  }
+
+  /* Responsive iframe */
+  .aspect-w-16 iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+  }
+
+  /* Add shadow to video container */
+  .video-container {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Add styles for the image */
+  .aspect-w-16 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    object-fit: cover;
+  }
+</style>

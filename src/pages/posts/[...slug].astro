@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import MenuBar from '../../components/MenuBar.astro';
+import Dock from '../../components/Dock.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -13,52 +13,151 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+// Format date
+const publishDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
 ---
 
-<MenuBar />
 <Layout title={post.data.title}>
-  <main class="container mx-auto px-4 py-8">
-    <nav class="text-sm breadcrumbs mb-6">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/read">Read</a></li>
-          <li>{post.data.title}</li>
-        </ul>
-      </nav>
-    <article class="prose lg:prose-xl mx-auto">
-      <h1>{post.data.title}</h1>
-      <img src={post.data.image.url} alt={post.data.image.alt} class="w-full h-64 object-cover rounded-lg mb-6">
-      <div class="flex items-center justify-between mb-6">
-        <span class="text-sm text-gray-500">{post.data.readingTime} min read</span>
-        <span class="text-sm text-gray-500">{post.data.pubDate.toLocaleDateString()}</span>
+  <main class="max-w-3xl mx-auto px-4 py-12">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center space-x-2 text-sm mb-8 text-text-300">
+      <a href="/" class="hover:text-primary-400">Home</a>
+      <span>/</span>
+      <a href="/read" class="hover:text-primary-400">Read</a>
+      <span>/</span>
+      <span class="text-text-50">{post.data.title}</span>
+    </nav>
+
+    <article class="prose prose-invert prose-primary max-w-none">
+      <!-- Post Header -->
+      <header class="mb-8 not-prose">
+        <h1 class="text-4xl font-bold text-text-50 mb-4">{post.data.title}</h1>
+        <div class="flex items-center space-x-4 text-sm text-text-300">
+          <time datetime={post.data.pubDate}>
+            {publishDate}
+          </time>
+          {post.data.readingTime && (
+            <>
+              <span>•</span>
+              <span>{post.data.readingTime}</span>
+            </>
+          )}
+        </div>
+      </header>
+
+      <!-- Tags -->
+      {post.data.tags && (
+        <div class="flex flex-wrap gap-2 mb-8 not-prose">
+          {post.data.tags.map((tag: string) => (
+            <span class="px-3 py-1 text-sm rounded-full bg-primary-400/10 text-primary-400">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <!-- Post Content -->
+      <div class="mt-8">
+        <Content />
       </div>
-      <div class="flex flex-wrap gap-2 mb-6">
-        {post.data.tags.map((tag) => (
-          <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-            {tag}
-          </span>
-        ))}
-      </div>
-      <Content />
     </article>
+
+    <!-- Dock Menu -->
+    <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
+      <Dock />
+    </div>
   </main>
 </Layout>
 
 <style>
-    .breadcrumbs ul {
-      display: flex;
-      list-style: none;
-      padding: 0;
-    }
-    .breadcrumbs li:not(:last-child)::after {
-      content: ">";
-      margin: 0 0.5rem;
-    }
-    .breadcrumbs a {
-      color: #3182ce;
-      text-decoration: none;
-    }
-    .breadcrumbs a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  /* Style markdown content */
+  :global(.prose) {
+    color: var(--text-300);
+  }
+
+  :global(.prose h1),
+  :global(.prose h2),
+  :global(.prose h3),
+  :global(.prose h4) {
+    color: var(--text-50);
+    font-weight: 600;
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+
+  :global(.prose h2) {
+    font-size: 1.875rem;
+    border-bottom: 1px solid rgba(var(--text-400), 0.1);
+    padding-bottom: 0.5rem;
+  }
+
+  :global(.prose h3) {
+    font-size: 1.5rem;
+  }
+
+  :global(.prose p) {
+    margin-bottom: 1.5em;
+    line-height: 1.75;
+  }
+
+  :global(.prose a) {
+    color: var(--primary-400);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  :global(.prose a:hover) {
+    border-color: var(--primary-400);
+  }
+
+  :global(.prose code) {
+    background: rgba(var(--primary-400), 0.1);
+    color: var(--primary-400);
+    padding: 0.2em 0.4em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+  }
+
+  :global(.prose pre) {
+    background: rgba(var(--background-800), 0.5);
+    border: 1px solid rgba(var(--text-400), 0.1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  :global(.prose pre code) {
+    background: none;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  :global(.prose blockquote) {
+    border-left: 4px solid var(--primary-400);
+    padding-left: 1rem;
+    color: var(--text-300);
+    font-style: italic;
+  }
+
+  :global(.prose ul),
+  :global(.prose ol) {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5em;
+  }
+
+  :global(.prose li) {
+    margin-bottom: 0.5em;
+  }
+
+  /* Add bottom padding to prevent content from being hidden behind the dock */
+  main {
+    padding-bottom: 120px;
+  }
+</style>

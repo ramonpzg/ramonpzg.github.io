@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Dock from '../../components/Dock.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const lists = await getCollection('lists');
+  return lists.map(entry => {
+    const slug = entry.id.split('/').pop()?.replace('.yaml', '');
+    return {
+      params: { slug },
+      props: { entry }
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { title, description, items } = entry.data;
+
+// Pre-process the categories
+const categorizedItems = items.reduce((acc, item) => {
+  const category = item.category || 'Uncategorized';
+  if (!acc[category]) {
+    acc[category] = [];
+  }
+  acc[category].push(item);
+  return acc;
+}, {} as Record<string, typeof items>);
+---
+
+<Layout title={`${title} | Ramon Perez`}>
+  <main class="relative min-h-screen pb-24">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+      <div class="space-y-8 mb-12">
+        <h1 class="text-4xl font-bold tracking-tight">
+          <span class="text-gradient">{title}</span>
+        </h1>
+        <p class="text-lg text-text-300">
+          {description}
+        </p>
+      </div>
+
+      <!-- Categories -->
+      <div class="space-y-12">
+        {Object.entries(categorizedItems).map(([category, categoryItems]) => (
+          <div class="space-y-4">
+            <h2 class="text-2xl font-semibold text-text-200">{category}</h2>
+            <div class="overflow-hidden rounded-lg border border-text-400/10">
+              <table class="min-w-full divide-y divide-text-400/10">
+                <thead class="bg-background-800/50">
+                  <tr>
+                    <th scope="col" class="py-3 px-4 text-left text-sm font-medium text-text-300">
+                      Name
+                    </th>
+                    <th scope="col" class="py-3 px-4 text-left text-sm font-medium text-text-300">
+                      Description
+                    </th>
+                    <th scope="col" class="py-3 px-4 text-right text-sm font-medium text-text-300 w-24">
+                      Link
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-text-400/10 bg-background-800/30">
+                  {categoryItems.map((item) => (
+                    <tr class="hover:bg-background-700/50 transition-colors">
+                      <td class="py-2 px-4 text-sm font-medium text-primary-400">
+                        {item.name}
+                      </td>
+                      <td class="py-2 px-4 text-sm text-text-300">
+                        {item.description}
+                      </td>
+                      <td class="py-2 px-4 text-right">
+                        <a
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="inline-flex items-center text-xs font-medium text-primary-400 hover:text-primary-300 transition-colors"
+                        >
+                          Visit →
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="fixed bottom-0 left-0 right-0 z-30 flex justify-center pb-4">
+      <Dock />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .text-gradient {
+    background: linear-gradient(45deg, var(--primary-400), var(--accent-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style> 

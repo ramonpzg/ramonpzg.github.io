@@ -1,0 +1,131 @@
+---
+interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+const { 
+  title, 
+  description, 
+  pubDate, 
+  author, 
+  image, 
+  readingTime,
+  tags = [], 
+} = post.data;
+---
+
+<article 
+  class="blog-card"
+  data-post
+  data-tags={JSON.stringify(tags)}
+>
+  <div class="flex items-start gap-4 p-6">
+    <div class="flex-shrink-0">
+      <!-- Simple document icon using HTML/CSS -->
+      <div class="icon-document">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-8 h-8 text-primary-400"
+        >
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      </div>
+    </div>
+    
+    <div class="flex-grow">
+      <div class="flex justify-between items-start gap-4">
+        <h2 class="text-xl font-semibold hover:text-primary-400 transition-colors">
+          <a href={`/posts/${post.slug}`}>{title}</a>
+        </h2>
+        <div class="flex flex-col items-end text-sm text-text-400">
+          <time datetime={pubDate.toISOString()}>
+            {pubDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            })}
+          </time>
+          <span class="mt-1">{readingTime}</span>
+        </div>
+      </div>
+
+      <p class="mt-2 text-text-300 line-clamp-2">
+        {description}
+      </p>
+
+      <div class="mt-4 flex items-center justify-between">
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag: string) => (
+            <span class="tag">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div class="flex items-center text-sm text-text-400">
+          <span class="inline-block w-6 h-6 rounded-full bg-primary-400 mr-2"></span>
+          {author}
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .blog-card {
+    background: rgba(var(--background-800), 0.5);
+    border: 1px solid rgba(var(--text-400), 0.1);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-color: rgba(var(--primary-400), 0.2);
+  }
+
+  .tag {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background: rgba(var(--primary-400), 0.1);
+    color: var(--primary-400);
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover {
+    background: rgba(var(--primary-400), 0.2);
+  }
+
+  .icon-document {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(var(--primary-400), 0.1);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+</style>
