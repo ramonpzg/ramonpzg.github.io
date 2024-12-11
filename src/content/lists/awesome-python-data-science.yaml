@@ -1,6 +1,6 @@
 title: "Awesome Python Data Science"
 description: "A curated list of awesome Python frameworks, libraries, software and resources for data science."
-tags: ["python", "data-science", "machine-learning"]
+tags: ["python", "data-science", "machine-learning", "ML"]
 items:
   - name: "Pandas"
     description: "Powerful data manipulation and analysis library"

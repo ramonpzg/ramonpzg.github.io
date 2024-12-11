@@ -33,3 +33,10 @@ pnpm-debug.log*
 .idea/
 
 old_site
+
+drizzle.config.ts
+drizzle/
+src/db
+src/lib
+src/pages/api
+src/pages/newsletter
