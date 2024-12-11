@@ -1,21 +1,12 @@
 ---
-title: 'PyData Global 2023'
-pubDate: 2023-12-06
-description: 'Architecting Data Tools'
-videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-thumbnailUrl: 'https://images.production.bytewax.io/pydata_global_2023_519c788d2c.png'
-duration: '10:30'
-tags: ["python", "data", "dev"]
+title: 'MLOps World 2023"'
+pubDate: 2023-10-24
+description: 'Lightning Talk on How to Serve Machine Learning Models'
+videoUrl: 'https://www.youtube.com/embed/o_2RA_-Tjso'
+thumbnailUrl: 'https://content.app-us1.com/cdn-cgi/image/dpr=2,fit=scale-down,format=auto,onerror=redirect,width=650/bZjbL/2023/08/30/5ba7290f-89ee-400a-af3f-3bfea6f477f5.png'
+duration: '04:46'
+tags: ["python", "ml", "serving", "lightning-talk"]
 ---
-title: "MLOps World 2023"
-date: 2023-11-03
-excerpt: "Lightning Talk on How to Serve Machine Learning Models"
-header:
-  image: https://content.app-us1.com/cdn-cgi/image/dpr=2,fit=scale-down,format=auto,onerror=redirect,width=650/bZjbL/2023/08/30/5ba7290f-89ee-400a-af3f-3bfea6f477f5.png
-  teaser: https://mlopsworld.com/wp-content/uploads/2023/02/mlops-world-new-logo.png
-
-
-{% include video id="o_2RA_-Tjso" provider="youtube" %}
 
 ## Abstract
 

@@ -1,27 +1,14 @@
 ---
-title: 'PyData Global 2023'
-pubDate: 2023-12-06
-description: 'Architecting Data Tools'
-videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-thumbnailUrl: 'https://images.production.bytewax.io/pydata_global_2023_519c788d2c.png'
-duration: '10:30'
-tags: ["python", "data", "dev"]
+title: 'PyCon APAC 2021'
+pubDate: 2021-11-21
+description: 'Data Pipelines 4 All'
+videoUrl: 'https://www.youtube.com/embed/p7zafB6qAp8'
+thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdiSVnVkBnqugffvgtQyA21Yho86bYq6tDSg&s'
+duration: '03:06:59'
+tags: ["python", "data", "ml", "pipelines", data-engineering]
 ---
-title: "PyCon APAC 2021"
-date: 2021-11-21
-excerpt: "Data Pipelines 4 All"
-header:
-  image: https://th.pycon.org/theme/img/pyconapachead.png
-  teaser: https://p-u.popcdn.net/event_details/covers/000/011/673/og_cover/673c83b16efbe5ba4d50985c47e68e37c6f445cb.png?1633478332
-
 
 [Here is the link to the repo with the set up instructions for the workshop.](https://github.com/ramonpzg/pycon-apac21-pipelines)
-
-Here is the proposal I submitted for the workshop.
-
-## Title
-
-> "Pipelines 4 All: From Data Engineering to Machine Learning"
 
 ## Description
 

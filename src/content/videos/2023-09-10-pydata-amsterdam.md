@@ -1,33 +1,15 @@
 ---
-title: 'PyData Global 2023'
-pubDate: 2023-12-06
-description: 'Architecting Data Tools'
-videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-thumbnailUrl: 'https://images.production.bytewax.io/pydata_global_2023_519c788d2c.png'
-duration: '10:30'
-tags: ["python", "data", "dev"]
+title: 'PyData Amsterdam 2023'
+pubDate: 2023-09-14
+description: 'Unlocking ~the Black-Box~ ML Models: Practical Examples to get Started with Explainable AI'
+thumbnailUrl: 'https://i.ytimg.com/vi/TwQNBqqH9hA/maxresdefault.jpg'
+duration: '01:35:30'
+tags: ["xai", "dev", "ml"]
 ---
-title: "PyData Amsterdam 2023"
-date: 2023-09-14
-excerpt: "Practical Examples to get Started with Explainable AI"
-header:
-  image: https://pbs.twimg.com/media/F0IJgS3XwAAi9cW?format=jpg&name=4096x4096
-  teaser: https://pbs.twimg.com/media/F0IJgS3XwAAi9cW?format=jpg&name=4096x4096
-
-toc: true
-toc_label: "Unique Title"
-toc_icon: "cog"
-toc_sticky: true
-
-
 
 [Here is the link to the repo with the set up instructions for the workshop.](https://github.com/ramonpzg/xai-workshop)
 
 Here is the outline for the workshop.
-
-## Title
-
-> Unlocking ~the Black-Box~ ML Models
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ramonpzg/xai-worksohp/HEAD)
 

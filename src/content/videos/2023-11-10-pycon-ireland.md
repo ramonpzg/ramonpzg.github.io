@@ -4,15 +4,12 @@ pubDate: 2023-11-10
 description: 'Architecting Dashboard for Analytics and Machine Learning'
 thumbnailUrl: 'https://cache.sessionize.com/image/6cb5-1140o400o3-raPpTgWjihEcgXXDs17cDt.png'
 duration: '10:30'
-tags: ["python", "data", "dev"]
+tags: ["python", "data", "dev", "dashboards"]
 ---
 
 
 [Here is the link to the repo with the set up instructions for the workshop.](https://github.com/ramonpzg/architecting-dashboards)
 
-## Title
-
-> Architecting Dashboards
 
 Welcome to Architecting Dashboards, a tutorial where we will be learning about how to deconstruct static 
 and dynamic dashboards and put new ones together; how to save dashboards for the purpose of sharing them 

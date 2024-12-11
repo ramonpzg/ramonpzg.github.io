@@ -1,40 +1,17 @@
 ---
-title: 'PyData Global 2023'
-pubDate: 2023-12-06
-description: 'Architecting Data Tools'
-videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-thumbnailUrl: 'https://images.production.bytewax.io/pydata_global_2023_519c788d2c.png'
-duration: '10:30'
-tags: ["python", "data", "dev"]
+title: 'PyCon Chile 2021'
+pubDate: 2021-11-05
+description: 'ETL Pipelines 4 Data Professionals'
+videoUrl: 'https://drive.google.com/file/d/1fitaTQX9tGzHqHIieYEgAeFhv2dDO6H2/preview'
+thumbnailUrl: 'https://pycon.cl/2021/images/pycon_chile_white.png'
+duration: '02:18:30'
+tags: ['workshop', 'pycon', "data engineering", 'technical', 'spanish']
 ---
-title: "PyCon Chile 2021"
-excerpt: "ETL Pipelines 4 Data Professionals"
-date: 2021-11-05
-header:
-  image: https://pycon.cl/2021/images/pycon_chile_white.png
-  teaser: https://pycon.cl/images/lapycon2021.png
-tags:
-  - workshop
-  - pycon
-  - data engineering
-  - feature stores
-  - technical
-
-
-Here is the recording of the workshop.
-
-<iframe src="https://drive.google.com/file/d/1fitaTQX9tGzHqHIieYEgAeFhv2dDO6H2/preview" width="640" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 
 [Here is the link to the repo with the set up instructions for the workshop.](https://github.com/ramonpzg/pycon-chile-etl-pipelines)
 
 Here is the proposal I submitted for the workshop.
-
-## Titulo
-
-> "ETL Pipelines 4 Data Professionals"
-
-### Date: 5 November 2021 from 2 to 6pm CDT
 
 ## PyCon Chile 2021
 

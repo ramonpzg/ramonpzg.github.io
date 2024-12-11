@@ -2,17 +2,14 @@
 title: 'PyData Global 2023'
 pubDate: 2023-12-06
 description: 'Architecting Data Tools'
-videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+videoUrl: 'https://www.youtube.com/watch?v=y_j86l9Gnr8'
 thumbnailUrl: 'https://images.production.bytewax.io/pydata_global_2023_519c788d2c.png'
-duration: '10:30'
+duration: '02:05:10'
 tags: ["python", "data", "dev"]
 ---
 
 [Here is the link to the repo with the set up instructions for the workshop.](https://github.com/ramonpzg/architecting_tools)
 
-## Title 
-
-> Architecting Data Tools
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ramonpzg/architecting_tools)
 

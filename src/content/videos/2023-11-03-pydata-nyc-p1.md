@@ -1,21 +1,12 @@
 ---
-title: 'PyData Global 2023'
-pubDate: 2023-12-06
-description: 'Architecting Data Tools'
-videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-thumbnailUrl: 'https://images.production.bytewax.io/pydata_global_2023_519c788d2c.png'
-duration: '10:30'
-tags: ["python", "data", "dev"]
+title: 'PyData NYC 2023 1st Talk'
+pubDate: 2023-11-03
+description: 'Architecting Data: A Deep Dive Into the world of Synthetic Data'
+videoUrl: 'https://www.youtube.com/embed/W9Tvexmtv3M'
+thumbnailUrl: 'https://pbs.twimg.com/media/F56TYPpWkAEKHuj?format=jpg&name=large'
+duration: '35:55'
+tags: ["python", "data", "synthetic-data"]
 ---
-title: "PyData NYC 2023 1st Talk"
-date: 2023-11-03
-excerpt: "Architecting Data: A Deep Dive Into the world of Synthetic Data"
-header:
-  image: https://pbs.twimg.com/media/F56TYPpWkAEKHuj?format=jpg&name=large
-  teaser: https://pbs.twimg.com/media/F56TYPpWkAEKHuj?format=jpg&name=large
-
-
-{% include video id="W9Tvexmtv3M" provider="youtube" %}
 
 ## Abstract
 

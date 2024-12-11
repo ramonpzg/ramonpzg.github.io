@@ -1,31 +1,16 @@
 ---
-title: 'PyData Global 2023'
-pubDate: 2023-12-06
-description: 'Architecting Data Tools'
-videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-thumbnailUrl: 'https://images.production.bytewax.io/pydata_global_2023_519c788d2c.png'
+title: 'PyData Global 2022'
+pubDate: 2022-12-03
+description: 'Workflows Deep Dive: From Data Engineering to Machine Learning'
+videoUrl: 'https://numfocus-org.zoom.us/rec/share/-_uBF0aeQIG2JwgUxsg09prdCYq-7UtNvCvS_yxgM2ay8yRvqhRgVupUn0hqNw8.1uQNaeadSO_CX8xx'
+thumbnailUrl: 'https://pydata.org/global2022/wp-content/uploads/2022/11/PyDataGlobal-OpenGraph.png'
 duration: '10:30'
 tags: ["python", "data", "dev"]
 ---
-title: "PyData Global 2022"
-date: 2022-12-03
-excerpt: "Workflows Deep Dive: From Data Engineering to Machine Learning"
-header:
-  image: https://pydata.org/global2022/wp-content/uploads/2022/11/PyDataGlobal-OpenGraph.png
-  teaser: https://images.production.bytewax.io/pydata_global_2023_519c788d2c.png
-
-
-Here is the recording of the workshop.
-
-<iframe src="https://numfocus-org.zoom.us/rec/share/-_uBF0aeQIG2JwgUxsg09prdCYq-7UtNvCvS_yxgM2ay8yRvqhRgVupUn0hqNw8.1uQNaeadSO_CX8xx" width="640" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 [Here is the link to the repo with the set up instructions for the workshop.](https://github.com/ramonpzg/workflows-deep-dive)
 
 Here is the proposal I submitted for the workshop.
-
-# Title
-
-> Workflows Deep Dive: From Data Engineering to Machine Learning
 
 ## Elevator Pitch
 
