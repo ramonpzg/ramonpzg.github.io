@@ -4,15 +4,14 @@ import { Icon } from 'astro-icon/components';
 const dockItems = [
   { name: 'Home', icon: 'ri:home-line', href: '/' },
   { name: 'Projects', icon: 'ri:archive-line', href: '/projects' },
-  { name: 'Learn', icon: 'ri:search-line', href: '/learn' },
   { name: 'Read', icon: 'ri:book-read-line', href: '/read' },
   { name: 'Watch', icon: 'ri:movie-line', href: '/watch' },
-  { name: 'About', icon: 'ri:user-line', href: '/about' },
   { name: 'Lists', icon: 'ri:list-check', href: '/lists' },
+  { name: 'About', icon: 'ri:user-line', href: '/about' },
 ];
 ---
 
-<div class="dock-container fixed bottom-4 right-4 md:relative md:bottom-auto md:right-auto" x-data="{ isOpen: false }">
+<div class="dock-container" x-data="{ isOpen: false }">
   <button 
     @click="isOpen = !isOpen"
     class="md:hidden dock-hamburger"
@@ -40,7 +39,10 @@ const dockItems = [
 
 <style>
   .dock-container {
-    position: relative;
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
     width: fit-content;
     z-index: 50;
   }

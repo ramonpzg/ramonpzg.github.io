@@ -1,6 +1,11 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 @layer base {
   :root {
@@ -127,4 +132,21 @@
     --accent-950: #eef7f6;
     
   }
+}
+
+/* Apply fonts strategically */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Patrick Hand SC', cursive;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  /* font-family: 'Patrick Hand SC', cursive; */
+}
+
+/* Optional: Add the hand-drawn font to interactive elements */
+.hand-drawn-box h3,
+.suggested-questions button,
+nav a {
+  font-family: 'Patrick Hand SC', cursive;
 }
