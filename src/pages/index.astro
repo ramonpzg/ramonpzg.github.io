@@ -1,8 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Dock from '../components/Dock.astro';
-import Terminal from '../components/Terminal.astro';
-import FloatingElements from '../components/FloatingElements.astro';
+import Chat from '../components/Chat.astro';
 import '../styles/theme.css';
 ---
 
@@ -11,35 +10,185 @@ import '../styles/theme.css';
     <!-- Background Elements -->
     <div class="absolute inset-0 bg-gradient-radial from-primary-800/20 to-background-950 -z-20"></div>
     <div class="animated-bg -z-10"></div>
-    <FloatingElements />
+    <!-- <FloatingElements /> -->
 
     <!-- Content -->
     <div class="container mx-auto relative z-10 flex flex-col items-center justify-start min-h-screen px-4 py-16">
       <div class="animate-fade-in text-center mb-8">
         <h1 class="text-6xl font-bold tracking-tighter mb-6">
-          <span class="text-gradient">Ramon Perez</span>
+          <span class="text-gradient">Ramón Pérez</span>
         </h1>
         <p class="text-xl text-text-300 mb-8 max-w-2xl mx-auto">
           Engineer, Educator, and Mountain Biker
         </p>
       </div>
+      
+      <div class="w-full max-w-3xl mx-auto relative">
+        <Chat />
+      </div>
 
-      <!-- Terminal Container -->
-      <!-- <div class="w-full max-w-3xl mx-auto relative">
-        <div class="floating-terminal"> -->
-          <!-- <Terminal /> -->
-        <!-- </div>
-      </div> -->
-    </div>
+      <!-- Interactive Boxes Section -->
+      <div class="w-full max-w-4xl mx-auto relative mb-24 hand-drawn-container">
+        <!-- Box 1: Projects -->
+        <a href="/projects" class="absolute left-[10%] top-[5%] w-[45%] group">
+          <div class="hand-drawn-box lined thick rotate-[-1deg]">
+            <h3 class="text-2xl font-bold mb-2 text-text-100">Projects</h3>
+            <p class="text-text-400">Explore my latest work and side projects</p>
+            <div class="absolute bottom-6 right-6 text-primary-500 group-hover:translate-x-1 transition-transform duration-300">→</div>
+          </div>
+        </a>
+
+        <!-- Box 2: Teaching -->
+        <a href="/teaching" class="absolute right-[15%] top-[15%] w-[40%] group">
+          <div class="hand-drawn-box dotted thick rotate-[1deg]">
+            <h3 class="text-2xl font-bold mb-2 text-text-100">Teaching</h3>
+            <p class="text-text-400">Educational resources and tutorials</p>
+            <div class="absolute bottom-6 right-6 text-primary-500 group-hover:translate-x-1 transition-transform duration-300">→</div>
+          </div>
+        </a>
+
+        <!-- Box 3: Blog -->
+        <a href="/blog" class="absolute left-[20%] top-[35%] w-[35%] group">
+          <div class="hand-drawn-box dashed thick rotate-[-0.5deg]">
+            <h3 class="text-2xl font-bold mb-2 text-text-100">Blog</h3>
+            <p class="text-text-400">Thoughts on tech and education</p>
+            <div class="absolute bottom-6 right-6 text-primary-500 group-hover:translate-x-1 transition-transform duration-300">→</div>
+          </div>
+        </a>
+
+        <!-- Box 4: About -->
+        <a href="/about" class="absolute right-[25%] top-[45%] w-[38%] group">
+          <div class="hand-drawn-box lined thick rotate-[0.8deg]">
+            <h3 class="text-2xl font-bold mb-2 text-text-100">About</h3>
+            <p class="text-text-400">Learn more about my journey</p>
+            <div class="absolute bottom-6 right-6 text-primary-500 group-hover:translate-x-1 transition-transform duration-300">→</div>
+          </div>
+        </a>
+
+        <!-- Box 5: Contact -->
+        <a href="/contact" class="absolute left-[30%] top-[65%] w-[42%] group">
+          <div class="hand-drawn-box dotted thick rotate-[-0.7deg]">
+            <h3 class="text-2xl font-bold mb-2 text-text-100">Contact</h3>
+            <p class="text-text-400">Get in touch with me</p>
+            <div class="absolute bottom-6 right-6 text-primary-500 group-hover:translate-x-1 transition-transform duration-300">→</div>
+          </div>
+        </a>
+
+        <!-- Box 6: Mountain Biking -->
+        <a href="/biking" class="absolute right-[35%] top-[80%] w-[36%] group">
+          <div class="hand-drawn-box dashed thick rotate-[1.2deg]">
+            <h3 class="text-2xl font-bold mb-2 text-text-100">Mountain Biking</h3>
+            <p class="text-text-400">Adventures on two wheels</p>
+            <div class="absolute bottom-6 right-6 text-primary-500 group-hover:translate-x-1 transition-transform duration-300">→</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Latest Updates Section -->
+      <div class="w-full max-w-2xl mx-auto mb-16">
+        <h2 class="text-2xl font-semibold mb-4 text-center">Latest Updates</h2>
+        <ul class="space-y-2">
+          {[
+            { title: "Website Redesign Launch", date: "2024-03-20", href: "/blog/website-redesign" },
+            { title: "New Project: AI Chat Interface", date: "2024-03-15", href: "/projects/ai-chat" },
+            { title: "Tutorial: Building with Astro", date: "2024-03-10", href: "/tutorials/astro-build" },
+            { title: "Mountain Biking Adventure Log", date: "2024-03-05", href: "/blog/biking-log" },
+            { title: "Teaching Resources Update", date: "2024-02-28", href: "/teaching/resources" },
+            { title: "Portfolio Project Showcase", date: "2024-02-20", href: "/projects" },
+            { title: "Tech Stack Evolution", date: "2024-02-15", href: "/blog/tech-stack" },
+            { title: "Coding Best Practices Guide", date: "2024-02-10", href: "/tutorials/best-practices" },
+            { title: "Education Platform Launch", date: "2024-02-05", href: "/teaching/platform" },
+            { title: "2024 Goals and Projects", date: "2024-01-30", href: "/blog/2024-goals" },
+          ].map((update) => (
+            <li class="update-item relative">
+              <a
+                href={update.href}
+                class="block p-3 rounded-lg transition-all duration-300 hover:bg-primary-800/10"
+              >
+                <div class="flex justify-between items-center">
+                  <span class="text-text-100">{update.title}</span>
+                  <span class="text-text-400 text-sm">{update.date}</span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Newsletter Section -->
+      <div class="w-full max-w-2xl mx-auto mb-16">
+        <div class="p-8 rounded-xl bg-primary-900/20 backdrop-blur-sm">
+          <h2 class="text-2xl font-semibold mb-3 text-center">Stay Up-to-date</h2>
+          <p class="text-text-300 text-center mb-6">
+            Get the latest updates on tutorials, projects, and tech insights delivered to your inbox.
+          </p>
+
+          <div class="flex justify-center">
+            <iframe src="https://ramonprz.substack.com/embed" width="480" height="320" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe>
+          </div>
+        </div>
+      </div>
 
     <!-- Dock Menu -->
-    <div class="fixed bottom-0 left-0 right-0 z-30 flex justify-center pb-4">
       <Dock />
-    </div>
   </main>
 </Layout>
 
 <style>
+  @import url('https://fonts.googleapis.com/css?family=Patrick+Hand+SC');
+
+  .hand-drawn-container {
+    height: 900px;
+    position: relative;
+  }
+
+  .hand-drawn-box {
+    background: rgba(var(--background-900), 0.5);
+    backdrop-filter: blur(8px);
+    padding: 1.5rem;
+    transition: all .5s ease;
+    position: relative;
+    box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  }
+
+  .hand-drawn-box:hover {
+    box-shadow: 2px 8px 4px -6px hsla(0,0%,0%,.3);
+    transform: translateY(-5px);
+  }
+
+  .hand-drawn-box.lined.thick {
+    border: solid 7px var(--primary-500);
+  }
+
+  .hand-drawn-box.dotted.thick {
+    border: dotted 5px var(--accent-500);
+  }
+
+  .hand-drawn-box.dashed.thick {
+    border: dashed 5px var(--primary-400);
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .hand-drawn-container {
+      height: auto;
+      padding: 2rem;
+    }
+
+    [class*="absolute"] {
+      position: relative !important;
+      width: 100% !important;
+      left: 0 !important;
+      top: 0 !important;
+      margin-bottom: 2rem;
+    }
+
+    .hand-drawn-box {
+      width: 100%;
+    }
+  }
+
   .animated-bg {
     position: absolute;
     inset: 0;
@@ -91,4 +240,169 @@ import '../styles/theme.css';
     min-height: 100vh;
     padding-bottom: 6rem; /* Make room for dock */
   }
+
+  .update-item {
+    position: relative;
+    z-index: 1;
+  }
+
+  .update-item a {
+    position: relative;
+    z-index: 2;
+  }
+
+  .update-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: 8px;
+    background: linear-gradient(
+      45deg,
+      transparent 50%,
+      var(--primary-400) 100%,
+      var(--accent-400) 100%
+    );
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .update-item:hover::before {
+    opacity: 1;
+  }
+
+  svg path {
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+
+  svg a:hover path {
+    stroke-width: 3;
+    filter: drop-shadow(0 0 8px var(--accent-400));
+  }
+
+  @keyframes drawPath {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  svg path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawPath 2s ease forwards;
+  }
+
+  .sketchy-box {
+    background: rgba(var(--background-900), 0.5);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--primary-500);
+    border-radius: 12px;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .sketchy-box::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid var(--accent-500);
+    border-radius: 14px;
+    opacity: 0.5;
+    transform: rotate(-1deg);
+  }
+
+  .sketchy-box::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border: 2px solid var(--primary-400);
+    border-radius: 13px;
+    opacity: 0.3;
+    transform: rotate(1deg);
+  }
+
+  .group:hover .sketchy-box {
+    transform: translateY(-5px);
+  }
+
+  .hand-drawn-arrow path {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: draw 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes draw {
+    from {
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Container needs a fixed height to accommodate absolute positioning */
+  .w-full.max-w-4xl {
+    height: 800px;
+    position: relative;
+  }
+
+  /* Make it responsive */
+  @media (max-width: 768px) {
+    .w-full.max-w-4xl {
+      height: 1200px;
+    }
+    
+    [class*="absolute"] {
+      position: relative !important;
+      width: 90% !important;
+      left: 5% !important;
+      top: 0 !important;
+      margin-bottom: 1rem;
+    }
+  }
 </style>
+
+<script>
+  const form = document.getElementById('newsletter-form');
+  const message = document.getElementById('form-message');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const email = formData.get('email');
+
+    try {
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        body: JSON.stringify({ email }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        message.textContent = data.message;
+        message.className = 'text-green-500 text-sm text-center mt-4';
+        (e.target as HTMLFormElement).reset();
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      message.textContent = 'Error subscribing to newsletter. Please try again.';
+      message.className = 'text-red-500 text-sm text-center mt-4';
+    }
+  });
+</script>

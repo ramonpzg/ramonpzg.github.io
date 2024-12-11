@@ -5,8 +5,14 @@ import BlogCard from '../components/BlogCard.astro';
 import TagFilter from '../components/TagFilter.astro';
 import Dock from '../components/Dock.astro';
 
-// Get all blog posts
+// Get all posts
 const posts = await getCollection('posts');
+
+// Sort content by date
+const sortByDate = (a: any, b: any) => 
+  new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+
+const sortedPosts = posts.sort(sortByDate);
 
 // Extract unique tags from all posts
 const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))];
@@ -27,11 +33,12 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))];
       <!-- Tag Filter -->
       <TagFilter tags={allTags} />
 
-      <!-- Blog Posts List -->
-      <div class="space-y-8 mt-12" id="posts-container">
-        {posts.map((post) => (
-          <BlogCard post={post} />
-        ))}
+      <div class="mt-12">
+        <div class="space-y-3" id="posts-container">
+          {sortedPosts.map((post) => (
+            <BlogCard post={post} />
+          ))}
+        </div>
       </div>
 
       <!-- Empty State -->
@@ -44,9 +51,7 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))];
     </div>
 
     <!-- Dock Menu -->
-    <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
-      <Dock />
-    </div>
+    <Dock />
   </main>
 </Layout>
 
@@ -58,7 +63,6 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))];
     background-clip: text;
   }
 
-  /* Add some bottom padding to prevent content from being hidden behind the dock */
   main {
     padding-bottom: 120px;
   }
@@ -77,13 +81,15 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))];
 
       posts.forEach(post => {
         const postTags = JSON.parse(post.getAttribute('data-tags') || '[]');
+        const element = post as HTMLElement; // Type assertion for TypeScript
+        
         if (tag === 'all' || postTags.includes(tag)) {
-          post.style.display = 'block';
-          post.classList.add('fade-in');
+          element.style.display = 'block';
+          element.classList.add('fade-in');
           visiblePosts++;
         } else {
-          post.style.display = 'none';
-          post.classList.remove('fade-in');
+          element.style.display = 'none';
+          element.classList.remove('fade-in');
         }
       });
 
