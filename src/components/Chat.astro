@@ -1,6 +1,4 @@
 ---
-import Message from './Message.astro';
-
 const suggestedQuestions = [
   { text: "Tell me about your background", action: "background" },
   { text: "What projects have you worked on?", action: "projects" },
@@ -139,9 +137,10 @@ const suggestedQuestions = [
     }
   });
 
-  function addMessage(role: 'assistant' | 'user', content: string, id: string) {
+  function addMessage(role: 'assistant' | 'user', content: string, id?: string) {
+    const messageId = id || `${role}-${Date.now()}-${messageCounter++}`;
     const messageHtml = `
-      <div id="${id}" class="flex ${role === 'user' ? 'justify-end' : 'justify-start'} mb-4">
+      <div id="${messageId}" class="flex ${role === 'user' ? 'justify-end' : 'justify-start'} mb-4">
         <div class="${
           role === 'user' 
             ? 'bg-primary-500 text-white rounded-br-none'
