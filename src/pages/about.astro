@@ -13,16 +13,13 @@ import Dock from '../components/Dock.astro';
       <!-- Contact Links -->
       <div class="flex flex-wrap gap-4 mb-12 text-text-300">
         <a href="mailto:ramonpzg@proton.me" class="hover:text-primary-400 flex items-center gap-2">
-          <span>📧</span> ramonpzg@proton.me
-        </a>
-        <a href="tel:+61-411-707-278" class="hover:text-primary-400 flex items-center gap-2">
-          <span>📱</span> +61-411-707-278
+          <span>📧</span> hello-ramon@pm.me
         </a>
         <a href="https://github.com/ramonpzg" class="hover:text-primary-400 flex items-center gap-2">
           <span>🐙</span> ramonpzg
         </a>
         <span class="flex items-center gap-2">
-          <span>📍</span> Remote
+          <span>📍</span> Sydney, AU
         </span>
       </div>
 
@@ -93,13 +90,16 @@ import Dock from '../components/Dock.astro';
         <div class="space-y-4">
           <div>
             <h3 class="text-lg font-medium mb-2">Languages</h3>
-            <p class="text-text-300">Native: Python, English, Java/Type-Script and Spanish | Intermediate: French</p>
+            <p class="text-text-300">Native Speaker: Python, English, Java/Type-Script and Spanish</p>
+            <p class="text-text-300">Intermediate: French and Rust</p>
           </div>
           
           <div>
             <h3 class="text-lg font-medium mb-2">Technologies</h3>
             <div class="flex flex-wrap gap-2">
-              {['PyTorch', 'Docker', 'FastAPI', 'React', 'NumPy', 'pandas', 'Astro', 'Git'].map(tech => (
+              {[
+                'PyTorch', 'Docker', 'FastAPI', 'SolidJS', 'NumPy', 'pandas', 'Astro', 'Git', "Tauri",
+              ].map(tech => (
                 <span class="px-3 py-1 bg-background-800 rounded-full text-sm text-text-300">{tech}</span>
               ))}
             </div>
@@ -109,9 +109,7 @@ import Dock from '../components/Dock.astro';
     </div>
 
     <!-- Dock Menu -->
-    <div class="fixed bottom-0 left-0 right-0 z-30 flex justify-center pb-4">
       <Dock />
-    </div>
   </main>
 </Layout>
 
