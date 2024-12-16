@@ -4,8 +4,9 @@ import ProjectCard from '../components/ProjectCard.astro';
 import Dock from '../components/Dock.astro';
 import { getCollection } from 'astro:content';
 
-// Get all projects from the collection
-const projects = await getCollection('projects');
+// Get all projects and sort them by order
+const projects = (await getCollection('projects'))
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 ---
 
 <Layout title="Projects | Ramon Perez">

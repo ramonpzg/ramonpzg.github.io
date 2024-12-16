@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import Dock from '../../components/Dock.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -16,7 +17,60 @@ const { Content } = await project.render();
 
 <Layout title={`${project.data.title} | Ramon Perez`}>
   <main class="max-w-4xl mx-auto px-4 py-16">
-    <h1>{project.data.title}</h1>
-    <Content />
+    {/* Project Header */}
+    <div class="mb-8">
+      <div class="flex items-center gap-4 mb-4">
+        <h1 class="text-4xl font-bold">{project.data.title}</h1>
+        <span class={`px-3 py-1 rounded-full text-sm font-medium
+          ${project.data.status === 'completed' ? 'bg-green-400/10 text-green-400' : 'bg-yellow-400/10 text-yellow-400'}`}>
+          {project.data.status}
+        </span>
+      </div>
+      <p class="text-xl text-text-300">{project.data.description}</p>
+      
+      {/* Tags */}
+      <div class="flex flex-wrap gap-2 mt-4">
+        {project.data.tags.map(tag => (
+          <span class="px-2 py-1 text-xs rounded-full bg-primary-400/10 text-primary-400 border border-primary-400/20">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    {/* Project Content */}
+    <article class="prose prose-invert max-w-none">
+      <Content />
+    </article>
+
+    {/* Project Links - Only show if link exists */}
+    {project.data.link && (
+      <div class="mt-8 pt-8 border-t border-background-700">
+        <a 
+          href={project.data.link}
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-500 hover:bg-primary-600 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>View Project</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
+    )}
+    
   </main>
-</Layout> 
+  <Dock />
+</Layout>
+
+<style>
+  /* Add styles for markdown content */
+  :global(.prose) {
+    --tw-prose-invert-headings: theme(colors.text.100);
+    --tw-prose-invert-body: theme(colors.text.200);
+    --tw-prose-invert-bold: theme(colors.text.100);
+    --tw-prose-invert-links: theme(colors.primary.400);
+    --tw-prose-invert-code: theme(colors.primary.300);
+  }
+</style> 
