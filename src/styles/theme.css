@@ -1,6 +1,8 @@
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -136,7 +138,7 @@
 
 /* Apply fonts strategically */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Patrick Hand SC', cursive;
+  font-family: 'DM Sans', sans-serif;
 }
 
 body {
@@ -148,5 +150,5 @@ body {
 .hand-drawn-box h3,
 .suggested-questions button,
 nav a {
-  font-family: 'Patrick Hand SC', cursive;
+  font-family: 'DM Sans', sans-serif;
 }
