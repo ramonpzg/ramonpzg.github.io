@@ -1,8 +1,8 @@
 ---
-title: "Educational Platform"
-description: "A comprehensive learning platform built with modern web technologies."
+title: "Music Finder"
+description: "."
 tags: ["TypeScript", "React", "Node.js", "PostgreSQL"]
-image: "/images/projects/educational-platform.png"
+image: "/images/projects/education-platform.png"
 link: "https://github.com/username/project"
 status: "completed"
 type: "education"

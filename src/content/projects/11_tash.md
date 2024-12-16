@@ -1,7 +1,7 @@
 ---
 title: "Educational Platform"
 description: "A comprehensive learning platform built with modern web technologies."
-tags: ["TypeScript", "React", "Node.js", "PostgreSQL"]
+tags: ["terminal", "python", "learning", "ml"]
 image: "/images/projects/education-platform.png"
 link: "https://github.com/username/project"
 status: "completed"

@@ -1,13 +1,13 @@
 ---
 title: "Educational Content"
-description: "A comprehensive learning platform built with modern web technologies."
-tags: ["python", "javascript", "bash"]
-image: "/images/mechanical_looking_basket_strawberries2.webp"
-link: "https://github.com/username/project"
-status: "completed"
+description: "All the lessons, tutorials, and walkthroughs I've created over the years and that I am currently creating in my spare time."
+tags: ["python", "javascript", "bash", "ml", "engineering"]
+image: ""
+link: "https://rpg-content.nuxt.space/"
+status: "in-progress"
 type: "education"
+order: 1
 ---
 
-# Educational Platform
-
-Detailed description of the project goes here...
+Over the years, I've created a lot of educational content for my students and for the public and 
+decided to consolidate it all into a single website.
