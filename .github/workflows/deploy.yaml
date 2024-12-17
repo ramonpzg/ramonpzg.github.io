@@ -39,7 +39,7 @@ jobs:
         env:
           PUBLIC_HF_TOKEN: ${{ secrets.PUBLIC_HF_TOKEN }}
         run: |
-          echo "PUBLIC_HF_TOKEN='${{ secrets.PUBLIC_HF_TOKEN }}'" > .env
+          echo "PUBLIC_HF_TOKEN=\"${{ secrets.PUBLIC_HF_TOKEN }}\"" > .env
           pnpm build
       - name: Upload artifact
         id: deployment

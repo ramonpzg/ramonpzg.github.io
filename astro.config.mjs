@@ -13,7 +13,7 @@ export default defineConfig({
   site: 'https://ramonpzg.github.io',
   vite: {
     define: {
-      'process.env.PUBLIC_HF_TOKEN': JSON.stringify(process.env.PUBLIC_HF_TOKEN)
+      '__HF_TOKEN__': JSON.stringify(process.env.PUBLIC_HF_TOKEN),
     },
     optimizeDeps: {
       include: ['@huggingface/inference']
