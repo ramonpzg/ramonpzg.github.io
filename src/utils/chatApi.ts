@@ -1,23 +1,5 @@
 import { HfInference } from "@huggingface/inference";
-
-declare global {
-  interface Window {
-    HF_TOKEN: string;
-  }
-}
-
-function getToken() {
-  const token = window.HF_TOKEN;
-  
-  console.log('Token available:', !!token);
-  
-  if (!token) {
-    console.log('Window object:', Object.keys(window));
-    throw new Error('Configuration error: API token is missing');
-  }
-  
-  return token;
-}
+import { HF_TOKEN } from '../config/token';
 
 // For static sites, we'll fetch the context at runtime
 async function getContext() {
@@ -37,10 +19,12 @@ async function getContext() {
 export async function* getChatResponseStream(userMessage: string) {
   console.log('Starting chat response stream');
   
-  const token = getToken();
+  if (!HF_TOKEN) {
+    throw new Error('Configuration error: API token is missing');
+  }
   
   try {
-    const client = new HfInference(token);
+    const client = new HfInference(HF_TOKEN);
     console.log('HF client initialized');
     
     // Get context at runtime

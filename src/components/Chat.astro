@@ -6,11 +6,7 @@ const suggestedQuestions = [
   { text: "What technologies do you use?", action: "tech" },
   { text: "How can we collaborate?", action: "contact" },
 ];
-
-const token = import.meta.env.PUBLIC_HF_TOKEN;
 ---
-
-<input type="hidden" id="hf-token" value={token} />
 
 <div class="w-full max-w-3xl mx-auto mb-16">
   <div class="flex items-center justify-between mb-4">
@@ -108,22 +104,12 @@ const token = import.meta.env.PUBLIC_HF_TOKEN;
 <script>
   let getChatResponseStream;
   
-  // Get token from hidden input
-  const tokenInput = document.getElementById('hf-token') as HTMLInputElement;
-  window.HF_TOKEN = tokenInput?.value;
-  
-  // Wait for token to be available
-  if (!window.HF_TOKEN) {
-    console.error('HF Token not found in window object');
-    console.log('Available window properties:', Object.keys(window));
-  }
-
   // Dynamically import the chat API
   try {
     const module = await import('../utils/chatApi');
     getChatResponseStream = module.getChatResponseStream;
   } catch (error) {
-    console.error('Failed to load chat API:', error.message, error.stack);
+    console.error('Failed to load chat API:', error);
   }
 
   const chatMessages = document.getElementById('chat-messages');
@@ -167,12 +153,6 @@ const token = import.meta.env.PUBLIC_HF_TOKEN;
 
   chatForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-    // Double check token availability before sending message
-    if (!window.HF_TOKEN) {
-      addMessage('assistant', 'Sorry, the chat system is not properly configured. Please try again later.');
-      return;
-    }
     
     if (!getChatResponseStream) {
       addMessage('assistant', 'Sorry, the chat system failed to initialize. Please refresh the page.');
