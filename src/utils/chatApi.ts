@@ -1,33 +1,52 @@
 import { HfInference } from "@huggingface/inference";
-import { findRelevantContent } from './embeddings/findRelevantContent';
-import type { EmbeddingItem } from './embeddings/types';
 
 const HF_TOKEN = import.meta.env.PUBLIC_HF_TOKEN;
 
-async function fetchEmbeddings(): Promise<EmbeddingItem[]> {
-  const response = await fetch('/data/embeddings.json');
-  return response.json();
+// For static sites, we'll fetch the context at runtime
+async function getContext() {
+  try {
+    const response = await fetch('/content/system/context.md');
+    return await response.text();
+  } catch (error) {
+    console.error('Failed to load context:', error);
+    // Provide a minimal fallback context if fetch fails
+    return `
+      Hi there! I'm an rAImond, the digital version of Ramon. I help answer questions about his work, 
+      projects, and experience. While I'm having trouble loading the full context right now, 
+      I'll do my best to help you with general questions.
+    `;
+  }
 }
 
 export async function* getChatResponseStream(userMessage: string) {
+  console.log('Starting chat response stream');
+  
+  if (!HF_TOKEN) {
+    console.error('HF_TOKEN is missing');
+    throw new Error('Configuration error: API token is missing');
+  }
+  
   try {
     const client = new HfInference(HF_TOKEN);
+    console.log('HF client initialized');
     
-    // Fetch embeddings and find relevant content
-    const embeddings = await fetchEmbeddings();
-    const relevantContent = await findRelevantContent(userMessage, embeddings);
+    // Get context at runtime
+    const CONTEXT = await getContext();
     
-    // Create context from relevant content
-    const context = relevantContent
-      .map(item => `${item.metadata.title || 'Content'}: ${item.content}`)
-      .join('\n\n');
-
+    console.log('Sending message to HF');
+    
     const stream = await client.chatCompletionStream({
       model: "Qwen/QwQ-32B-Preview",
       messages: [
         {
           role: "system",
-          content: `You are an AI assistant for Ramon. Use the following context to answer questions about Ramon:\n\n${context}`
+          content: `You are an AI assistant called rAImon and you only answer questions about Ramon as if you were Ramon 
+                    himself. You can only answer in English, Spanish or French. Here is all the context you need about Ramon. If you 
+                    don't know the answer, just say that you don't know. Context:\n\n${CONTEXT}`
+        },
+        {
+          role: "assistant",
+          content: "👋 Hey there! I'm rAImond - a digital version of the real(?) Ramon. I know all about his work, projects, and experiences so ask away!"
         },
         {
           role: "user",
@@ -36,17 +55,23 @@ export async function* getChatResponseStream(userMessage: string) {
       ],
       max_tokens: 500
     });
-
+    
+    if (!stream) {
+      throw new Error('No response stream received from HuggingFace');
+    }
+    
+    console.log('Stream received from HF');
+    
     for await (const chunk of stream) {
-      if (chunk.choices && chunk.choices.length > 0) {
-        const newContent = chunk.choices[0].delta.content;
-        if (newContent) {
-          yield newContent;
-        }
+      if (chunk.choices?.[0]?.delta?.content) {
+        yield chunk.choices[0].delta.content;
       }
     }
   } catch (error) {
-    console.error('Chat API Error:', error);
-    throw new Error('Failed to get chat response');
+    console.error('Detailed error:', error);
+    if (error instanceof Error) {
+      throw new Error(`Chat API Error: ${error.message}`);
+    }
+    throw new Error('Unknown error occurred while processing chat request');
   }
 } 
