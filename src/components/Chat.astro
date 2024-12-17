@@ -8,14 +8,9 @@ const suggestedQuestions = [
 ];
 
 const token = import.meta.env.PUBLIC_HF_TOKEN;
-console.log('Server-side token:', !!token);
 ---
 
-<script define:vars={{ token }}>
-  console.log('Token being set:', !!token);
-  window.HF_TOKEN = token;
-  console.log('Window token after set:', !!window.HF_TOKEN);
-</script>
+<input type="hidden" id="hf-token" value={token} />
 
 <div class="w-full max-w-3xl mx-auto mb-16">
   <div class="flex items-center justify-between mb-4">
@@ -112,6 +107,10 @@ console.log('Server-side token:', !!token);
 
 <script>
   let getChatResponseStream;
+  
+  // Get token from hidden input
+  const tokenInput = document.getElementById('hf-token') as HTMLInputElement;
+  window.HF_TOKEN = tokenInput?.value;
   
   // Wait for token to be available
   if (!window.HF_TOKEN) {
