@@ -7,6 +7,7 @@ interface Window {
 
 interface ImportMetaEnv {
   readonly PUBLIC_HF_TOKEN: string;
+  readonly [key: string]: any;
 }
 
 interface ImportMeta {
