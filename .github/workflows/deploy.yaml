@@ -32,12 +32,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build website
-        run: pnpm build
-        env:
-          PUBLIC_HF_TOKEN: ${{ secrets.PUBLIC_HF_TOKEN }}
         run: |
           echo "PUBLIC_HF_TOKEN=${{ secrets.PUBLIC_HF_TOKEN }}" > .env
           pnpm build
+        env:
+          PUBLIC_HF_TOKEN: ${{ secrets.PUBLIC_HF_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
