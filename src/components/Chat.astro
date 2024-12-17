@@ -8,10 +8,13 @@ const suggestedQuestions = [
 ];
 
 const token = import.meta.env.PUBLIC_HF_TOKEN;
+console.log('Server-side token:', !!token);
 ---
 
 <script define:vars={{ token }}>
+  console.log('Token being set:', !!token);
   window.HF_TOKEN = token;
+  console.log('Window token after set:', !!window.HF_TOKEN);
 </script>
 
 <div class="w-full max-w-3xl mx-auto mb-16">
@@ -113,6 +116,7 @@ const token = import.meta.env.PUBLIC_HF_TOKEN;
   // Wait for token to be available
   if (!window.HF_TOKEN) {
     console.error('HF Token not found in window object');
+    console.log('Available window properties:', Object.keys(window));
   }
 
   // Dynamically import the chat API
@@ -120,7 +124,7 @@ const token = import.meta.env.PUBLIC_HF_TOKEN;
     const module = await import('../utils/chatApi');
     getChatResponseStream = module.getChatResponseStream;
   } catch (error) {
-    console.error('Failed to load chat API:', error);
+    console.error('Failed to load chat API:', error.message, error.stack);
   }
 
   const chatMessages = document.getElementById('chat-messages');
