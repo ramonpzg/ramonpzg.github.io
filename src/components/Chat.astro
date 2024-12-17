@@ -6,7 +6,15 @@ const suggestedQuestions = [
   { text: "What technologies do you use?", action: "tech" },
   { text: "How can we collaborate?", action: "contact" },
 ];
+
+// Get the token during SSR
+const hfToken = import.meta.env.PUBLIC_HF_TOKEN;
 ---
+
+<script define:vars={{ hfToken }}>
+  // Inject the token into window object
+  window.__HF_TOKEN__ = hfToken;
+</script>
 
 <div class="w-full max-w-3xl mx-auto mb-16">
   <div class="flex items-center justify-between mb-4">

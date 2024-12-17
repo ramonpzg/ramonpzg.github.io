@@ -17,6 +17,9 @@ export default defineConfig({
     },
     ssr: {
       noExternal: ['@huggingface/inference']
+    },
+    define: {
+      __HF_TOKEN__: JSON.stringify(process.env.PUBLIC_HF_TOKEN)
     }
   }
 });

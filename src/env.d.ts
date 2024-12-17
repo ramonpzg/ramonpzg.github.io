@@ -3,6 +3,7 @@
 
 interface Window {
     Alpine: import('alpinejs').Alpine;
+    __HF_TOKEN__?: string;
   }
 
 interface ImportMetaEnv {
