@@ -17,30 +17,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout your repository using git
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          node-version: 23
-      - uses: pnpm/action-setup@v2
+          node-version: '23'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
         with:
           version: 9
-+     env:
-+       PUBLIC_HF_TOKEN: ${{ secrets.PUBLIC_HF_TOKEN }}
       - name: Install dependencies
         run: pnpm install
       - name: Build website
         run: pnpm build
+        env:
+          PUBLIC_HF_TOKEN: ${{ secrets.PUBLIC_HF_TOKEN }}
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v1
         with:
-          path: dist
+          path: dist/
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
