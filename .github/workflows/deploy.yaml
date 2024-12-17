@@ -16,6 +16,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_HF_TOKEN: ${{ secrets.PUBLIC_HF_TOKEN }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
@@ -33,6 +35,9 @@ jobs:
         run: pnpm build
         env:
           PUBLIC_HF_TOKEN: ${{ secrets.PUBLIC_HF_TOKEN }}
+        run: |
+          echo "PUBLIC_HF_TOKEN=${{ secrets.PUBLIC_HF_TOKEN }}" > .env
+          pnpm build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
