@@ -1,13 +1,11 @@
 ---
 title: "Music Finder"
-description: "."
-tags: ["TypeScript", "React", "Node.js", "PostgreSQL"]
-image: "/images/projects/education-platform.png"
-link: "https://github.com/username/project"
+description: "Find the best music for your mood."
+tags: ["python", "vector-db"]
+image: ""
+link: ""
 status: "completed"
 type: "education"
+order: 6
 ---
 
-# Educational Platform
-
-Detailed description of the project goes here... 

@@ -6,7 +6,7 @@ image: ""
 link: ""
 status: "completed"
 type: "education"
-order: 3
+order: 4
 ---
 
 Here are some of the things that I worked on while at Qdrant.

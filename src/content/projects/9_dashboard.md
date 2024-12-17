@@ -1,13 +1,10 @@
 ---
-title: "Educational Platform"
-description: "A comprehensive learning platform built with modern web technologies."
-tags: ["TypeScript", "React", "Node.js", "PostgreSQL"]
-image: "/images/projects/education-platform.png"
-link: "https://github.com/username/project"
-status: "completed"
-type: "education"
+title: "Live Airbnb Dashboard"
+description: "A dashboard that shows the live status of Airbnb listings using Inside Airbnb data."
+tags: ["python", "analytics", "etl", "airbnb"]
+image: ""
+link: ""
+status: "in-progress"
+type: "retail"
+order: 9
 ---
-
-# Educational Platform
-
-Detailed description of the project goes here... 
