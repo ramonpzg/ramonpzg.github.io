@@ -6,6 +6,8 @@ const suggestedQuestions = [
   { text: "What technologies do you use?", action: "tech" },
   { text: "How can we collaborate?", action: "contact" },
 ];
+
+const token = import.meta.env.PUBLIC_HF_TOKEN;
 ---
 
 <div class="w-full max-w-3xl mx-auto mb-16">
@@ -23,7 +25,7 @@ const suggestedQuestions = [
     </button>
   </div>
 
-  <div class="bg-background-900/50 rounded-xl overflow-hidden backdrop-blur-sm relative">
+  <div id="chat-container" class="bg-background-900/50 rounded-xl overflow-hidden backdrop-blur-sm relative" data-token={token}>
     <!-- Gradient Border -->
     <div class="absolute inset-0 p-[1.5px] rounded-xl bg-gradient-to-r from-purple-500/30 via-primary-500/40 to-accent-500/20">
       <div class="absolute inset-0 rounded-xl bg-background-900/25 backdrop-blur-sm"></div>

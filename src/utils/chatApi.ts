@@ -1,7 +1,15 @@
 import { HfInference } from "@huggingface/inference";
 
-// Embed the token directly during build time
-declare const __HF_TOKEN__: string;
+function getToken() {
+  const chatContainer = document.getElementById('chat-container');
+  const token = chatContainer?.getAttribute('data-token');
+  
+  if (!token) {
+    throw new Error('Configuration error: API token is missing');
+  }
+  
+  return token;
+}
 
 // For static sites, we'll fetch the context at runtime
 async function getContext() {
@@ -10,7 +18,6 @@ async function getContext() {
     return await response.text();
   } catch (error) {
     console.error('Failed to load context:', error);
-    // Provide a minimal fallback context if fetch fails
     return `
       Hi there! I'm an rAImond, the digital version of Ramon. I help answer questions about his work, 
       projects, and experience. While I'm having trouble loading the full context right now, 
@@ -22,13 +29,10 @@ async function getContext() {
 export async function* getChatResponseStream(userMessage: string) {
   console.log('Starting chat response stream');
   
-  if (!__HF_TOKEN__) {
-    console.error('HF_TOKEN is missing');
-    throw new Error('Configuration error: API token is missing');
-  }
+  const token = getToken();
   
   try {
-    const client = new HfInference(__HF_TOKEN__);
+    const client = new HfInference(token);
     console.log('HF client initialized');
     
     // Get context at runtime
