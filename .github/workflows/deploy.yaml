@@ -31,12 +31,13 @@ jobs:
           version: 9
       - name: Install dependencies
         run: pnpm install
+      - name: Debug env
+        run: |
+          echo "Token exists: ${{ secrets.PUBLIC_HF_TOKEN != '' }}"
       - name: Build website
         run: |
           echo "PUBLIC_HF_TOKEN=${{ secrets.PUBLIC_HF_TOKEN }}" > .env
           pnpm build
-        env:
-          PUBLIC_HF_TOKEN: ${{ secrets.PUBLIC_HF_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

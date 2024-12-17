@@ -110,6 +110,11 @@ const token = import.meta.env.PUBLIC_HF_TOKEN;
 <script>
   let getChatResponseStream;
   
+  // Wait for token to be available
+  if (!window.HF_TOKEN) {
+    console.error('HF Token not found in window object');
+  }
+
   // Dynamically import the chat API
   try {
     const module = await import('../utils/chatApi');
@@ -159,6 +164,12 @@ const token = import.meta.env.PUBLIC_HF_TOKEN;
 
   chatForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    // Double check token availability before sending message
+    if (!window.HF_TOKEN) {
+      addMessage('assistant', 'Sorry, the chat system is not properly configured. Please try again later.');
+      return;
+    }
     
     if (!getChatResponseStream) {
       addMessage('assistant', 'Sorry, the chat system failed to initialize. Please refresh the page.');

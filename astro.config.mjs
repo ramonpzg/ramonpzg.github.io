@@ -12,6 +12,15 @@ export default defineConfig({
   output: 'static',
   site: 'https://ramonpzg.github.io',
   vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            chat: ['@huggingface/inference']
+          }
+        }
+      }
+    },
     optimizeDeps: {
       include: ['@huggingface/inference']
     },

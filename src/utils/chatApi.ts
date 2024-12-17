@@ -9,7 +9,10 @@ declare global {
 function getToken() {
   const token = window.HF_TOKEN;
   
+  console.log('Token available:', !!token);
+  
   if (!token) {
+    console.log('Window object:', Object.keys(window));
     throw new Error('Configuration error: API token is missing');
   }
   
