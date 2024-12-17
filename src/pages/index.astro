@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import Layout from '../layouts/Layout.astro';
 import Dock from '../components/Dock.astro';
 import Chat from '../components/Chat.astro';
@@ -19,13 +20,30 @@ import '../styles/theme.css';
           <span class="text-gradient">Ramón Pérez</span>
         </h1>
         <p class="text-xl text-text-300 mb-8 max-w-2xl mx-auto">
-          Engineer, Educator, and Mountain Biker
+          Engineer, Educator, and Mountain Biker. If you'd like to know more about me, head to any of the sections of my website or talk to rAImond below.
         </p>
+        <div class="flex gap-6 justify-center mb-8">
+          <a href="https://github.com/ramonpzg" class="text-text-400 hover:text-primary-400 transition-colors">
+            <Icon name="ri:github-fill" class="w-6 h-6" />
+          </a>
+          <a href="https://linkedin.com/in/ramonprz" class="text-text-400 hover:text-primary-400 transition-colors">
+            <Icon name="ri:linkedin-fill" class="w-6 h-6" />
+          </a>
+          <a href="https://x.com/ramonprz0" class="text-text-400 hover:text-primary-400 transition-colors">
+            <Icon name="ri:twitter-x-fill" class="w-6 h-6" />
+          </a>
+          <!-- <a href="https://youtube.com/@ramonprz01" class="text-text-400 hover:text-primary-400 transition-colors">
+            <Icon name="ri:youtube-fill" class="w-6 h-6" />
+          </a> -->
+          <a href="https://huggingface.co/ramonpzg" class="text-text-400 hover:text-primary-400 transition-colors">
+            <Icon name="noto-v1:hugging-face" class="w-6 h-6" />
+          </a>
+        </div>
       </div>
       
-      <!-- <div class="w-full max-w-3xl mx-auto relative">
+      <div class="w-full max-w-3xl mx-auto relative">
         <Chat />
-      </div> -->
+      </div>
 
       <!-- Interactive Boxes Section -->
       <div class="w-full max-w-4xl mx-auto relative mb-24 hand-drawn-container">
@@ -93,6 +111,7 @@ import '../styles/theme.css';
             // { title: "New Project: AI Chat Interface", date: "2024-03-15", href: "/projects/ai-chat" },
             // { title: "Tutorial: Building with Astro",  date: "2024-03-10", href: "/tutorials/astro-build" },
             // { title: "Mountain Biking Adventure Log",  date: "2024-03-05", href: "/blog/biking-log" },
+            { title: "NbSwitch: AI-Notebook Companion",  date: "2024-03-05", href: "/projects/2_nbswitch" },
             { title: "Inventor: Local First Education Platform",  date: "2024-11-11", href: "/projects/1_inventor" },
             { title: "Intro to RAG for Engineers",     date: "2024-05-16", href: "/posts/2024-05-16-rag-intro" },
             // { title: "Portfolio Project Showcase",     date: "2024-02-20", href: "/projects" },
