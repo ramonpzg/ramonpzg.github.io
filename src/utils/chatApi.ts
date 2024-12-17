@@ -1,8 +1,13 @@
 import { HfInference } from "@huggingface/inference";
 
+declare global {
+  interface Window {
+    HF_TOKEN: string;
+  }
+}
+
 function getToken() {
-  const chatContainer = document.getElementById('chat-container');
-  const token = chatContainer?.getAttribute('data-token');
+  const token = window.HF_TOKEN;
   
   if (!token) {
     throw new Error('Configuration error: API token is missing');
