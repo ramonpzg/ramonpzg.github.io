@@ -6,14 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "pnpm run generate-embeddings && astro build",
+    "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "drizzle-kit": "drizzle-kit",
-    "db:generate": "drizzle-kit generate:sqlite",
-    "db:push": "drizzle-kit push:sqlite",
-    "db:migrate": "tsx src/db/migrate.ts",
-    "generate-embeddings": "tsx src/utils/embeddings/generateEmbeddings.ts"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.0",
@@ -35,6 +30,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
+    "@iconify-json/noto-v1": "^1.2.0",
     "@iconify-json/ri": "^1.2.3",
     "@tailwindcss/typography": "^0.5.15",
     "astro-icon": "^1.1.4",

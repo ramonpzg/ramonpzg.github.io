@@ -3,7 +3,6 @@ import alpinejs from '@astrojs/alpinejs';
 import tailwind from '@astrojs/tailwind';
 import icon from 'astro-icon';
 
-// https://astro.build/config
 export default defineConfig({
   integrations: [
     alpinejs(), 
@@ -11,5 +10,13 @@ export default defineConfig({
     icon({include: {ri: ['*']}})
   ],
   output: 'static',
-  site: 'https://ramonpzg.github.io/v2',
+  site: 'https://ramonpzg.github.io',
+  vite: {
+    optimizeDeps: {
+      include: ['@huggingface/inference']
+    },
+    ssr: {
+      noExternal: ['@huggingface/inference']
+    }
+  }
 });

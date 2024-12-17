@@ -60,6 +60,9 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
     devDependencies:
+      '@iconify-json/noto-v1':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@iconify-json/ri':
         specifier: ^1.2.3
         version: 1.2.3
@@ -864,6 +867,9 @@ packages:
 
   '@huggingface/tasks@0.12.30':
     resolution: {integrity: sha512-A1ITdxbEzx9L8wKR8pF7swyrTLxWNDFIGDLUWInxvks2ruQ8PLRBZe8r0EcjC3CDdtlj9jV1V4cgV35K/iy3GQ==}
+
+  '@iconify-json/noto-v1@1.2.0':
+    resolution: {integrity: sha512-3W+0kOUdG+kDZ/zlQXm4Ondsqr8gayTMa531yM8hlxCL6cTwBfe6KN7bBkg/f5sm2+9y2SWT4+sC1OpT7G+DVw==}
 
   '@iconify-json/ri@1.2.3':
     resolution: {integrity: sha512-UVKofd5xkSevGd5K01pvO4NWsu+2C9spu+GxnMZUYymUiaWmpCAxtd22MFSpm6MGf0MP4GCwhDCo1Q8L8oZ9wg==}
@@ -4524,6 +4530,10 @@ snapshots:
       '@huggingface/tasks': 0.12.30
 
   '@huggingface/tasks@0.12.30': {}
+
+  '@iconify-json/noto-v1@1.2.0':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify-json/ri@1.2.3':
     dependencies:
