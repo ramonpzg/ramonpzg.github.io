@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 const suggestedQuestions = [
   { text: "Tell me about your background", action: "background" },
   { text: "What projects have you worked on?", action: "projects" },
@@ -8,8 +9,19 @@ const suggestedQuestions = [
 ---
 
 <div class="w-full max-w-3xl mx-auto mb-16">
-  <h2 class="text-4xl font-bold mb-4 text-text-100 text-center">What would you like to know?</h2>
-  <p class="text-text-400 mb-8 text-center">Ask me anything about my work, experience, or interests.</p>
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-4xl font-bold text-text-100">Ask way!</h2>
+    <button
+      id="clear-chat-btn"
+      class="p-2 rounded-full hover:bg-background-900/20 transition-colors duration-300 group"
+      title="Clear chat history"
+    >
+      <Icon
+        name="ri:refresh-line"
+        class="w-6 h-6 text-text-400 group-hover:text-text-100 transition-colors duration-300"
+      />
+    </button>
+  </div>
 
   <div class="bg-background-900/50 rounded-xl overflow-hidden backdrop-blur-sm relative">
     <!-- Gradient Border -->
@@ -90,7 +102,15 @@ const suggestedQuestions = [
 </div>
 
 <script>
-  import { getChatResponseStream } from '../utils/chatApi';
+  let getChatResponseStream;
+  
+  // Dynamically import the chat API
+  try {
+    const module = await import('../utils/chatApi');
+    getChatResponseStream = module.getChatResponseStream;
+  } catch (error) {
+    console.error('Failed to load chat API:', error);
+  }
 
   const chatMessages = document.getElementById('chat-messages');
   const chatForm = document.getElementById('chat-form');
@@ -98,8 +118,47 @@ const suggestedQuestions = [
 
   let messageCounter = 0;
 
+  // Move this outside of DOMContentLoaded
+  function loadSavedMessages() {
+    if (chatMessages) {
+      const savedMessages = localStorage.getItem('chatHistory');
+      if (savedMessages) {
+        chatMessages.innerHTML = savedMessages;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      } else {
+        // Set initial message if no history exists
+        chatMessages.innerHTML = `
+          <div class="flex justify-start mb-4">
+            <div class="bg-primary-900/20 backdrop-blur-sm rounded-bl-none text-text-100 max-w-[80%] p-4 rounded-2xl shadow-sm">
+              <p class="whitespace-pre-wrap font-patrick">👋 Hey there! I'm rAImond - a digital version of the real(?) Ramon. I know all about his work, projects, and experiences so ask away!</p>
+            </div>
+          </div>
+        `;
+      }
+    }
+  }
+
+  // Call it immediately when script loads
+  loadSavedMessages();
+
+  // Also call it when the DOM is fully loaded (backup)
+  document.addEventListener('DOMContentLoaded', loadSavedMessages);
+
+  // Add visibility change listener to reload messages when tab becomes visible
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      loadSavedMessages();
+    }
+  });
+
   chatForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    if (!getChatResponseStream) {
+      addMessage('assistant', 'Sorry, the chat system failed to initialize. Please refresh the page.');
+      return;
+    }
+
     const message = userInput.value.trim();
     if (!message) return;
 
@@ -133,7 +192,12 @@ const suggestedQuestions = [
       }
     } catch (error) {
       console.error('Error:', error);
-      addMessage('assistant', 'Sorry, I encountered an error. Please try again.');
+      // Show error message to user
+      updateMessage(
+        assistantMessageId, 
+        'Sorry, I encountered an error. Please try again later. ' + 
+        (error instanceof Error ? error.message : 'Unknown error')
+      );
     }
   });
 
@@ -154,6 +218,8 @@ const suggestedQuestions = [
     if (chatMessages) {
       chatMessages.insertAdjacentHTML('beforeend', messageHtml);
       chatMessages.scrollTop = chatMessages.scrollHeight;
+      // Save to localStorage after adding new message
+      localStorage.setItem('chatHistory', chatMessages.innerHTML);
     }
   }
 
@@ -163,16 +229,42 @@ const suggestedQuestions = [
       const contentElement = messageElement.querySelector('.message-content');
       if (contentElement) {
         contentElement.textContent = content;
+        // Save to localStorage after updating message
+        localStorage.setItem('chatHistory', chatMessages.innerHTML);
       }
     }
   }
+
+  // Add a clear chat button if you want
+  function clearChat() {
+    if (chatMessages) {
+      chatMessages.innerHTML = `
+        <div class="flex justify-start mb-4">
+          <div class="bg-primary-900/20 backdrop-blur-sm rounded-bl-none text-text-100 max-w-[80%] p-4 rounded-2xl shadow-sm">
+            <p class="whitespace-pre-wrap font-patrick">👋 Hey there! I'm rAImond - a digital version of the real(?) Ramon. I know all about his work, projects, and experiences so ask away!</p>
+          </div>
+        </div>
+      `;
+      localStorage.removeItem('chatHistory');
+    }
+  }
+
+  // Add event listener for clear chat button
+  document.getElementById('clear-chat-btn')?.addEventListener('click', clearChat);
 
   // Suggested questions functionality
   document.querySelectorAll('[data-action]').forEach(button => {
     button.addEventListener('click', () => {
       const input = document.getElementById('user-input') as HTMLInputElement;
-      input.value = (button as HTMLElement).innerText;
+      const message = (button as HTMLElement).innerText;
+      
+      // Set the input value and focus the input
+      input.value = message;
       input.focus();
+      
+      // Move cursor to end of input
+      const length = input.value.length;
+      input.setSelectionRange(length, length);
     });
   });
 </script>
