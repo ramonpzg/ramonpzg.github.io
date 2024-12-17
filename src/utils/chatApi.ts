@@ -1,17 +1,7 @@
 import { HfInference } from "@huggingface/inference";
 
-// Instead of directly accessing import.meta.env
-const getHfToken = () => {
-  // Check for the token in window.__HF_TOKEN__ first (set during build)
-  const tokenFromWindow = (window as any).__HF_TOKEN__;
-  if (tokenFromWindow) return tokenFromWindow;
-  
-  // Fallback to env variable
-  const envToken = import.meta.env.PUBLIC_HF_TOKEN;
-  if (envToken) return envToken;
-  
-  throw new Error('Configuration error: API token is missing');
-};
+// Embed the token directly during build time
+declare const __HF_TOKEN__: string;
 
 // For static sites, we'll fetch the context at runtime
 async function getContext() {
@@ -32,15 +22,13 @@ async function getContext() {
 export async function* getChatResponseStream(userMessage: string) {
   console.log('Starting chat response stream');
   
-  const HF_TOKEN = getHfToken();
-  
-  if (!HF_TOKEN) {
+  if (!__HF_TOKEN__) {
     console.error('HF_TOKEN is missing');
     throw new Error('Configuration error: API token is missing');
   }
   
   try {
-    const client = new HfInference(HF_TOKEN);
+    const client = new HfInference(__HF_TOKEN__);
     console.log('HF client initialized');
     
     // Get context at runtime

@@ -12,14 +12,14 @@ export default defineConfig({
   output: 'static',
   site: 'https://ramonpzg.github.io',
   vite: {
+    define: {
+      __HF_TOKEN__: `"${process.env.PUBLIC_HF_TOKEN}"`,
+    },
     optimizeDeps: {
       include: ['@huggingface/inference']
     },
     ssr: {
       noExternal: ['@huggingface/inference']
-    },
-    define: {
-      __HF_TOKEN__: JSON.stringify(process.env.PUBLIC_HF_TOKEN)
     }
   }
 });
