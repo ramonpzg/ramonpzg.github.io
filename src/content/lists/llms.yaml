@@ -1,0 +1,8 @@
+title: "LLM Resources"
+description: "Collection of LLM tools, frameworks, and best practices for production machine learning."
+tags: ["llm", "tools", "resources"]
+items:
+  - name: "MLflow"
+    description: "Platform for ML lifecycle management"
+    url: "https://mlflow.org/"
+    category: "Model Management" 

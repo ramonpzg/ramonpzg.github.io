@@ -33,18 +33,18 @@ const { lists } = Astro.props;
   </div>
 
   <!-- Table -->
-  <div class="relative overflow-hidden rounded-xl border border-text-400/10 bg-background-800/50">
-    <table class="w-full" id="lists-table">
+  <div class="relative overflow-x-auto rounded-xl border border-text-400/10 bg-background-800/50">
+    <table class="w-full table-auto min-w-full" id="lists-table">
       <thead>
         <tr class="border-b border-text-400/10">
-          <th class="sortable px-6 py-4 text-left text-sm font-medium text-text-300" data-sort="title">
+          <th class="sortable px-6 py-4 text-left text-sm font-medium text-text-300 whitespace-nowrap" data-sort="title">
             Title
             <span class="sort-icon ml-1">↕</span>
           </th>
-          <th class="px-6 py-4 text-left text-sm font-medium text-text-300">
+          <th class="px-6 py-4 text-left text-sm font-medium text-text-300 hidden sm:table-cell">
             Tags
           </th>
-          <th class="sortable px-6 py-4 text-left text-sm font-medium text-text-300" data-sort="description">
+          <th class="sortable px-6 py-4 text-left text-sm font-medium text-text-300 hidden md:table-cell" data-sort="description">
             Description
             <span class="sort-icon ml-1">↕</span>
           </th>
@@ -54,7 +54,7 @@ const { lists } = Astro.props;
       <tbody>
         {lists.map((list) => (
           <tr class="group border-b border-text-400/5">
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 whitespace-nowrap">
               <a 
                 href={`/lists/${list.id.replace('.yaml', '')}`} 
                 class="text-primary-400 hover:text-primary-300 font-medium"
@@ -62,7 +62,7 @@ const { lists } = Astro.props;
                 {list.data.title}
               </a>
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 hidden sm:table-cell">
               <div class="flex flex-wrap gap-2">
                 {list.data.tags.map(tag => {
                   const tagColors = {
@@ -81,10 +81,10 @@ const { lists } = Astro.props;
                 })}
               </div>
             </td>
-            <td class="px-6 py-4 text-text-300">
+            <td class="px-6 py-4 text-text-300 hidden md:table-cell">
               {list.data.description}
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 whitespace-nowrap">
               <button 
                 class="expand-button text-text-400 hover:text-primary-400 transition-colors"
                 aria-label="Expand details"
@@ -163,7 +163,45 @@ const { lists } = Astro.props;
       icon.style.transform = detailsRow.classList.contains('hidden') ? '' : 'rotate-180deg';
     }
 
-    // ... rest of the TableManager methods (filterTable, sortTable) remain the same ...
+    filterTable() {
+      const searchTerm = this.searchInput?.value.toLowerCase();
+      const rows = this.table?.getElementsByTagName('tr');
+
+      if (!rows) return;
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        // Skip header row and details rows
+        if (row.parentElement?.tagName === 'THEAD' || row.classList.contains('details-row')) {
+          continue;
+        }
+
+        const titleCell = row.cells[0];
+        const tagsCell = row.cells[1];
+        const descriptionCell = row.cells[2];
+
+        if (!titleCell) continue;
+
+        const title = titleCell.textContent?.toLowerCase() || '';
+        const tags = tagsCell?.textContent?.toLowerCase() || '';
+        const description = descriptionCell?.textContent?.toLowerCase() || '';
+
+        const matches = title.includes(searchTerm) || 
+                       tags.includes(searchTerm) || 
+                       description.includes(searchTerm);
+
+        // Hide/show the main row
+        row.style.display = matches ? '' : 'none';
+        
+        // Hide/show the details row if it exists
+        const detailsRow = row.nextElementSibling;
+        if (detailsRow?.classList.contains('details-row')) {
+          detailsRow.style.display = matches ? 'none' : 'none'; // Keep details hidden when filtering
+        }
+      }
+    }
+
+    // ... rest of the TableManager methods (sortTable) remain the same ...
   }
 
   // Initialize table manager when the page loads
