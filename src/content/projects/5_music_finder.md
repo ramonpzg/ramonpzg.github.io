@@ -1,11 +1,12 @@
 ---
 title: "Music Finder"
-description: "Find the best music for your mood."
-tags: ["python", "vector-db"]
+description: "Find similar songs using vector embeddings."
+tags: ["python", "vector-db", "lancedb"]
 image: ""
-link: ""
+link: "https://music-search-app.fly.dev/"
 status: "completed"
-type: "education"
+type: "product"
 order: 6
 ---
 
+This app uses LanceDB to conduct semantic search over music data.
