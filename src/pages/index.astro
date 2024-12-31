@@ -20,7 +20,8 @@ import '../styles/theme.css';
           <span class="text-gradient">Ramón Pérez</span>
         </h1>
         <p class="text-xl text-text-300 mb-8 max-w-2xl mx-auto">
-          Engineer, Educator, and Mountain Biker. If you'd like to know more about me, head to any of the sections of my website or talk to rAImond below.
+          Engineer, Educator, and Mountain Biker.
+          <!-- If you'd like to know more about me, head to any of the sections of my website or talk to rAImond below. -->
         </p>
         <div class="flex gap-6 justify-center mb-8">
           <a href="https://github.com/ramonpzg" class="text-text-400 hover:text-primary-400 transition-colors">
@@ -40,10 +41,10 @@ import '../styles/theme.css';
           </a>
         </div>
       </div>
-      
-      <div class="w-full max-w-3xl mx-auto relative">
+
+      <!-- <div class="w-full max-w-3xl mx-auto relative">
         <Chat />
-      </div>
+      </div> -->
 
       <!-- Interactive Boxes Section -->
       <div class="w-full max-w-4xl mx-auto relative mb-24 hand-drawn-container">
@@ -283,11 +284,11 @@ import '../styles/theme.css';
       var(--primary-400) 100%,
       var(--accent-400) 100%
     );
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
-    mask: 
-      linear-gradient(#fff 0 0) content-box, 
+    mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -382,7 +383,7 @@ import '../styles/theme.css';
     .w-full.max-w-4xl {
       height: 1200px;
     }
-    
+
     [class*="absolute"] {
       position: relative !important;
       width: 90% !important;
@@ -412,7 +413,7 @@ import '../styles/theme.css';
       });
 
       const data = await response.json();
-      
+
       if (response.ok) {
         message.textContent = data.message;
         message.className = 'text-green-500 text-sm text-center mt-4';
