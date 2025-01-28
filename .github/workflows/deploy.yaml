@@ -1,0 +1,59 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Trigger the workflow every time you push to the `astro-site` branch
+  push:
+    branches: [master]
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
+
+# Allow this job to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_HF_TOKEN: ${{ secrets.PUBLIC_HF_TOKEN }}
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "23"
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
+      - name: Install dependencies
+        run: pnpm install
+      - name: Debug env
+        run: |
+          echo "Token exists: ${{ secrets.PUBLIC_HF_TOKEN != '' }}"
+          echo "Token length: ${#PUBLIC_HF_TOKEN}"
+      - name: Build website
+        env:
+          PUBLIC_HF_TOKEN: ${{ secrets.PUBLIC_HF_TOKEN }}
+        run: |
+          echo "PUBLIC_HF_TOKEN=\"${{ secrets.PUBLIC_HF_TOKEN }}\"" > .env
+          pnpm build
+      - name: Upload artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

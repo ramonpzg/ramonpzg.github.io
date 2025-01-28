@@ -1,0 +1,270 @@
+---
+import Layout from '../layouts/Layout.astro';
+import VideoCard from '../components/VideoCard.astro';
+import Dock from '../components/Dock.astro';
+import { getCollection } from 'astro:content';
+
+const videos = (await getCollection('videos'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const tags = [...new Set(videos.flatMap(video => video.data.tags))];
+
+// Group videos by tag for filtering
+const videosByTag = tags.reduce((acc, tag) => {
+  acc[tag] = videos.filter(video => video.data.tags.includes(tag));
+  return acc;
+}, {});
+---
+
+<Layout title="Watch | Ramon Perez">
+  <main class="relative min-h-screen pb-24">
+    <!-- Hand-drawn header -->
+    <div class="header-container">
+      <h1 class="sketch-title">Talks, Workshops, Panels, and Tutorials</h1>
+      <p class="sketch-subtitle">Over 100+ hours of content since 2020 🤓</p>
+      
+      <!-- Decorative squiggles -->
+      <div class="squiggles">
+        <svg width="100" height="20" class="squiggle">
+          <path d="M 0 10 Q 25 0, 50 10 T 100 10" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Tag filter -->
+    <div class="tag-container">
+      <button 
+        class="tag-btn active" 
+        data-tag="all"
+      >
+        All Videos
+      </button>
+      {tags.map(tag => (
+        <button 
+          class="tag-btn" 
+          data-tag={tag}
+        >
+          {tag}
+        </button>
+      ))}
+    </div>
+
+    <!-- Video grid -->
+    <div class="video-grid">
+      {videos.map(video => (
+        <div data-post class="video-card" data-tags={JSON.stringify(video.data.tags)}>
+          <VideoCard video={video} />
+        </div>
+      ))}
+    </div>
+
+    <!-- Add empty state -->
+    <div 
+      id="empty-state" 
+      class="hidden text-center py-12 text-text-300"
+    >
+      <p class="text-lg">No videos found for the selected tag.</p>
+    </div>
+
+      <Dock />
+  </main>
+</Layout>
+
+<style>
+  .header-container {
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sketch-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-50);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .sketch-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 4px;
+    background: var(--primary-400);
+    filter: url(#pencil-stroke);
+    opacity: 0.3;
+  }
+
+  .sketch-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-300);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .squiggles {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.2;
+  }
+
+  .squiggle {
+    color: var(--primary-400);
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .tag-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: rgba(var(--primary-400), 0.1);
+    color: var(--text-300);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .tag-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--primary-400);
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    filter: url(#pencil-stroke);
+  }
+
+  .tag-btn:hover::after,
+  .tag-btn.active::after {
+    opacity: 0.2;
+  }
+
+  .tag-btn.active {
+    background: rgba(var(--primary-400), 0.2);
+    color: var(--text-50);
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  @media (max-width: 768px) {
+    .video-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .sketch-title {
+      font-size: 2.5rem;
+    }
+  }
+</style>
+
+<script>
+  function initializeTagFilter() {
+    const tagButtons = document.querySelectorAll('.tag-btn');
+    const videos = document.querySelectorAll('[data-post]');
+    const emptyState = document.getElementById('empty-state');
+    let selectedTags = new Set(['all']); // Track selected tags
+    
+    function updateVideosVisibility() {
+      let visibleVideos = 0;
+
+      videos.forEach(video => {
+        const videoTags = JSON.parse(video.getAttribute('data-tags') || '[]');
+        // Show video if 'all' is selected or if it matches ANY of the selected tags
+        const shouldShow = selectedTags.has('all') || 
+          videoTags.some(tag => selectedTags.has(tag));
+
+        if (shouldShow) {
+          video.style.display = 'block';
+          video.style.opacity = '1';
+          video.style.transform = 'scale(1)';
+          visibleVideos++;
+        } else {
+          video.style.display = 'none';
+          video.style.opacity = '0';
+          video.style.transform = 'scale(0.95)';
+        }
+      });
+
+      // Show/hide empty state
+      if (emptyState) {
+        emptyState.style.display = visibleVideos === 0 ? 'block' : 'none';
+      }
+    }
+
+    tagButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tag = button.dataset.tag;
+        if (!tag) return;
+        
+        // Handle 'all' tag specially
+        if (tag === 'all') {
+          selectedTags.clear();
+          selectedTags.add('all');
+          tagButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tag === 'all');
+          });
+        } else {
+          // Remove 'all' if it was previously selected
+          selectedTags.delete('all');
+          document.querySelector('[data-tag="all"]')?.classList.remove('active');
+          
+          // Toggle the clicked tag
+          if (selectedTags.has(tag)) {
+            selectedTags.delete(tag);
+            button.classList.remove('active');
+            
+            // If no tags are selected, default to 'all'
+            if (selectedTags.size === 0) {
+              selectedTags.add('all');
+              document.querySelector('[data-tag="all"]')?.classList.add('active');
+            }
+          } else {
+            selectedTags.add(tag);
+            button.classList.add('active');
+          }
+        }
+
+        // Filter videos
+        updateVideosVisibility();
+      });
+    });
+  }
+
+  // Initialize when the DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeTagFilter);
+  } else {
+    initializeTagFilter();
+  }
+</script>

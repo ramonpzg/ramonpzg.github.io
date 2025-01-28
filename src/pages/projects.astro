@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Dock from '../components/Dock.astro';
+import { getCollection } from 'astro:content';
+
+// Get all projects and sort them by order
+const projects = (await getCollection('projects'))
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+---
+
+<Layout title="Projects | Ramon Perez">
+  <main class="relative min-h-screen">
+    <div class="pixel-background"></div>
+
+    <div class="max-w-6xl mx-auto px-4 py-16">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <h1 class="text-4xl font-bold mb-4 pixel-text">
+          <span class="text-gradient">Projects & Experiments</span>
+        </h1>
+        <p class="text-lg text-text-300 max-w-2xl mx-auto">
+          A collection of my work in education, development, and research. 
+          Each project is an exploration of new ideas and technologies.
+        </p>
+      <p class="text-sm text-text-300 mt-2 italic">
+        ⚠️ This page and its content is a work in progress. ⚠️
+      </p>
+      </div>
+
+      <!-- Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[250px]">
+        {projects.map((project, index) => (
+          <a 
+            href={`/projects/${project.slug}`} 
+            class:list={[
+              'group p-6 rounded-xl transition-all duration-300 hover:scale-[1.02]',
+              'bg-background-800/50 backdrop-blur-sm border border-background-700',
+              // Vary the size based on index
+              index === 0 ? 'md:col-span-2 md:row-span-2' : // First project is larger
+              index === 1 ? 'md:col-span-2' : // Second project is wide
+              index === 2 ? 'md:row-span-2' : // Third project is tall
+              '' // Default size
+            ]}
+          >
+            <ProjectCard project={project.data} />
+          </a>
+        ))}
+      </div>
+    </div>
+    <Dock />
+  </main>
+</Layout>
+
+<style>
+  .pixel-background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: 
+      linear-gradient(
+        to right,
+        rgba(var(--primary-400), 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(var(--primary-400), 0.05) 1px,
+        transparent 1px
+      );
+    background-size: 24px 24px;
+    mask-image: radial-gradient(
+      circle at center,
+      black,
+      transparent 80%
+    );
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      45deg,
+      var(--primary-400),
+      var(--accent-400)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .pixel-text {
+    text-shadow: 2px 2px 0px rgba(var(--primary-400), 0.3);
+    letter-spacing: -0.02em;
+  }
+
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

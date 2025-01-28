@@ -1,0 +1,343 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Dock from '../components/Dock.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<Layout title="About | Ramon Perez">
+  <main class="relative min-h-screen bg-background-950 text-text-50 pb-24">
+    <!-- Header Section -->
+    <div class="max-w-4xl mx-auto px-4 pt-16">
+      <h1 class="text-4xl font-bold mb-4">Ramon Perez</h1>
+      <p class="text-xl text-secondary-300 text-text-300 mb-8">Data Scientist & Engineer</p>
+      
+      <!-- Contact Links -->
+      <div class="flex flex-wrap gap-4 mb-12 text-text-300">
+        <a href="mailto:hello-ramon@pm.me" class="hover:text-primary-400 flex items-center gap-2">
+          <Icon name="ri:mail-fill" class="text-secondary-300 w-5 h-5" /> hello-ramon@pm.me
+        </a>
+        <a href="https://github.com/ramonpzg" class="hover:text-primary-400 flex items-center gap-2">
+          <Icon name="ri:github-fill" class="text-secondary-300 w-5 h-5" /> ramonpzg
+        </a>
+        <span class="flex items-center gap-2">
+          <Icon name="ri:map-pin-2-fill" class="text-secondary-300 w-5 h-5" /> Sydney, AU
+        </span>
+        <p>
+          Hi there! Ramon here from the DR 🇩🇴 I was recently working at <a href="https://seldon.io" class="text-secondary-500 hover:underline">Seldon</a> in London leading their 
+          Developer Relations efforts. I am currently freelancing and working on a few personal projects, mainly, [Inventor](inventor.dev).
+        </p>
+        <p>
+          I'm an educator at heart on all things science, technology, and (as of recently) design.
+        </p>
+        <p>
+          I have a lot of breath with different technologies that cover the entire data and machine 
+          learning lifecycle, and a lot of depth in technology education.
+        </p>
+        <p>
+          That said, I'm no native to any kind of technology or skill, but I'm still able to speak a few well 
+          with a noticeable accent. My goal when I pick up a new challenge or project is to get it done 
+          in a unique and yet efficient way while explaining what I did in clearest way possible.
+        </p>
+        <p>
+          A bit more detail on my experience.
+        </p>
+        <p>
+          Although I'm no distributed computing expert, I've work on research engineering projects where I've 
+          (managed to) successfully set up compute clusters (🖥+🖥+🖥) using different cloud technologies (☁️⛈☁️) without 
+          breaking our AWS bar tab (🍻). The goal of the project was to clean and analyze large amounts of data using 
+          frameworks like Dask, PySpark and Ray (not together), and then train --what I would have considered then-- large 
+          language models.
+        </p>
+        <p>
+          I've also done some cool data engineering work. I created a straightforward data platform using only AWS services
+          to move, reshape, clean, and make use of all the data of my employer. Although this project was never continued 
+          or picked up by another engineer upon my departure, I learned a ton about data quality, infrastructure and 
+          how to (or try to avoid) technical debt.
+        </p>
+        <p>
+          On the software dev side (👨‍💻), I've built several microservices and web apps, with and without machine 
+          learning, to help translate, summarize, and improve educational content. I've written infrastructure as 
+          code scripts (with a lot of headaches along the way) to set up a Jupyter Hub instance in GKE and teach 
+          different data science classes at different events 
+          around Australia.
+        </p>
+      </div>
+
+      <!-- Experience Sections -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-semibold mb-7 text-primary-300">Experience</h2>
+        <h2 class="text-2xl font-semibold mb-6 text-secondary-400">Engineering</h2>
+        
+        <!-- Seldon -->
+        <div class="mb-8">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h3 class="text-xl font-medium">DX Engineer at Seldon</h3>
+              <p class="text-text-300">London</p>
+            </div>
+            <span class="text-text-400">Jun-23 to Oct-24</span>
+          </div>
+          <p class="text-text-200 mb-4">
+            Actively contributed to Seldon's suite of dev tools with emphasis on the paid machine learning inference 
+            products, crafted educational content for the OSS tools, delivered talks at conferences on different ML 
+            topics, and engage with our developer community while coordinating the MLOps World Meetup group events, 
+            fostering stronger connections and support within our network.
+          </p>
+        </div>
+
+        <!-- Decoded -->
+        <div class="mb-8">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h3 class="text-xl font-medium">Sr. Product Developer | Instructor at Decoded</h3>
+              <p class="text-text-300">Remote</p>
+            </div>
+            <span class="text-text-400">Nov-21 to Present</span>
+          </div>
+          <p class="text-text-200">
+            Created Decoded's initial data engineering platform on AWS, and developed four machine learning (ML) 
+            applications for language translation, churn prediction, fraud detection, and content recommendation. I 
+            led the creation of our MLOps engineering program (<a href="#" class="text-primary-400 hover:underline">see it here</a>) and contributed to our React-based presentation tool. I still teach for Decoded's biggest clients.
+          </p>
+        </div>
+      </section>
+
+      <!-- Teaching Experience -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 text-secondary-400">Teaching</h2>
+        
+        <div class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="teaching-card bg-background-900 p-4 rounded-lg relative">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-medium mb-2">London Business School</h3>
+                  <p class="text-text-300 text-sm">Programming Instructor</p>
+                  <p class="text-text-400 text-sm">Remote | Jan to Mar-21</p>
+                </div>
+                <button class="expand-btn text-primary-400" aria-label="Show more details">
+                  <Icon name="ri:arrow-down-s-line" class="w-5 h-5 transition-transform duration-300" />
+                </button>
+              </div>
+              <div class="description-panel absolute left-0 right-0 top-[95%] z-50 bg-background-900 rounded-lg p-4 shadow-lg opacity-0 invisible scale-95 transition-all duration-300 transform origin-top">
+                <p class="text-sm text-text-200">
+                  I worked at LBS as an external instructor teaching a series of 6 sessions in statistical programming with Python for a course titled, People Analytics. Here is an overview of the topics I taught in all 6 sessions,
+                </p>
+                <br>
+                <ol class="text-sm text-text-200 list-decimal list-inside">
+                  <li>Intro to Python</li>
+                  <li>Regression Pt 1</li>
+                  <li>Regression Pt 2</li>
+                  <li>Panel Regression and Fixed Effects</li>
+                  <li>Regularization</li>
+                  <li>Intro to NLP and Topic Modeling</li>
+                  <li>Network Analysis</li>
+                </ol>
+              </div>
+            </div>
+            
+            <div class="teaching-card bg-background-900 p-4 rounded-lg relative">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-medium mb-2">Coder Academy</h3>
+                  <p class="text-text-300 text-sm">Data Scientist & Educator</p>
+                  <p class="text-text-400 text-sm">Sydney, AU | Sep-19 to Aug-21</p>
+                </div>
+                <button class="expand-btn text-primary-400" aria-label="Show more details">
+                  <Icon name="ri:arrow-down-s-line" class="w-5 h-5 transition-transform duration-300" />
+                </button>
+              </div>
+              <div class="description-panel absolute left-0 right-0 top-[95%] z-50 bg-background-900 rounded-lg p-4 shadow-lg opacity-0 invisible scale-95 transition-all duration-300 transform origin-top">
+                <p class="text-sm text-text-200">
+                  At Coder Academy, I taught courses ranging from introduction to research to data analysis with Python, 
+                  and with every course, I have been a student of my students as I always learn more from them than they 
+                  do from me. My main responsibility though was to develop the first accredited Data Science Bootcamp outside 
+                  of a university in Australia. Said bootcamp application for accreditation was submitted to TEQSA n July 2021. 
+                  Here are the subjects that I worked on for the past 2 years.
+                </p>
+                <br>
+                <ol class="text-sm text-text-200 list-decimal list-inside">
+                  <li>Programming for Data Analytics</li>
+                  <li>Advanced Statistics</li>
+                  <li>Data Engineering</li>
+                  <li>Machine Learning</li>
+                  <li>Cloud Computing, Data Ethics and Privacy</li>
+                  <li>Software Engineering for Data Professionals (ML in Production)</li>
+                </ol>
+              </div>
+            </div>
+            
+            <div class="teaching-card bg-background-900 p-4 rounded-lg relative">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-medium mb-2">Johns Hopkins University</h3>
+                  <p class="text-text-300 text-sm">Lead Quantitative Tutor</p>
+                  <p class="text-text-400 text-sm">Remote | Jan to Aug-19</p>
+                </div>
+                <button class="expand-btn text-primary-400" aria-label="Show more details">
+                  <Icon name="ri:arrow-down-s-line" class="w-5 h-5 transition-transform duration-300" />
+                </button>
+              </div>
+              <div class="description-panel absolute left-0 right-0 top-[95%] z-50 bg-background-900 rounded-lg p-4 shadow-lg opacity-0 invisible scale-95 transition-all duration-300 transform origin-top">
+                <p class="text-sm text-text-200">
+                  As the Lead Quantitative Tutor, I guided students through R and Python programming while teaching advanced 
+                  courses in experimental design, big data analytics, and machine learning. I developed comprehensive introductory 
+                  programming courses tailored for graduate students of varying technical backgrounds, and created a structured 
+                  onboarding manual to streamline the hiring and training process for new tutors joining our team.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Research Experience -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 text-secondary-400">Research</h2>
+        
+        <!-- INSEAD -->
+        <div class="mb-8">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h3 class="text-xl font-medium">Research Engineer at INSEAD</h3>
+              <p class="text-text-300">Remote</p>
+            </div>
+            <span class="text-text-400">Oct-19 to April-21</span>
+          </div>
+          <p class="text-text-200 mb-4">
+            During my tenure at INSEAD, I worked with a team of outstanding researchers to develop algorithms for 
+            analyzing company structures and culture. Our main project focused on generating hierarchical organizational 
+            structures (vertical or horizontal) by analyzing historical job advertisements from target companies and 
+            similar organizations. We leveraged various natural language processing techniques alongside supervised, 
+            semi-supervised, and unsupervised machine learning methods. Additionally, I developed a Python package 
+            implementing Latent Dirichlet Allocation to automatically extract and select meaningful topics from company 
+            reviews on platforms like Glassdoor. This package not only identified key themes but also provided quantitative 
+            cultural measures for organizations based on the discovered topics, offering valuable insights into organizational 
+            culture and structure.
+          </p>
+        </div>
+
+        <!-- GFLEC -->
+        <div class="mb-8">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h3 class="text-xl font-medium">Research Associate at Global Financial Literacy Excellence Center</h3>
+              <p class="text-text-300">Washington, DC, USA</p>
+            </div>
+            <span class="text-text-400">Sep-18 to April-19</span>
+          </div>
+          <p class="text-text-200">
+            At GFLEC, I led multiple research initiatives focused on retirement and financial education. I developed 
+            and deployed a comprehensive MTurk survey examining millennials' financial education seeking behaviors, 
+            while simultaneously conducting extensive literature reviews and expert interviews with 20 policymakers and 
+            retirement specialists to understand phased retirement programs. Using the Health and Retirement Study dataset, 
+            I built statistical models in Stata and R to analyze patterns between future workforce participation and baby 
+            boomers' gradual retirement trends, providing valuable insights into retirement planning and financial literacy.
+          </p>
+        </div>
+
+        <!-- SMG -->
+        <div class="mb-8">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h3 class="text-xl font-medium">Research Intern at Service Management Group</h3>
+              <p class="text-text-300">Kansas City, MO, USA</p>
+            </div>
+            <span class="text-text-400">Oct-16 to Sep-17</span>
+          </div>
+          <p class="text-text-200">
+            Created ArcGIS maps to visualize consumer behavior data, while concurrently conducting sentiment analysis 
+            using SPSS and Python, and orchestrating A/B tests to assess the efficacy of various data collection 
+            strategies like email, mail, and point-of-sale.
+          </p>
+        </div>
+      </section>
+      
+      <!-- Skills Section -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 text-accent-400">Technical Skills</h2>
+        
+        <div class="space-y-4">
+          <div>
+            <h3 class="text-lg font-medium mb-2">Languages</h3>
+            <p class="text-text-300">Native Speaker: Python, English, JavaScript and Spanish</p>
+            <p class="text-text-300">Intermediate: French and Rust</p>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-medium mb-2">Technologies</h3>
+            <div class="flex flex-wrap gap-2">
+              {[
+                'PyTorch', 'Docker', 'FastAPI', 'SolidJS', 'NumPy', 'pandas', 'Astro', 'Git', "Tauri",
+              ].map(tech => (
+                <span class="px-3 py-1 bg-background-800 rounded-full text-sm text-text-300">{tech}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Dock Menu -->
+      <Dock />
+  </main>
+</Layout>
+
+<style>
+  /* Add any custom styles here */
+  .bg-gradient-radial {
+    background: radial-gradient(circle at center, var(--primary-500/20), var(--background-950));
+  }
+
+  .teaching-card {
+    height: 110px;
+    transition: all 0.3s ease;
+  }
+
+  .teaching-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .expand-btn.active .w-5 {
+    transform: rotate(180deg);
+  }
+
+  .description-panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.teaching-card');
+    
+    cards.forEach(card => {
+      const btn = card.querySelector('.expand-btn');
+      const panel = card.querySelector('.description-panel');
+      
+      btn?.addEventListener('click', (e) => {
+        // Close all other panels first
+        document.querySelectorAll('.description-panel.active').forEach(p => {
+          if (p !== panel) {
+            p.classList.remove('active');
+            p.previousElementSibling?.querySelector('.expand-btn')?.classList.remove('active');
+          }
+        });
+
+        btn.classList.toggle('active');
+        panel?.classList.toggle('active');
+      });
+
+      // Close panel when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!card.contains(e.target as Node)) {
+          btn?.classList.remove('active');
+          panel?.classList.remove('active');
+        }
+      });
+    });
+  });
+</script>

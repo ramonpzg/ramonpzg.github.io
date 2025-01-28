@@ -1,0 +1,58 @@
+---
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<div class="tag-filter">
+  <button
+    class="filter-button active"
+    data-tag="all"
+  >
+    All Posts
+  </button>
+  
+  {tags.map(tag => (
+    <button
+      class="filter-button"
+      data-tag={tag}
+    >
+      {tag}
+    </button>
+  ))}
+</div>
+
+<style>
+  .tag-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba(var(--background-800), 0.5);
+    border: 1px solid rgba(var(--text-400), 0.1);
+    border-radius: 1rem;
+  }
+
+  .filter-button {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    color: var(--text-400);
+    background: transparent;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  .filter-button:hover {
+    color: rgb(74, 222, 128);
+    background: rgba(74, 222, 128, 0.1);
+  }
+
+  .filter-button.active {
+    color: rgb(74, 222, 128);
+    border-color: rgb(74, 222, 128);
+    background: rgba(74, 222, 128, 0.1);
+  }
+</style>

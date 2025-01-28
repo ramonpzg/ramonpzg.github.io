@@ -1,0 +1,168 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Dock from '../../components/Dock.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const lists = await getCollection('lists');
+  return lists.map(entry => {
+    const slug = entry.id.split('/').pop()?.replace('.yaml', '');
+    return {
+      params: { slug },
+      props: { entry }
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { title, description, items, tags } = entry.data;
+
+// Pre-process the categories
+const categorizedItems = items.reduce((acc, item) => {
+  const category = item.category || 'Uncategorized';
+  if (!acc[category]) {
+    acc[category] = [];
+  }
+  acc[category].push(item);
+  return acc;
+}, {} as Record<string, typeof items>);
+
+// Define tag colors
+const tagColors: Record<string, string> = {
+  'python': 'bg-blue-500/10 text-blue-400',
+  'data-science': 'bg-green-500/10 text-green-400',
+  'machine-learning': 'bg-purple-500/10 text-purple-400',
+  'ML': 'bg-purple-500/10 text-purple-400',
+  // Add more tag colors as needed
+};
+
+// Default color for undefined tags
+const defaultTagColor = 'bg-gray-500/10 text-gray-400';
+---
+
+<Layout title={`${title} | Ramon Perez`}>
+  <main class="relative min-h-screen pb-24">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+      <div class="space-y-8 mb-12">
+        <h1 class="text-4xl font-bold tracking-tight">
+          <span class="text-gradient">{title}</span>
+        </h1>
+        <p class="text-lg text-text-300">
+          {description}
+        </p>
+      </div>
+
+      <!-- Add search input -->
+      <div class="mb-8">
+        <input
+          type="text"
+          id="search"
+          placeholder="Search items..."
+          class="w-full px-4 py-2 rounded-lg bg-background-800/50 border border-text-400/10 text-text-300 focus:outline-none focus:border-primary-400"
+        />
+      </div>
+
+      <!-- Add tags section -->
+      <div class="flex flex-wrap gap-2 mb-8">
+        {tags.map((tag) => (
+          <span class={`px-3 py-1 rounded-full text-sm ${tagColors[tag] || defaultTagColor}`}>
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <!-- Categories -->
+      <div class="space-y-12">
+        {Object.entries(categorizedItems).map(([category, categoryItems]) => (
+          <div class="space-y-4 category-section">
+            <h2 class="text-2xl font-semibold text-gradient">{category}</h2>
+            <div class="overflow-hidden rounded-lg border border-text-400/10">
+              <table class="min-w-full divide-y divide-text-400/10">
+                <thead class="bg-background-800/50">
+                  <tr>
+                    <th scope="col" class="py-3 px-4 text-left text-sm font-medium text-text-300">
+                      Name
+                    </th>
+                    <th scope="col" class="py-3 px-4 text-left text-sm font-medium text-text-300">
+                      Description
+                    </th>
+                    <th scope="col" class="py-3 px-4 text-right text-sm font-medium text-text-300 w-24">
+                      Link
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-text-400/10 bg-background-800/30">
+                  {categoryItems.map((item) => (
+                    <tr class="hover:bg-background-700/50 transition-colors list-item">
+                      <td class="py-2 px-4 text-sm font-medium text-primary-400">
+                        {item.name}
+                      </td>
+                      <td class="py-2 px-4 text-sm text-primary-300">
+                        {item.description}
+                      </td>
+                      <td class="py-2 px-4 text-right">
+                        <a
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="inline-flex items-center text-xs font-medium text-primary-400 hover:text-primary-300 transition-colors"
+                        >
+                          Visit →
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <Dock />
+  </main>
+</Layout>
+
+<script>
+  // Improved search functionality
+  const searchInput = document.getElementById('search') as HTMLInputElement;
+  const listItems = document.querySelectorAll('.list-item') as NodeListOf<HTMLElement>;
+  const categorySections = document.querySelectorAll('.category-section') as NodeListOf<HTMLElement>;
+
+  function updateSearch() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+
+    categorySections.forEach((section) => {
+      let hasVisibleItems = false;
+      const items = section.querySelectorAll('.list-item') as NodeListOf<HTMLElement>;
+      
+      items.forEach((item) => {
+        const name = item.querySelector('td:first-child')?.textContent?.toLowerCase() || '';
+        const description = item.querySelector('td:nth-child(2)')?.textContent?.toLowerCase() || '';
+        const shouldShow = name.includes(searchTerm) || description.includes(searchTerm);
+        
+        item.style.display = shouldShow ? 'table-row' : 'none';
+        if (shouldShow) hasVisibleItems = true;
+      });
+
+      // Show/hide the entire category section
+      const categoryHeader = section.querySelector('h2')?.parentElement;
+      if (categoryHeader) {
+        categoryHeader.style.display = hasVisibleItems ? 'block' : 'none';
+      }
+    });
+  }
+
+  // Add event listeners
+  searchInput?.addEventListener('input', updateSearch);
+  searchInput?.addEventListener('change', updateSearch);
+</script>
+
+<style>
+  .text-gradient {
+    background: linear-gradient(45deg, var(--primary-400), var(--accent-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style> 

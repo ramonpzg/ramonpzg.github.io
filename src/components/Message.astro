@@ -1,0 +1,20 @@
+---
+interface Props {
+  role: 'assistant' | 'user';
+  content: string;
+}
+
+const { role, content } = Astro.props;
+---
+
+<div class={`flex ${role === 'user' ? 'justify-end' : 'justify-start'} mb-4`}>
+  <div class={`
+    max-w-[80%] p-4 rounded-2xl
+    ${role === 'user' 
+      ? 'bg-primary-500/10 rounded-tr-sm' 
+      : 'bg-primary-900/20 backdrop-blur-sm rounded-tl-sm'
+    }
+  `}>
+    <p class="text-text-100 whitespace-pre-wrap">{content}</p>
+  </div>
+</div> 

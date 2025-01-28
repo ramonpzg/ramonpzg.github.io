@@ -1,0 +1,154 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+  :root {
+    --text-50: #f4eef6;
+    --text-100: #eaddee;
+    --text-200: #d4bbdd;
+    --text-300: #bf99cc;
+    --text-400: #aa77bb;
+    --text-500: #9555aa;
+    --text-600: #774488;
+    --text-700: #593366;
+    --text-800: #3b2244;
+    --text-900: #1e1122;
+    --text-950: #0f0911;
+    
+    --background-50: #f2edf7;
+    --background-100: #e6dbf0;
+    --background-200: #ccb8e0;
+    --background-300: #b294d1;
+    --background-400: #9970c2;
+    --background-500: #7f4db3;
+    --background-600: #663d8f;
+    --background-700: #4c2e6b;
+    --background-800: #331f47;
+    --background-900: #190f24;
+    --background-950: #0d0812;
+    
+    --primary-50: #f4eef7;
+    --primary-100: #e8dcef;
+    --primary-200: #d2bade;
+    --primary-300: #bb97ce;
+    --primary-400: #a474be;
+    --primary-500: #8d52ad;
+    --primary-600: #71418b;
+    --primary-700: #553168;
+    --primary-800: #392145;
+    --primary-900: #1c1023;
+    --primary-950: #0e0811;
+    
+    --secondary-50: #eff7ee;
+    --secondary-100: #e0efdc;
+    --secondary-200: #c0deba;
+    --secondary-300: #a1ce97;
+    --secondary-400: #82be74;
+    --secondary-500: #62ad52;
+    --secondary-600: #4f8b41;
+    --secondary-700: #3b6831;
+    --secondary-800: #274521;
+    --secondary-900: #142310;
+    --secondary-950: #0a1108;
+    
+    --accent-50: #eef7f6;
+    --accent-100: #dcefed;
+    --accent-200: #badedb;
+    --accent-300: #97cec9;
+    --accent-400: #74beb6;
+    --accent-500: #52ada4;
+    --accent-600: #418b83;
+    --accent-700: #316863;
+    --accent-800: #214542;
+    --accent-900: #102321;
+    --accent-950: #081110;
+    
+  }
+  .dark {
+    --text-50: #0f0811;
+    --text-100: #1e1122;
+    --text-200: #3c2145;
+    --text-300: #5a3267;
+    --text-400: #78428a;
+    --text-500: #9653ac;
+    --text-600: #ab75bd;
+    --text-700: #c098cd;
+    --text-800: #d5bade;
+    --text-900: #eaddee;
+    --text-950: #f4eef7;
+    
+    --background-50: #0d0811;
+    --background-100: #1b1023;
+    --background-200: #362046;
+    --background-300: #503069;
+    --background-400: #6b408c;
+    --background-500: #8650af;
+    --background-600: #9e73bf;
+    --background-700: #b696cf;
+    --background-800: #cfb9df;
+    --background-900: #e7dcef;
+    --background-950: #f3eef7;
+    
+    --primary-50: #0e0811;
+    --primary-100: #1c1023;
+    --primary-200: #392145;
+    --primary-300: #553168;
+    --primary-400: #71418b;
+    --primary-500: #8d52ad;
+    --primary-600: #a474be;
+    --primary-700: #bb97ce;
+    --primary-800: #d2bade;
+    --primary-900: #e8dcef;
+    --primary-950: #f4eef7;
+    
+    --secondary-50: #0a1108;
+    --secondary-100: #142310;
+    --secondary-200: #274521;
+    --secondary-300: #3b6831;
+    --secondary-400: #4f8b41;
+    --secondary-500: #62ad52;
+    --secondary-600: #82be74;
+    --secondary-700: #a1ce97;
+    --secondary-800: #c0deba;
+    --secondary-900: #e0efdc;
+    --secondary-950: #eff7ee;
+    
+    --accent-50: #081110;
+    --accent-100: #102321;
+    --accent-200: #214542;
+    --accent-300: #316863;
+    --accent-400: #418b83;
+    --accent-500: #52ada4;
+    --accent-600: #74beb6;
+    --accent-700: #97cec9;
+    --accent-800: #badedb;
+    --accent-900: #dcefed;
+    --accent-950: #eef7f6;
+    
+  }
+}
+
+/* Apply fonts strategically */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'DM Sans', sans-serif;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  /* font-family: 'Patrick Hand SC', cursive; */
+}
+
+/* Optional: Add the hand-drawn font to interactive elements */
+.hand-drawn-box h3,
+.suggested-questions button,
+nav a {
+  font-family: 'Quicksand', sans-serif;
+}

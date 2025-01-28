@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Dock from '../components/Dock.astro';
+import ListsTable from '../components/ListsTable.astro';
+import { getCollection } from 'astro:content';
+
+const lists = await getCollection('lists');
+---
+
+<Layout title="List of Lists | Ramon Perez">
+  <main class="relative min-h-screen pb-24">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+      <div class="space-y-8 mb-12">
+        <h1 class="text-4xl font-bold tracking-tight">
+          <span class="text-gradient">List of Lists</span>
+        </h1>
+        <p class="text-lg text-text-300">
+          A curated collection of awesome lists and resources I've found useful.
+        </p>
+        <p class="text-sm text-text-300 mt-2 italic">
+          ⚠️ This page and its content is a work in progress. ⚠️
+        </p>
+      </div>
+
+      <ListsTable lists={lists} />
+    </div>
+
+    <div class="fixed bottom-0 left-0 right-0 z-30 flex justify-center pb-4">
+      <Dock />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .text-gradient {
+    background: linear-gradient(45deg, var(--primary-400), var(--accent-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>

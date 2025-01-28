@@ -1,0 +1,118 @@
+---
+interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+const { 
+  title, 
+  description, 
+  pubDate, 
+  author, 
+  image, 
+  readingTime,
+  tags = [], 
+} = post.data;
+---
+
+<article 
+  class="blog-card group"
+  data-post
+  data-tags={JSON.stringify(tags)}
+>
+  <div class="gradient-border">
+    <div class="content">
+      <div class="flex items-center gap-3 p-3">
+        <div class="flex-grow min-w-0">
+          <div class="flex justify-between items-center gap-4">
+            <h2 class="text-base font-medium group-hover:text-primary-400 transition-colors truncate">
+              <a href={`/${post.collection}/${post.slug}`}>{title}</a>
+            </h2>
+            <div class="flex items-center gap-3 flex-shrink-0 text-sm text-text-400">
+              <div class="flex gap-2">
+                {tags.map((tag: string) => (
+                  <span class="tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <time datetime={pubDate.toISOString()}>
+                {pubDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                })}
+              </time>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .blog-card {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .blog-card:hover {
+    transform: translateX(4px);
+  }
+
+  .gradient-border {
+    position: relative;
+    border-radius: 0.5rem;
+    padding: 1px;
+    background: linear-gradient(
+      45deg,
+      rgba(74, 222, 128, 0.1) 0%,
+      rgba(129, 140, 248, 0.1) 100%
+    );
+    transition: background 0.3s ease;
+  }
+
+  .blog-card:hover .gradient-border {
+    background: linear-gradient(
+      45deg,
+      rgba(74, 222, 128, 0.2) 0%,
+      rgba(129, 140, 248, 0.2) 100%
+    );
+  }
+
+  .content {
+    background: rgba(var(--background-800), 0.95);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    background: rgba(74, 222, 128, 0.1);
+    color: rgb(74, 222, 128);
+    border: 1px solid rgb(74, 222, 128);
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover {
+    background: rgba(74, 222, 128, 0.2);
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .fade-in {
+    animation: slideIn 0.3s ease-out forwards;
+  }
+</style>

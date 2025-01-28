@@ -1,0 +1,8 @@
+title: "MLOps Resources"
+description: "Collection of MLOps tools, frameworks, and best practices for production machine learning."
+tags: ["mlops", "devops", "machine-learning"]
+items:
+  - name: "MLflow"
+    description: "Platform for ML lifecycle management"
+    url: "https://mlflow.org/"
+    category: "Model Management" 
