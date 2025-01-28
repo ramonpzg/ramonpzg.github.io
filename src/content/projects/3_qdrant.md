@@ -9,7 +9,7 @@ type: "education"
 order: 4
 ---
 
-Here are some of the things that I worked on while at Qdrant.
+Here are some of the things I worked on while at Qdrant.
 
 ## 1. What is Qdrant?
 

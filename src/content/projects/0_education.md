@@ -11,3 +11,5 @@ order: 1
 
 Over the years, I've created a lot of educational content for my students and for the public and 
 decided to consolidate it all into a single website.
+
+Have a look and let me know what you think! 🤓

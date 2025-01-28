@@ -3,7 +3,7 @@ title: "Inventor"
 description: "Local-first learning platform for mastering new skills."
 tags: ["tauri", "solidjs", "llms", "learning"]
 image: ""
-link: "https://github.com/username/project"
+link: "https://inventor.dev"
 status: "in-progress"
 type: "education"
 order: 2
@@ -12,14 +12,14 @@ order: 2
 # Inventor - AI-Powered Learning Platform
 
 ## Overview
-Inventor is a local-first learning platform that helps users master new skills through personalized AI guidance and interactive exercises. Built with privacy in mind, it runs entirely on your machine while providing powerful learning capabilities.
+Inventor is a local-first learning platform that helps users master new skills through personalized content and interactive exercises. Built with privacy in mind, it runs entirely on your machine while providing powerful learning capabilities.
 
 ## Key Features
 
-### 🧠 Personalized Learning Paths
-- Adaptive curriculum based on your learning style and pace
-- Progress tracking and skill assessment
-- Custom exercise generation based on your needs
+### 🧠 Personalized Content
+- The content and format of a lesson can be switched on the fly using State-of-the-Art LLMs or open-source ones.
+- The language of a lessons can be changed on the fly to your preferred one.
+- Based on your interactions with the lesson, we create flashcards and byte-sized exercises after every lesson.
 
 ### 🔒 Privacy-First Architecture
 - Local-first approach - all data stays on your machine
@@ -29,7 +29,7 @@ Inventor is a local-first learning platform that helps users master new skills t
 ### 🛠 Technical Stack
 - **Frontend**: SolidJS for reactive UI
 - **Backend**: Tauri (Rust) for native performance
-- **AI**: Local LLMs for personalized content generation
+- **AI**: SOTA and Local LLMs for personalized content generation
 - **Storage**: SQLite for efficient local data management
 
 ## Current Status
