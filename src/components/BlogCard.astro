@@ -4,18 +4,18 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { 
-  title, 
-  description, 
-  pubDate, 
-  author, 
-  image, 
+const {
+  title,
+  description,
+  pubDate,
+  author,
+  image,
   readingTime,
-  tags = [], 
+  tags = [],
 } = post.data;
 ---
 
-<article 
+<article
   class="blog-card group"
   data-post
   data-tags={JSON.stringify(tags)}
@@ -26,7 +26,7 @@ const {
         <div class="flex-grow min-w-0">
           <div class="flex justify-between items-center gap-4">
             <h2 class="text-base font-medium group-hover:text-primary-400 transition-colors truncate">
-              <a href={`/${post.collection}/${post.slug}`}>{title}</a>
+              <a href={`/posts/${post.id}`}>{title}</a>
             </h2>
             <div class="flex items-center gap-3 flex-shrink-0 text-sm text-text-400">
               <div class="flex gap-2">

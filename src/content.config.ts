@@ -9,12 +9,12 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    tags: z.array(z.string()),
     image: z.string().optional(),
-    tags: z.array(z.string()).default([]),
-    order: z.number().optional(),
-    status: z.enum(['completed', 'in-progress', 'planned']).default('completed'),
-    link: z.string().url().optional(),
-    pubDate: z.date().optional(),
+    link: z.string().optional(),
+    status: z.enum(['completed', 'in-progress']),
+    type: z.string(),
+    order: z.number().default(99)
   })
 });
 
@@ -39,16 +39,15 @@ const lists = defineCollection({
   loader: glob({
     pattern: 'src/content/lists/**/*.{yaml,yml}',
   }),
-  type: 'data',
   schema: z.object({
     title: z.string(),
     description: z.string(),
     tags: z.array(z.string()),
     items: z.array(z.object({
       name: z.string(),
-      description: z.string(),
-      url: z.string().url(),
-      category: z.string()
+      description: z.union([z.string(), z.literal('')]).optional(),
+      url: z.union([z.string().url(), z.literal('')]).optional(),
+      category: z.union([z.string(), z.literal('')]).optional()
     }))
   })
 });

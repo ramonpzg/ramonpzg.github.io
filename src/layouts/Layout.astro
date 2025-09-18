@@ -21,6 +21,10 @@ const { title } = Astro.props;
     <div class="min-h-screen bg-background-950 text-text-50">
       <slot />
     </div>
+    <script>
+      import mermaid from 'mermaid';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
   </body>
 </html>
 
@@ -66,4 +70,3 @@ const { title } = Astro.props;
       monospace;
   }
 </style>
-  

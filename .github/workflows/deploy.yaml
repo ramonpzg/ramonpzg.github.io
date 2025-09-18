@@ -21,16 +21,12 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: "23"
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 9
+          bun-version: latest
       - name: Install dependencies
-        run: pnpm install
+        run: bun install
       - name: Debug env
         run: |
           echo "Token exists: ${{ secrets.PUBLIC_HF_TOKEN != '' }}"
@@ -40,7 +36,7 @@ jobs:
           PUBLIC_HF_TOKEN: ${{ secrets.PUBLIC_HF_TOKEN }}
         run: |
           echo "PUBLIC_HF_TOKEN=\"${{ secrets.PUBLIC_HF_TOKEN }}\"" > .env
-          pnpm build
+          bun run build
       - name: Upload artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3

@@ -20,7 +20,7 @@ const projects = (await getCollection('projects'))
           <span class="text-gradient">Projects & Experiments</span>
         </h1>
         <p class="text-lg text-text-300 max-w-2xl mx-auto">
-          A collection of my work in education, development, and research. 
+          A collection of my work in education, development, and research.
           Each project is an exploration of new ideas and technologies.
         </p>
       <p class="text-sm text-text-300 mt-2 italic">
@@ -31,8 +31,8 @@ const projects = (await getCollection('projects'))
       <!-- Bento Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[250px]">
         {projects.map((project, index) => (
-          <a 
-            href={`/projects/${project.slug}`} 
+          <a
+            href={`/projects/${project.id}`}
             class:list={[
               'group p-6 rounded-xl transition-all duration-300 hover:scale-[1.02]',
               'bg-background-800/50 backdrop-blur-sm border border-background-700',
@@ -57,7 +57,7 @@ const projects = (await getCollection('projects'))
     position: fixed;
     inset: 0;
     z-index: -1;
-    background-image: 
+    background-image:
       linear-gradient(
         to right,
         rgba(var(--primary-400), 0.05) 1px,

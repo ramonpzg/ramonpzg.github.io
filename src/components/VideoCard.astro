@@ -1,7 +1,7 @@
 ---
 interface Props {
   video: {
-    slug: string;
+    id: string;
     data: {
       title: string;
       description: string;
@@ -36,7 +36,7 @@ const formattedDate = dateObj.toLocaleDateString('en-US', {
         <feColorMatrix type="saturate" values="0"/>
         <feBlend mode="multiply" in="SourceGraphic"/>
       </filter>
-      
+
       <!-- Pencil stroke effect -->
       <filter id="pencil-stroke">
         <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3"/>
@@ -45,12 +45,12 @@ const formattedDate = dateObj.toLocaleDateString('en-US', {
     </defs>
   </svg>
 
-  <a href={`/watch/${video.slug}`} class="card-content">
+  <a href={`/watch/${video.id}`} class="card-content">
     <!-- Thumbnail with sketch overlay -->
     <div class="thumbnail-container">
       <div class="sketch-overlay"></div>
-      <img 
-        src={thumbnailUrl} 
+      <img
+        src={thumbnailUrl}
         alt={title}
         class="thumbnail"
         loading="lazy"
@@ -61,7 +61,7 @@ const formattedDate = dateObj.toLocaleDateString('en-US', {
     <div class="content">
       <h3 class="title">{title}</h3>
       <p class="description">{description}</p>
-      
+
       <div class="meta">
         <div class="tags">
           {tags.slice(0, 2).map(tag => (

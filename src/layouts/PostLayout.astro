@@ -1,13 +1,14 @@
 ---
 import Layout from './Layout.astro';
 import Dock from '../components/Dock.astro';
+import { render } from 'astro:content';
 
 interface Props {
   post: any;
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 // Format date
 const publishDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
@@ -110,8 +111,8 @@ const publishDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
   }
 
   :global(.prose code) {
-    background: rgba(var(--primary-400), 0.1);
-    color: var(--primary-400);
+    background: rgba(74, 222, 128, 0.1);
+    color: rgb(74, 222, 128);
     padding: 0.2em 0.4em;
     border-radius: 0.25em;
     font-size: 0.875em;

@@ -24,10 +24,10 @@ const { lists } = Astro.props;
 <div class="space-y-4">
   <!-- Search -->
   <div class="mb-8">
-    <input 
-      type="text" 
+    <input
+      type="text"
       id="table-search"
-      placeholder="Search lists..." 
+      placeholder="Search lists..."
       class="w-full bg-background-800/50 border border-text-400/10 rounded-lg px-4 py-2 focus:outline-none focus:border-primary-400/50 text-text-300 placeholder-text-400/50"
     />
   </div>
@@ -55,8 +55,8 @@ const { lists } = Astro.props;
         {lists.map((list) => (
           <tr class="group border-b border-text-400/5">
             <td class="px-6 py-4 whitespace-nowrap">
-              <a 
-                href={`/lists/${list.id.replace('.yaml', '')}`} 
+              <a
+                href={`/lists/${list.id.split('/').pop()?.replace('.yaml', '')}`}
                 class="text-primary-400 hover:text-primary-300 font-medium"
               >
                 {list.data.title}
@@ -85,14 +85,14 @@ const { lists } = Astro.props;
               {list.data.description}
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <button 
+              <button
                 class="expand-button text-text-400 hover:text-primary-400 transition-colors"
                 aria-label="Expand details"
               >
-                <svg 
-                  class="w-5 h-5 transform transition-transform duration-200" 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  class="w-5 h-5 transform transition-transform duration-200"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -111,7 +111,7 @@ const { lists } = Astro.props;
                         <h4 class="text-primary-400">{item.name}</h4>
                         <p class="text-sm text-text-300">{item.description}</p>
                       </div>
-                      <a 
+                      <a
                         href={item.url}
                         class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-primary-400/10 text-primary-400 hover:bg-primary-400/20 transition-colors"
                         target="_blank"
@@ -139,7 +139,7 @@ const { lists } = Astro.props;
       this.sortColumns = document.querySelectorAll('.sortable');
       this.expandButtons = document.querySelectorAll('.expand-button');
       this.currentSort = { column: null, direction: 'asc' };
-      
+
       this.initialize();
     }
 
@@ -186,13 +186,13 @@ const { lists } = Astro.props;
         const tags = tagsCell?.textContent?.toLowerCase() || '';
         const description = descriptionCell?.textContent?.toLowerCase() || '';
 
-        const matches = title.includes(searchTerm) || 
-                       tags.includes(searchTerm) || 
+        const matches = title.includes(searchTerm) ||
+                       tags.includes(searchTerm) ||
                        description.includes(searchTerm);
 
         // Hide/show the main row
         row.style.display = matches ? '' : 'none';
-        
+
         // Hide/show the details row if it exists
         const detailsRow = row.nextElementSibling;
         if (detailsRow?.classList.contains('details-row')) {
@@ -236,4 +236,4 @@ const { lists } = Astro.props;
   .sort-desc .sort-icon::after {
     content: "↓";
   }
-</style> 
+</style>

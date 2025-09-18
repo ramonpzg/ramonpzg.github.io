@@ -1,18 +1,18 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Dock from '../../components/Dock.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map(project => ({
-    params: { slug: project.slug },
+    params: { slug: project.id },
     props: { project },
   }));
 }
 
 const { project } = Astro.props;
-const { Content } = await project.render();
+const { Content } = await render(project);
 ---
 
 <Layout title={`${project.data.title} | Ramon Perez`}>
