@@ -12,10 +12,9 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.8",
+    "@astrojs/mdx": "^4.0.0",
     "@astrojs/check": "^0.9.4",
-    "@astrojs/starlight": "^0.34.4",
     "@astrojs/tailwind": "^6.0.2",
-    "@huggingface/inference": "^2.6.4",
     "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.14.6",
     "astro": "5.11.0",

@@ -1,11 +1,12 @@
 import { defineConfig } from "astro/config";
 import alpinejs from "@astrojs/alpinejs";
+import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
 import rehypeMermaid from "rehype-mermaid";
 
 export default defineConfig({
-  integrations: [alpinejs(), tailwind(), icon({ include: { ri: ["*"] } })],
+  integrations: [alpinejs(), mdx(), tailwind(), icon({ include: { ri: ["*"] } })],
   markdown: {
     rehypePlugins: [
       [

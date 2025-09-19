@@ -9,6 +9,9 @@ tags: ["local", "llms", "benchmarking"]
 icon: "file-text"
 ---
 
+import RobobenchArch from '../../../public/images/robobench1.svg'
+import RobobenchArch2 from '../../../public/images/robobench2.svg'
+
 At the beginning of 2025, I joined Menlo Research (formerly HomeBrew Labs) as a research engineer
 and had the chance to work on a few cool projects, `robobench` being one of them. The timing was
 particularly interesting as Large Language Model deployment had become the new gold rush, with
@@ -30,78 +33,7 @@ While most benchmarking tools focus on abstract metrics that sound impressive in
 your LLM deployment will gracefully handle common workloads or collapse like a house of cards at
 the first sign of stress.
 
-*[Placeholder: Architecture diagram showing the relationship between Cortex.cpp, llama.cpp, and robobench]*
-
-```mermaid
-%%{
-  init: {
-    "theme": "dark",
-    "themeVariables": {
-      "primaryColor": "#333333",
-      "primaryTextColor": "#FFFFFF",
-      "secondaryColor": "#333333",
-      "secondaryTextColor": "#FFFFFF",
-      "tertiaryColor": "#333333",
-      "tertiaryTextColor": "#FFFFFF",
-      "textColor": "#FFFFFF",
-      "lineColor": "#FFFFFF"
-    }
-  }
-}%%
-graph TB
-      CLI[CLI Interface<br/>cli.py] --> |typer commands| BENCH{Benchmark Type}
-
-      BENCH --> |--type init| INIT[Model Initialization<br/>initialization.py]
-      BENCH --> |--type runtime| RUNTIME[Runtime Performance<br/>runtime.py]
-      BENCH --> |--type resources| RESOURCES[Resource Monitoring<br/>resources.py]
-      BENCH --> |--type advanced| ADVANCED[Advanced Processing<br/>advanced.py]
-      BENCH --> |--type workload| WORKLOAD[Workload Testing<br/>workloads.py]
-      BENCH --> |--type quantization| QUANT[Quantization Analysis<br/>quantization.py]
-      BENCH --> |--type stability| STABILITY[Stability Testing<br/>stability.py]
-      BENCH --> |--type integration| INTEGRATION[Integration Testing<br/>integration.py]
-
-      INIT --> |measures| COLD[Cold Start Time]
-      INIT --> |measures| WARM[Warm Start Time]
-      INIT --> |measures| MEM_SPIKE[Memory Spike]
-
-      RUNTIME --> |measures| TOKENS[Tokens/Second]
-      RUNTIME --> |measures| VARIANCE[Latency Variance]
-      RUNTIME --> |measures| BATCH[Batch Performance]
-
-      RESOURCES --> |monitors| CPU_USAGE[CPU Utilization]
-      RESOURCES --> |monitors| MEM_GROWTH[Memory Growth]
-      RESOURCES --> |monitors| GPU_METRICS[GPU Metrics]
-
-      WORKLOAD --> |tests| MULTI_LANG[Multilingual Performance]
-      WORKLOAD --> |tests| PROMPT_LEN[Prompt Length Impact]
-      WORKLOAD --> |tests| SYS_PROMPT[System Prompt Overhead]
-
-      STABILITY --> |detects| MEM_LEAK[Memory Leaks]
-      STABILITY --> |detects| THERMAL[Thermal Throttling]
-      STABILITY --> |tracks| ERROR_RATE[Error Patterns]
-
-      CLI --> |reset environment| CORTEX_ENV[Cortex Environment<br/>cortex stop/start]
-
-      CORTEX_ENV --> |runs| CORTEX_CMD[cortex run -d model_name]
-      CORTEX_CMD --> |wraps| LLAMA_CPP[llama.cpp engine]
-
-      UTILS[utils.py<br/>- MemorySnapshot<br/>- measure_time decorator<br/>- get_memory_usage] --> |shared by| INIT
-      UTILS --> |shared by| RUNTIME
-      UTILS --> |shared by| RESOURCES
-      UTILS --> |shared by| WORKLOAD
-      UTILS --> |shared by| STABILITY
-
-      CLI --> |outputs| TABLES[Rich Tables<br/>Performance Metrics]
-      CLI --> |outputs| JSON_EXPORT[JSON Results<br/>--json flag]
-
-      style CLI fill:#e1f5fe,color:#000
-      style CORTEX_CMD fill:#fff3e0,color:#000
-      style LLAMA_CPP fill:#f3e5f5,color:#000
-      style UTILS fill:#e8f5e8,color:#000
-      style TABLES fill:#fce4ec,color:#000
-      style JSON_EXPORT fill:#fce4ec,color:#000
-```
-
+<RobobenchArch2 />
 
 ## What was getting measured
 
@@ -146,35 +78,7 @@ src/robobench/core/
 └── workloads.py
 ```
 
-```mermaid
-graph TD
-      CLI[robobench CLI] --> BENCH_ROUTER{Benchmark Type}
-      BENCH_ROUTER --> INIT[Initialization<br/>Cold/Warm Start]
-      BENCH_ROUTER --> RUNTIME[Runtime<br/>Tokens/Second & Variance]
-      BENCH_ROUTER --> RESOURCES[Resources<br/>Memory & CPU Monitoring]
-      BENCH_ROUTER --> WORKLOADS[Workloads<br/>Multilingual & Prompts]
-      BENCH_ROUTER --> STABILITY[Stability<br/>Memory Leaks & Errors]
-      UTILS[Shared Utilities<br/>Memory Tracking<br/>Timing Decorators] --> INIT
-      UTILS --> RUNTIME
-      UTILS --> RESOURCES
-      UTILS --> WORKLOADS
-      UTILS --> STABILITY
-      CORTEX[Cortex Commands<br/>Model Management] --> INIT
-      CORTEX --> RUNTIME
-      CORTEX --> WORKLOADS
-      SYSTEM[System Monitoring<br/>psutil & gpustat] --> RESOURCES
-      SYSTEM --> STABILITY
-      INIT --> OUTPUT[Rich Tables<br/>& JSON Export]
-      RUNTIME --> OUTPUT
-      RESOURCES --> OUTPUT
-      WORKLOADS --> OUTPUT
-      STABILITY --> OUTPUT
-      style CLI fill:#e3f2fd
-      style UTILS fill:#e8f5e8
-      style CORTEX fill:#fff3e0
-      style SYSTEM fill:#f0f0f0
-      style OUTPUT fill:#fce4ec
-```
+<RobobenchArch />
 
 ### Model Loading
 
