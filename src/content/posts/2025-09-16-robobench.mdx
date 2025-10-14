@@ -12,51 +12,53 @@ icon: "file-text"
 import RobobenchArch from '../../../public/images/robobench1.svg'
 import RobobenchArch2 from '../../../public/images/robobench2.svg'
 
-At the beginning of 2025, I joined Menlo Research (formerly HomeBrew Labs) as a research engineer
-and had the chance to work on a few cool projects, `robobench` being one of them. The timing was
-particularly interesting as Large Language Model deployment had become the new gold rush, with
-everyone claiming they had the fastest inference, the lowest latency, or the most efficient memory
-usage. The problem was, most of these claims were backed by benchmarks about as reliable as a weather
-forecast in tornado season.
+Since the beginning of 2025, I have been working at Menlo Research (formerly Homebrew Labs) as a
+research engineer and have had the chance to work on a few cool projects like `robobench`, a benchmarking
+tool for our now archived wrapper around llama.cpp, [Cortex.cpp](https://github.com/menloresearch/cortex.cpp). The
+timing was interesting as LLMs had become the new gold rush, and with everyone claiming they
+had the fastest inference, the lowest latency, or the most efficient memory usage on their bazillion-dollar
+GPU set up, we were just trying to measure what your computer said about a llama here and ther. Also,
+if you hang around X long enough, you'll start to notice that most benchmark claims are about as
+reliable as a weather forecast in tornado season.
 
-At Menlo, we were building yet another wrapper around llama.cpp called Cortex.cpp. This was not
-for general purpose conversations with open source models but rather for using LLMs inside
-hardware that could be used to control a robot. This required heavy testing on different
-all the pis motherboard configurations possible, which led to my work on `robobench`: a tool
-designed to measure a myriad of metrics and benchmark Cortex.cpp and llama.cpp. While Cortex was
-ultimately [archived in June 2025](https://github.com/menloresearch/cortex.cpp), the benchmarking
-insights and methodology behind `robobench` remain relevant for anyone serious about measuring local
-LLM performance.
+The goal of our llama.cpp wrapper was to run LLMs inside hardware that could be used to control
+a robot either within it or because we attached it to the robot like a fitbit or a whoop these days. This
+required heavy testing on all the Pis possible (never got to an arduino), which led to my work on
+`robobench`: a tool designed to measure a myriad of metrics around local deployment. While we neve made it
+public, the insights and methodology behind `robobench` remain relevant for anyone serious about
+measuring local LLM performance. So, in this blog post, I will walk through the architectural decisions I
+made, some of the metrics I measured, and the lessons learned.
 
-While most benchmarking tools focus on abstract metrics that sound impressive in marketing materials,
-`robobench` takes a different approach. It measures performance characteristics that determine whether
-your LLM deployment will gracefully handle common workloads or collapse like a house of cards at
-the first sign of stress.
+At a high level, here is a diagram of the structure of the CLI and its commands.
 
 <RobobenchArch2 />
 
 ## What was getting measured
 
-During my time working on this project in early 2025, `robobench` focused specifically on Cortex.cpp, which
-was Menlo's ambitious attempt to create "the brain of robots." The benchmarking challenge was incredibly
-interesting as Cortex.cpp was essentially an elegant wrapper around llama.cpp but with a Docker-inspired CLI,
-integrated OpenAI-compatible API with [Scalar docs](https://scalar.com/), and other niceties. This challenge entailed
-measuring the entire stack—not just raw llama.cpp performance, but also the impact of the orchestration layer
-that makes running models practical (i.e., pulling, running, switching, and tweaking models).
+The most basic metrics I wanted to measure per model at the beginning were around initialisation,
+runtime performance, and resources used. After setting up the foundation, I moved on to add metrics around
+different integrations, workloads, quantisation levels, and scalability, as well as some advanced ones
+around concurrency, GPU sharing, and resource contention.
 
-When you run `robobench "llama3.2:3b-gguf-q2-k" --type init`, the tool measures that loading this 3GB model
-spikes memory by 4.2GB (the difference between peak and initial), takes 12.3 seconds cold versus 2.1 seconds
-warm, and reveals that your "fast" SSD is actually the bottleneck at 180MB/s sustained read. These aren't theoretical
-numbers—they're measurements of what your hardware actually does when asked to wake up artificial intelligence.
+The initial three (initialisation, runtime performance and resource usage) provided answers to questions
+such as: how fast can we load a model on X device, how quickly can it generate the first token, what's the
+CPU and GPU usage under regular and heavy load, and what's the memory usage under different conditions.
+
+`robobench` focused specifically on Cortex.cpp, which was our attempt to create "the brain of robots." The
+benchmarking challenge was incredibly interesting as Cortex.cpp was essentially an elegant wrapper around
+llama.cpp but with a Docker-inspired CLI, integrated OpenAI-compatible API with [Scalar docs](https://scalar.com/),
+and other niceties.
+
+When you run `robobench "llama3.2:3b-gguf-q2-k" --type init`, you were running the initialisation module so
+robobench would measure that loading this 3GB model spiked memory by 4.2GB (the difference between peak
+and initial), takes 12.3 seconds cold versus 2.1 seconds warm, and highlighted that your "fast" SSD is
+the bottleneck at 180MB/s sustained read. These were the measurements of what your hardware does when asked
+to wake up an AI model.
 
 The tool recognized that measuring wrapper performance is more valuable than measuring engine performance. When
 robobench executed `cortex run -d model_name` via the `subprocess` module, it captured the full pipeline from
 docker-style orchestration overhead, API server startup time, model file parsing, memory allocation patterns,
 and the eventual llama.cpp inference, all wrapped in our vision of AI-powered robotics.
-
-What began as tooling for an ambitious robotics platform proved that the metrics which matter for a robot's
-"brain" are the same ones that matter for any serious local development or production use. The performance
-measurement principles remain just as relevant for any local LLM infrastructure, whether it's running on a robot or a server.
 
 ## Architecture
 
