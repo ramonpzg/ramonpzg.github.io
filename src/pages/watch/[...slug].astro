@@ -5,10 +5,15 @@ import Dock from '../../components/Dock.astro';
 
 export async function getStaticPaths() {
   const videos = await getCollection('videos');
-  return videos.map(video => ({
-    params: { slug: video.id },
-    props: { video },
-  }));
+  return videos.map(video => {
+    // Extract just the filename/folder from the full path
+    // e.g., "src/content/videos/2023-09-12-pycon-cz" -> "2023-09-12-pycon-cz"
+    const slug = video.id.split('/').pop()?.replace(/\.(mdx?|md)$/, '') || video.id;
+    return {
+      params: { slug },
+      props: { video },
+    };
+  });
 }
 
 const { video } = Astro.props;
