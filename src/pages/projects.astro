@@ -30,9 +30,12 @@ const projects = (await getCollection('projects'))
 
       <!-- Bento Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[250px]">
-        {projects.map((project, index) => (
+        {projects.map((project, index) => {
+          // Extract just the filename from the full path
+          const slug = project.id.split('/').pop()?.replace(/\.(mdx?|md)$/, '') || project.id;
+          return (
           <a
-            href={`/projects/${project.id}`}
+            href={`/projects/${slug}`}
             class:list={[
               'group p-6 rounded-xl transition-all duration-300 hover:scale-[1.02]',
               'bg-background-800/50 backdrop-blur-sm border border-background-700',
@@ -45,7 +48,7 @@ const projects = (await getCollection('projects'))
           >
             <ProjectCard project={project.data} />
           </a>
-        ))}
+        )})}
       </div>
     </div>
     <Dock />

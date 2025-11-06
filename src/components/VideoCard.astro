@@ -24,6 +24,10 @@ const formattedDate = dateObj.toLocaleDateString('en-US', {
   day: 'numeric',
   year: 'numeric'
 });
+
+// Extract just the filename from the full path
+// e.g., "src/content/videos/2023-09-12-pycon-cz" -> "2023-09-12-pycon-cz"
+const slug = video.id.split('/').pop()?.replace(/\.(mdx?|md)$/, '') || video.id;
 ---
 
 <div class="video-card">
@@ -45,7 +49,7 @@ const formattedDate = dateObj.toLocaleDateString('en-US', {
     </defs>
   </svg>
 
-  <a href={`/watch/${video.id}`} class="card-content">
+  <a href={`/watch/${slug}`} class="card-content">
     <!-- Thumbnail with sketch overlay -->
     <div class="thumbnail-container">
       <div class="sketch-overlay"></div>
