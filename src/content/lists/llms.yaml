@@ -34,7 +34,3 @@ items:
     description: "A framework for programming—not prompting—language models "
     url: "https://dspy.ai/"
     category: "Prompt Management"
-  - name: "Jan"
-    description: "Open-source ChatGPT-alternative that runs 100% offline."
-    url: "https://jan.ai/"
-    category: "local model chat"

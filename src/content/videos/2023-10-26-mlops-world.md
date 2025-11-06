@@ -3,7 +3,7 @@ title: 'MLOps World 2023"'
 pubDate: 2023-10-24
 description: 'Lightning Talk on How to Serve Machine Learning Models'
 videoUrl: 'https://www.youtube.com/embed/o_2RA_-Tjso'
-thumbnailUrl: 'https://content.app-us1.com/cdn-cgi/image/dpr=2,fit=scale-down,format=auto,onerror=redirect,width=650/bZjbL/2023/08/30/5ba7290f-89ee-400a-af3f-3bfea6f477f5.png'
+thumbnailUrl: '/images/mlops_world.png'
 duration: '04:46'
 tags: ["python", "ml", "serving", "lightning-talk"]
 ---
