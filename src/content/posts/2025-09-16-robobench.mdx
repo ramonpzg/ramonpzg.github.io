@@ -62,10 +62,10 @@ and the eventual llama.cpp inference, all wrapped in our vision of AI-powered ro
 
 ## Architecture
 
-The codebase is organized into distinct benchmarking modules, each targeting a specific aspect of LLM
-performance. This modular approach means you can pick and choose the metrics that matter most for your use case,
-rather than drowning in a sea of irrelevant info/metadata that can take time to process (e.g., running benchmarks
-on a >14B model will take much longer than on a smaller model).
+The codebase is organized into distinct benchmarking modules, which means you can pick and choose 
+the metrics that matter most for your use case, rather than drowning in a sea of irrelevant 
+info/metadata that can take time to process (e.g., running benchmarks on a >14B model will take 
+much longer than on a smaller model).
 
 ```sh
 src/robobench/core/
@@ -102,15 +102,22 @@ def _cold_start(self) -> Dict[str, Any]:
     }
 ```
 
-The cold start measurement is particularly revealing because it captures the full model loading pipeline: reading the GGUF file from disk, allocating memory buffers, initializing the computational graph, and warming up the inference engine. The warm start measurement, by contrast, measures how quickly the system can reload an already-cached model.
+The cold start measurement captures the model pipeline reading the GGUF file from disk, 
+allocating memory buffers, initializing the computational graph, and warming up the inference 
+engine. The warm start measurement, by contrast, measures how quickly the system can reload 
+an already-cached model, which is incredibly important if you only have space for one loaded 
+model at a time.
 
-What makes this genuinely useful is the memory spike calculation (`memory_spike = peak_memory.ram_used - initial_memory.ram_used`). When you see that loading llama3.2:3b requires 4.2GB of RAM despite being a 3GB model file, you're learning that your deployment needs to account for temporary buffers, initialization overhead, and memory fragmentation. This is why containers running "3GB models" crash with "out of memory" errors on 4GB systems.
-
-*[Placeholder: Video showing robobench initialization benchmark running with memory usage visualization]*
+What makes this genuinely useful is the memory spike calculation 
+(`memory_spike = peak_memory.ram_used - initial_memory.ram_used`). When you see that loading 
+llama3.2:3b requires 4.2GB of RAM despite being a 3GB model file, you get the gist of what your 
+deployment needs to account for, for example, initialization overhead or memory fragmentation. 
+This is why containers running "3GB models" crash with "out of memory" errors on 4GB systems.
 
 ### Runtime Performance: Beyond Tokens Per Second
 
-The `RuntimeBenchmark` class demonstrates sophisticated understanding of what actually affects inference performance. Rather than just measuring raw token throughput, it captures metrics that impact real-world usage:
+The `RuntimeBenchmark` class shows what affects inference performance while the model is 
+running. Here is an example
 
 ```python
 def _measure_streaming_performance(self) -> tuple[float, float]:
