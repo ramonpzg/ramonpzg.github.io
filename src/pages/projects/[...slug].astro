@@ -5,10 +5,15 @@ import Dock from '../../components/Dock.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  return projects.map(project => ({
-    params: { slug: project.id },
-    props: { project },
-  }));
+  return projects.map(project => {
+    // Extract just the filename/folder from the full path
+    // e.g., "src/content/projects/1_inventor" -> "1_inventor"
+    const slug = project.id.split('/').pop()?.replace(/\.(mdx?|md)$/, '') || project.id;
+    return {
+      params: { slug },
+      props: { project },
+    };
+  });
 }
 
 const { project } = Astro.props;

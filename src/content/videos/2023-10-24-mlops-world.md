@@ -3,7 +3,7 @@ title: 'MLOps World 2023'
 pubDate: 2023-10-24
 description: 'Introduction to Building Machine Learning Microservices'
 videoUrl: 'https://www.youtube.com/embed/RsAHprbnIvY'
-thumbnailUrl: 'https://content.app-us1.com/cdn-cgi/image/dpr=2,fit=scale-down,format=auto,onerror=redirect,width=650/bZjbL/2023/08/30/5ba7290f-89ee-400a-af3f-3bfea6f477f5.png'
+thumbnailUrl: '/images/mlops_world.png'
 duration: '03:19:29'
 tags: ["python", "microservices", "ml", "serving"]
 ---

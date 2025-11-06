@@ -13,6 +13,10 @@ const {
   readingTime,
   tags = [],
 } = post.data;
+
+// Extract just the filename from the full path
+// e.g., "src/content/posts/2024-05-16-rag-intro" -> "2024-05-16-rag-intro"
+const slug = post.id.split('/').pop()?.replace(/\.(mdx?|md)$/, '') || post.id;
 ---
 
 <article
@@ -26,7 +30,7 @@ const {
         <div class="flex-grow min-w-0">
           <div class="flex justify-between items-center gap-4">
             <h2 class="text-base font-medium group-hover:text-primary-400 transition-colors truncate">
-              <a href={`/posts/${post.id}`}>{title}</a>
+              <a href={`/posts/${slug}`}>{title}</a>
             </h2>
             <div class="flex items-center gap-3 flex-shrink-0 text-sm text-text-400">
               <div class="flex gap-2">
