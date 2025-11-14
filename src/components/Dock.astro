@@ -11,8 +11,13 @@ const dockItems = [
 ];
 ---
 
-<div class="dock-container" x-data="{ isOpen: false }">
-  <button 
+<div
+  class="dock-container"
+  x-data="{ isOpen: false }"
+  @click.away="isOpen = false"
+  @resize.window="isOpen = false"
+>
+  <button
     @click="isOpen = !isOpen"
     class="md:hidden dock-hamburger"
     aria-label="Toggle menu"
@@ -20,13 +25,18 @@ const dockItems = [
     <Icon name="ri:menu-line" class="icon" />
   </button>
 
-  <div 
-    class="dock" 
+  <div
+    class="dock"
     :class="{ 'dock-mobile': !isOpen }"
+    x-cloak
   >
     {
       dockItems.map((item) => (
-        <a href={item.href} class="dock-item">
+        <a
+          href={item.href}
+          class="dock-item"
+          @click="isOpen = false"
+        >
           <div class="icon-wrapper">
             <Icon name={item.icon} class="icon" />
           </div>
@@ -38,6 +48,8 @@ const dockItems = [
 </div>
 
 <style>
+  [x-cloak] { display: none !important; }
+
   .dock-container {
     position: fixed;
     bottom: 2rem;

@@ -10,7 +10,8 @@ const menuItems = [
 
 <div
   x-data="menuBar()"
-  @click.away="menuBarOpen = false"
+  @click.away="menuBarOpen = false; mobileMenuOpen = false"
+  @resize.window="mobileMenuOpen = false"
   class="relative top-0 left-0 z-50 w-auto transition-all duration-150 ease-out"
 >
   <!-- Mobile hamburger button -->
@@ -45,14 +46,16 @@ const menuItems = [
   </div>
 
   <!-- Mobile menu -->
-  <div 
-    x-show="mobileMenuOpen" 
+  <div
+    x-show="mobileMenuOpen"
+    x-cloak
     x-transition
     class="md:hidden absolute top-full left-0 w-full mt-2 bg-white border rounded-md border-neutral-200/80 shadow-lg"
   >
     {menuItems.map((item) => (
       <a
         href={item.href}
+        @click="mobileMenuOpen = false"
         class="block px-4 py-2 text-sm text-neutral-900 hover:bg-neutral-100"
       >
         {item.title}
